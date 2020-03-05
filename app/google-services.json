@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "433180711956",
+    "firebase_url": "https://tour-room-40e3d.firebaseio.com",
+    "project_id": "tour-room-40e3d",
+    "storage_bucket": "tour-room-40e3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433180711956:android:277768be850959085e5b01",
+        "android_client_info": {
+          "package_name": "com.example.tourroom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "433180711956-lhaei4r1esniq73e71gfqi63ej89e9s8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoVacyI24jbUGSEutIpUdO09vn3KERQLI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "433180711956-lhaei4r1esniq73e71gfqi63ej89e9s8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

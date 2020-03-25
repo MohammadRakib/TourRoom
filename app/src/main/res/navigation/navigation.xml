@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_Home">
+
+    <fragment
+        android:id="@+id/nav_Home"
+        android:name="com.example.tourroom.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/nav_Profile"
+        android:name="com.example.tourroom.ui.profile.profileFragment"
+        android:label="@string/menu_Profile"
+        tools:layout="@layout/fragment_profile"/>
+
+    <fragment
+        android:id="@+id/nav_visited_places"
+        android:name="com.example.tourroom.ui.Visit_places.visit_placesFragment"
+        android:label="@string/menu_visited_places"
+        tools:layout="@layout/fragment_visitedplaces" />
+    <fragment
+        android:id="@+id/about_fragment"
+        android:name="com.example.tourroom.ui.about.about_fragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
+
+</navigation>

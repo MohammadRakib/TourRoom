@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation_graph"
+    app:startDestination="@id/feed_fragment">
+
+
+    <fragment
+        android:id="@+id/feed_fragment"
+        android:name="com.example.tourroom.ui.feed.feed_fragment"
+        android:label="feed_fragment"
+        tools:layout="@layout/feed_fragment" />
+    <fragment
+        android:id="@+id/place_fragment"
+        android:name="com.example.tourroom.ui.place.place_fragment"
+        android:label="place_fragment"
+        tools:layout="@layout/place_fragment" />
+    <fragment
+        android:id="@+id/group_fragment"
+        android:name="com.example.tourroom.ui.group.group_fragment"
+        android:label="group_fragment"
+        tools:layout="@layout/group_fragment" />
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="com.example.tourroom.ui.search.search_fragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
+    <fragment
+        android:id="@+id/notification_fragment"
+        android:name="com.example.tourroom.ui.noti_fication.notification_fragment"
+        android:label="notification_fragment"
+        tools:layout="@layout/notification_fragment" />
+</navigation>

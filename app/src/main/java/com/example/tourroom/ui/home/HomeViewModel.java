@@ -6,14 +6,12 @@ import androidx.lifecycle.ViewModel;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<Integer> pending_notification;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        pending_notification=new MutableLiveData<>();
+        pending_notification.setValue(3);
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+    LiveData<Integer> get_pending_notification(){return pending_notification;}
 }

@@ -1,4 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="place">Place</string>
+    <string name="group">Group</string>
+    <string name="notification">Notification</string>
+
     <string name="app_name">Tour Room</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -15,11 +20,5 @@
 
     <string name="home_second">Home Second</string>
     <string name="feed">Feed</string>
-    <string name="place">Place</string>
-    <string name="group">Group</string>
-    <string name="notification">Notification</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="notification_counter_img">notification_counter_img</string>
 </resources>

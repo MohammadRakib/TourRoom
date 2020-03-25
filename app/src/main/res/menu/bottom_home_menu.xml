@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/feed_fragment"
+        android:icon="@drawable/ic_feed"
+        android:title="@string/feed" />
+    <item
+        android:id="@+id/place_fragment"
+        android:icon="@drawable/ic_place"
+        android:title="@string/place" />
+    <item
+        android:id="@+id/group_fragment"
+        android:icon="@drawable/ic_groups"
+        android:title="@string/group" />
+    <item
+        android:id="@+id/search_fragment"
+        android:icon="@drawable/ic_search"
+        android:title="@android:string/search_go" />
+    <item
+        android:id="@+id/notification_fragment"
+        android:icon="@drawable/ic_notification"
+        android:title="@string/notification" />
+</menu>

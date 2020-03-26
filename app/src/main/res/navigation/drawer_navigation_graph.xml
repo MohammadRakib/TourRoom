@@ -15,7 +15,11 @@
         android:id="@+id/nav_Profile"
         android:name="com.example.tourroom.ui.profile.profileFragment"
         android:label="@string/menu_Profile"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_nav_Profile_to_testfragment22"
+            app:destination="@id/testfragment22" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_visited_places"
@@ -27,5 +31,10 @@
         android:name="com.example.tourroom.ui.about.about_fragment"
         android:label="@string/menu_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/testfragment22"
+        android:name="com.example.tourroom.testfragment2"
+        android:label="fragment_testfragment2"
+        tools:layout="@layout/fragment_testfragment2" />
 
 </navigation>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/group_nav_graph"
+    app:startDestination="@id/testfragment12">
+    <fragment
+        android:id="@+id/testfragment12"
+        android:name="com.example.tourroom.testfragment1"
+        android:label="fragment_testfragment1"
+        tools:layout="@layout/fragment_testfragment1" >
+        <action
+            android:id="@+id/action_testfragment12_to_about_fragment2"
+            app:destination="@id/about_fragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/testfragment23"
+        android:name="com.example.tourroom.testfragment2"
+        android:label="fragment_testfragment2"
+        tools:layout="@layout/fragment_testfragment2" />
+    <fragment
+        android:id="@+id/about_fragment2"
+        android:name="com.example.tourroom.ui.about.about_fragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+</navigation>

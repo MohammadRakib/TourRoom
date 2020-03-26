@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeFragment extends Fragment {
 
+    private BottomNavigationView bottomNavigationView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class HomeFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         //bottom navigation
-        BottomNavigationView bottomNavigationView = root.findViewById(R.id.bottom_home_nav);
+        bottomNavigationView = root.findViewById(R.id.bottom_home_nav);
         NavController navController = Navigation.findNavController(root.findViewById(R.id.bottom_nav_host_fragment));
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
         //notification badger
@@ -44,5 +45,7 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
+
 
 }

@@ -21,4 +21,6 @@
     <string name="home_second">Home Second</string>
     <string name="feed">Feed</string>
     <string name="notification_counter_img">notification_counter_img</string>
+    <string name="after_login">After Login</string>
+    <string name="login_activity">Login</string>
 </resources>

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginPage"></activity>
+        <activity android:name=".testactivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -20,6 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".After_login_Activity"
+            android:label="@string/after_login"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

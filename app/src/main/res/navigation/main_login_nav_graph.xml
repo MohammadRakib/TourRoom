@@ -9,5 +9,14 @@
         android:id="@+id/login_fragment"
         android:name="com.example.tourroom.ui.login.login_fragment"
         android:label="login_fragment"
-        tools:layout="@layout/login_fragment" />
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_login_fragment_to_registration_fragment"
+            app:destination="@id/registration_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registration_fragment"
+        android:name="com.example.tourroom.ui.Registration.Registration_fragment"
+        android:label="registration_fragment"
+        tools:layout="@layout/registration_fragment" />
 </navigation>

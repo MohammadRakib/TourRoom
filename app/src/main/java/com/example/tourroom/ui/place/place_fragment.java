@@ -1,7 +1,9 @@
 package com.example.tourroom.ui.place;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,9 +19,12 @@ import android.widget.Button;
 
 import com.example.tourroom.R;
 
+import java.util.Objects;
+
 public class place_fragment extends Fragment {
 
     private PlaceFragmentViewModel mViewModel;
+    private NavController navController;
 
     public static place_fragment newInstance() {
         return new place_fragment();
@@ -28,25 +33,28 @@ public class place_fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        mViewModel = new ViewModelProvider(this).get(PlaceFragmentViewModel.class);
         return inflater.inflate(R.layout.place_fragment, container, false);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(PlaceFragmentViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button button = view.findViewById(R.id.testbutton3);
+        Button button = view.findViewById(R.id.add_new_place_btn);
+        Button button1 = view.findViewById(R.id.place_info_btn);
+        navController = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_place_fragment_to_testfragment2);
+                navController.navigate(R.id.add_new_place_fragment);
+            }
+        });
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.place_info_fragment);
             }
         });
     }

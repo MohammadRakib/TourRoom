@@ -17,8 +17,8 @@
         android:label="@string/menu_Profile"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_nav_Profile_to_testfragment22"
-            app:destination="@id/testfragment22" />
+            android:id="@+id/action_nav_Profile_to_edit_profile_fragment"
+            app:destination="@id/edit_profile_fragment" />
     </fragment>
 
     <fragment
@@ -32,9 +32,29 @@
         android:label="@string/menu_about"
         tools:layout="@layout/fragment_about" />
     <fragment
-        android:id="@+id/testfragment22"
-        android:name="com.example.tourroom.testfragment2"
-        android:label="fragment_testfragment2"
-        tools:layout="@layout/fragment_testfragment2" />
+        android:id="@+id/group_info_fragment"
+        android:name="com.example.tourroom.ui.group.Group_info_fragment"
+        android:label="Group Info"
+        tools:layout="@layout/group_info_fragment" />
+    <fragment
+        android:id="@+id/edit_profile_fragment"
+        android:name="com.example.tourroom.ui.profile.edit_profile_fragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/edit_profile_fragment" />
+    <fragment
+        android:id="@+id/place_info_fragment"
+        android:name="com.example.tourroom.ui.place.place_info_fragment"
+        android:label="Place Info"
+        tools:layout="@layout/place_info_fragment" />
+    <fragment
+        android:id="@+id/add_new_place_fragment"
+        android:name="com.example.tourroom.ui.place.add_new_place_fragment"
+        android:label="Add a new place"
+        tools:layout="@layout/add_new_place_fragment" />
+    <fragment
+        android:id="@+id/create_group_fragment"
+        android:name="com.example.tourroom.ui.group.create_group_fragment"
+        android:label="Create a new group"
+        tools:layout="@layout/create_group_fragment" />
 
 </navigation>

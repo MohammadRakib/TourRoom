@@ -2,7 +2,6 @@ package com.example.tourroom.ui.login;
 
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Build;
@@ -12,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -32,6 +30,8 @@ public class login_fragment extends Fragment {
         return new login_fragment();
     }
 
+    NavController navController;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -46,7 +46,9 @@ public class login_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button button = view.findViewById(R.id.testbutton);
+        Button button = view.findViewById(R.id.login);
+        Button button1 = view.findViewById(R.id.register);
+        navController = Navigation.findNavController(view);
         button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -55,6 +57,13 @@ public class login_fragment extends Fragment {
                 startActivity(intent);
                 Objects.requireNonNull(getActivity()).finishAffinity();
 
+            }
+        });
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_login_fragment_to_registration_fragment);
             }
         });
     }

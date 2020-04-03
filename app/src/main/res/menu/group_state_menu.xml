@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/chat"
+        android:icon="@drawable/ic_chat"
+        android:title="@string/chat" />
+    <item
+        android:id="@+id/member"
+        android:icon="@drawable/ic_member"
+        android:title="@string/members" />
+    <item
+        android:id="@+id/poll"
+        android:icon="@drawable/ic_ballot"
+        android:title="@string/poll" />
+    <item
+        android:id="@+id/event"
+        android:icon="@drawable/ic_event"
+        android:title="@string/events" />
+    <item
+        android:id="@+id/announcement"
+        android:icon="@drawable/ic_megaphone"
+        android:title="@string/announcements" />
+    <item
+        android:id="@+id/member_request"
+        android:icon="@drawable/ic_scammer"
+        android:title="@string/member_requests" />
+</menu>

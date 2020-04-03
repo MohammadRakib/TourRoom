@@ -15,11 +15,7 @@
         android:id="@+id/place_fragment"
         android:name="com.example.tourroom.ui.place.place_fragment"
         android:label="place_fragment"
-        tools:layout="@layout/place_fragment" >
-        <action
-            android:id="@+id/action_place_fragment_to_testfragment2"
-            app:destination="@id/testfragment2" />
-    </fragment>
+        tools:layout="@layout/place_fragment" />
     <fragment
         android:id="@+id/group_fragment"
         android:name="com.example.tourroom.ui.group.group_fragment"
@@ -35,9 +31,4 @@
         android:name="com.example.tourroom.ui.noti_fication.notification_fragment"
         android:label="notification_fragment"
         tools:layout="@layout/notification_fragment" />
-    <fragment
-        android:id="@+id/testfragment2"
-        android:name="com.example.tourroom.testfragment2"
-        android:label="fragment_testfragment2"
-        tools:layout="@layout/fragment_testfragment2" />
 </navigation>

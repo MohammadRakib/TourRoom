@@ -3,24 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/group_nav_graph"
-    app:startDestination="@id/testfragment12">
+    app:startDestination="@id/chat_fragment">
     <fragment
-        android:id="@+id/testfragment12"
-        android:name="com.example.tourroom.testfragment1"
-        android:label="fragment_testfragment1"
-        tools:layout="@layout/fragment_testfragment1" >
-        <action
-            android:id="@+id/action_testfragment12_to_about_fragment2"
-            app:destination="@id/about_fragment2" />
-    </fragment>
+        android:id="@+id/chat_fragment"
+        android:name="com.example.tourroom.ui.chat.Chat_fragment"
+        tools:layout="@layout/chat_fragment" />
     <fragment
-        android:id="@+id/testfragment23"
-        android:name="com.example.tourroom.testfragment2"
-        android:label="fragment_testfragment2"
-        tools:layout="@layout/fragment_testfragment2" />
+        android:id="@+id/members_fragment"
+        android:name="com.example.tourroom.ui.member.Members_fragment"
+        tools:layout="@layout/members_fragment" />
     <fragment
-        android:id="@+id/about_fragment2"
-        android:name="com.example.tourroom.ui.about.about_fragment"
-        android:label="fragment_about"
-        tools:layout="@layout/fragment_about" />
+        android:id="@+id/member_Requests_fragment"
+        android:name="com.example.tourroom.ui.member.Member_Requests_fragment"
+        tools:layout="@layout/member__requests_fragment" />
+    <fragment
+        android:id="@+id/poll_fragment"
+        android:name="com.example.tourroom.ui.Poll.Poll_fragment"
+        tools:layout="@layout/poll_fragment" />
+    <fragment
+        android:id="@+id/event_fragment"
+        android:name="com.example.tourroom.ui.event.Event_fragment"
+        tools:layout="@layout/event_fragment" />
+    <fragment
+        android:id="@+id/announcement_fragment"
+        android:name="com.example.tourroom.ui.announcement.announcement_fragment"
+        tools:layout="@layout/announcement_fragment" />
 </navigation>

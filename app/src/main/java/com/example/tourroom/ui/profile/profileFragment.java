@@ -1,5 +1,6 @@
 package com.example.tourroom.ui.profile;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -57,8 +58,8 @@ public class profileFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_nav_Profile_to_edit_profile_fragment);
+                Intent intent = new Intent(getActivity(), edit_profile_activity.class);
+                startActivity(intent);
             }
         });
 

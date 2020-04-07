@@ -13,12 +13,4 @@
         android:id="@+id/group_fragment"
         android:icon="@drawable/ic_groups"
         android:title="@string/group" />
-    <item
-        android:id="@+id/search_fragment"
-        android:icon="@drawable/ic_search"
-        android:title="@android:string/search_go" />
-    <item
-        android:id="@+id/notification_fragment"
-        android:icon="@drawable/ic_notification"
-        android:title="@string/notification" />
 </menu>

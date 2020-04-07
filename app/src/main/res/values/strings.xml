@@ -38,4 +38,11 @@
     <string name="use_as_a_popup_button">use as a popup button</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="search_title">search</string>
+    <string name="reject">reject</string>
+    <string name="join">join</string>
+    <string name="this_image_is_for_invitation_row">this image is for invitation row</string>
+    <string name="this_image_is_for_genaral_notification_row">This image is for genaral notification row</string>
+
+
 </resources>

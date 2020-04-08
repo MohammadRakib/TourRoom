@@ -19,11 +19,7 @@ import android.view.ViewGroup;
 
 import com.example.tourroom.R;
 
-import java.util.Objects;
-
 public class add_new_place_fragment extends Fragment {
-
-    DrawerLayout drawer;
 
     private Add_New_Place_Fragment_ViewModel mViewModel;
 
@@ -48,15 +44,6 @@ public class add_new_place_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        drawer = Objects.requireNonNull(getActivity()).findViewById(R.id.after_login_layout_id);
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.search).setVisible(false);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.notification).setVisible(false);
-        }
 
     }
 
@@ -64,14 +51,6 @@ public class add_new_place_fragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.search).setVisible(true);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.notification).setVisible(true);
-        }
 
     }
 

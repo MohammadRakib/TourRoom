@@ -21,11 +21,8 @@ import androidx.navigation.Navigation;
 
 import com.example.tourroom.R;
 
-import java.util.Objects;
-
-
 public class profileFragment extends Fragment {
-    DrawerLayout drawer;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,15 +42,6 @@ public class profileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_toolbar);
-        drawer = Objects.requireNonNull(getActivity()).findViewById(R.id.after_login_layout_id);
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.search).setVisible(false);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.notification).setVisible(false);
-        }
         Button button=view.findViewById(R.id.edit_profile);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,15 +57,6 @@ public class profileFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.search).setVisible(true);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.notification).setVisible(true);
-        }
-
     }
 
 

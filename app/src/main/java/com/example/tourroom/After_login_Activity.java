@@ -32,22 +32,6 @@ public class After_login_Activity extends AppCompatActivity {
         navigation_drawer_work();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_toolbar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.notification) {
-            navController.navigate(R.id.notification_fragment);
-            return true;
-        }else {
-            return false;
-        }
-    }
 
     public void navigation_drawer_work(){
 

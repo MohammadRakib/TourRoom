@@ -21,14 +21,10 @@ import com.example.tourroom.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.Objects;
-
-
 public class notification_fragment extends Fragment {
 
     private NotificationFragmentViewModel mViewModel;
     private TabLayoutMediator tabLayoutMediator;
-    DrawerLayout drawer;
 
     public static notification_fragment newInstance() {
         return new notification_fragment();
@@ -45,15 +41,6 @@ public class notification_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        drawer = Objects.requireNonNull(getActivity()).findViewById(R.id.after_login_layout_id);
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.search).setVisible(false);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.notification).setVisible(false);
-        }
         TabLayout tabLayout = view.findViewById(R.id.notification_tab_layout);
         ViewPager2 viewPager2 = view.findViewById(R.id.notification_viewpager);
         notification_page_adapter pagerAdapter = new notification_page_adapter(this);
@@ -75,15 +62,6 @@ public class notification_fragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         tabLayoutMediator.detach();
-        Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.search).setVisible(true);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.notification).setVisible(true);
-        }
-
     }
 }

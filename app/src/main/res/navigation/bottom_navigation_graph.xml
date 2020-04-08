@@ -21,4 +21,14 @@
         android:name="com.example.tourroom.ui.group.group_fragment"
         android:label="group_fragment"
         tools:layout="@layout/group_fragment" />
+    <fragment
+        android:id="@+id/notification_fragment"
+        android:name="com.example.tourroom.ui.noti_fication.notification_fragment"
+        android:label="notification_fragment"
+        tools:layout="@layout/notification_fragment" />
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="com.example.tourroom.ui.search.search_fragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
 </navigation>

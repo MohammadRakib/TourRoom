@@ -18,12 +18,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.tourroom.R;
 
-import java.util.Objects;
-
-
 public class visit_placesFragment extends Fragment {
 
-    DrawerLayout drawer;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Visit_placesViewModel visitedPlacesViewModel = new ViewModelProvider(this).get(Visit_placesViewModel.class);
@@ -41,29 +37,12 @@ public class visit_placesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_toolbar);
-        drawer = Objects.requireNonNull(getActivity()).findViewById(R.id.after_login_layout_id);
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.search).setVisible(false);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.notification).setVisible(false);
-        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.search).setVisible(true);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.notification).setVisible(true);
-        }
 
     }
 

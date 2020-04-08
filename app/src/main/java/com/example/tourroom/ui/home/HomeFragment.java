@@ -21,8 +21,6 @@ import com.example.tourroom.R;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.Objects;
-
 public class HomeFragment extends Fragment {
 
     private BottomNavigationView bottomNavigationView;
@@ -35,10 +33,10 @@ public class HomeFragment extends Fragment {
         bottomNavigationView = root.findViewById(R.id.bottom_home_nav);
         NavController navController = Navigation.findNavController(root.findViewById(R.id.bottom_nav_host_fragment));
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
-        //notification badger
-        /*Menu bottom_menu = bottomNavigationView.getMenu();
-        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottom_menu.getItem(3).getItemId());
-        badgeDrawable.setVisible(true);*/
+
+        Menu bottom_menu = bottomNavigationView.getMenu();
+        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottom_menu.getItem(4).getItemId());
+        badgeDrawable.setVisible(true);
 
         //view model related
         homeViewModel.get_pending_notification().observe(getViewLifecycleOwner(), new Observer<Integer>() {
@@ -61,13 +59,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Toolbar toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.search).setVisible(false);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getMenu().findItem(R.id.notification).setVisible(false);
-        }
+
 
     }
 

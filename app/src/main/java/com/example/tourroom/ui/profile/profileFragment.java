@@ -43,11 +43,11 @@ public class profileFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button button=view.findViewById(R.id.edit_profile);
+        final NavController navController = Navigation.findNavController(view);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), edit_profile_activity.class);
-                startActivity(intent);
+                navController.navigate(R.id.edit_profile_fragment);
             }
         });
 

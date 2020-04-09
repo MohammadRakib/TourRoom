@@ -1,6 +1,7 @@
 package com.example.tourroom.ui.group;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -44,10 +45,13 @@ public class group_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if(!Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).isShowing()){
+            Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).show();
+        }
         Button button = view.findViewById(R.id.into_group);
         Button button1=view.findViewById(R.id.group_info);
         Button button2=view.findViewById(R.id.create_group_btn);
-        navController = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+        navController = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.after_login_host_fragment);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

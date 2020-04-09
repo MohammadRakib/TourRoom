@@ -2,14 +2,20 @@ package com.example.tourroom.ui.home;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -21,22 +27,34 @@ import com.example.tourroom.R;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Objects;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class HomeFragment extends Fragment {
 
-    private BottomNavigationView bottomNavigationView;
+    public BottomNavigationView bottomNavigationView;
+    public Toolbar main_toolbar;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        //toolbar
+        main_toolbar = root.findViewById(R.id.main_toolbar);
+        ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(main_toolbar);
+
+
         //bottom navigation
         bottomNavigationView = root.findViewById(R.id.bottom_home_nav);
-        NavController navController = Navigation.findNavController(root.findViewById(R.id.bottom_nav_host_fragment));
+        final NavController navController = Navigation.findNavController(root.findViewById(R.id.bottom_nav_host_fragment));
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
 
         Menu bottom_menu = bottomNavigationView.getMenu();
-        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottom_menu.getItem(4).getItemId());
-        badgeDrawable.setVisible(true);
+        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottom_menu.getItem(3).getItemId());        badgeDrawable.setVisible(true);
 
         //view model related
         homeViewModel.get_pending_notification().observe(getViewLifecycleOwner(), new Observer<Integer>() {
@@ -48,6 +66,8 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

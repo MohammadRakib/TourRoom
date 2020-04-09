@@ -1,6 +1,7 @@
-package com.example.tourroom.ui.search;
+package com.example.tourroom.ui.security;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
@@ -14,24 +15,24 @@ import android.view.ViewGroup;
 
 import com.example.tourroom.R;
 
-public class search_fragment extends Fragment {
+public class security_fragment extends Fragment {
 
-    private Search_Fragment_ViewModel mViewModel;
+    private Security_Fragment_View_Model mViewModel;
 
-    public static search_fragment newInstance() {
-        return new search_fragment();
+    public static security_fragment newInstance() {
+        return new security_fragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.search_fragment, container, false);
+        return inflater.inflate(R.layout.security_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(Search_Fragment_ViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(Security_Fragment_View_Model.class);
         // TODO: Use the ViewModel
     }
 

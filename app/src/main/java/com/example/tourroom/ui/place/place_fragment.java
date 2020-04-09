@@ -1,6 +1,7 @@
 package com.example.tourroom.ui.place;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Build;
@@ -41,9 +42,12 @@ public class place_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if(!Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).isShowing()){
+            Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).show();
+        }
         Button button = view.findViewById(R.id.add_new_place_btn);
         Button button1 = view.findViewById(R.id.place_info_btn);
-        navController = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.nav_host_fragment);
+        navController = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.after_login_host_fragment);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,5 +61,12 @@ public class place_fragment extends Fragment {
                 navController.navigate(R.id.place_info_fragment);
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
     }
 }

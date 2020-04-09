@@ -27,8 +27,8 @@
         android:label="notification_fragment"
         tools:layout="@layout/notification_fragment" />
     <fragment
-        android:id="@+id/search_fragment"
-        android:name="com.example.tourroom.ui.search.search_fragment"
-        android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
+        android:id="@+id/menu_fragment"
+        android:name="com.example.tourroom.ui.menu.menu_fragment"
+        android:label="menu_fragment"
+        tools:layout="@layout/menu_fragment" />
 </navigation>

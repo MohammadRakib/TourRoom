@@ -42,6 +42,8 @@
     <string name="join">join</string>
     <string name="this_image_is_for_invitation_row">this image is for invitation row</string>
     <string name="this_image_is_for_genaral_notification_row">This image is for genaral notification row</string>
+    <string name="menu">Menu</string>
+    <string name="security">Security</string>
 
 
 </resources>

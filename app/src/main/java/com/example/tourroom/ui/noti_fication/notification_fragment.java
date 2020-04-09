@@ -1,6 +1,7 @@
 package com.example.tourroom.ui.noti_fication;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,6 +21,8 @@ import android.view.ViewGroup;
 import com.example.tourroom.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.Objects;
 
 public class notification_fragment extends Fragment {
 
@@ -41,6 +44,9 @@ public class notification_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if(Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).isShowing()){
+            Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).hide();
+        }
         TabLayout tabLayout = view.findViewById(R.id.notification_tab_layout);
         ViewPager2 viewPager2 = view.findViewById(R.id.notification_viewpager);
         notification_page_adapter pagerAdapter = new notification_page_adapter(this);

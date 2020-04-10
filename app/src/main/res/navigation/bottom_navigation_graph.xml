@@ -28,7 +28,7 @@
         tools:layout="@layout/notification_fragment" />
     <fragment
         android:id="@+id/menu_fragment"
-        android:name="com.example.tourroom.ui.menu.menu_fragment"
+        android:name="com.example.tourroom.ui.Main_menu.main_menu_fragment"
         android:label="menu_fragment"
-        tools:layout="@layout/menu_fragment" />
+        tools:layout="@layout/main_menu_fragment" />
 </navigation>

@@ -5,30 +5,19 @@
     android:id="@+id/main_toolbar_layout_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    app:elevation="0dp">
+    android:background="#FFFFFF">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:paddingLeft="6dp"
+        android:paddingRight="11dp"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
-        app:layout_scrollFlags="scroll|enterAlways|snap">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/search_background"
-            android:focusable="false"
-            app:iconifiedByDefault="false"
-            app:searchIcon="@drawable/ic_search" />
-    </androidx.appcompat.widget.Toolbar>
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp" />
 
 
 </com.google.android.material.appbar.AppBarLayout>

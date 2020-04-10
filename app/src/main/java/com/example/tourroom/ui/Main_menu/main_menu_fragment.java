@@ -1,4 +1,4 @@
-package com.example.tourroom.ui.menu;
+package com.example.tourroom.ui.Main_menu;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -24,9 +24,9 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class menu_fragment extends Fragment {
+public class main_menu_fragment extends Fragment {
 
-    public menu_fragment() {
+    public main_menu_fragment() {
         // Required empty public constructor
     }
 
@@ -35,7 +35,7 @@ public class menu_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.menu_fragment, container, false);
+        return inflater.inflate(R.layout.main_menu_fragment, container, false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

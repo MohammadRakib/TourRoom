@@ -13,10 +13,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="9dp"
-        android:contentDescription="send image"
+        android:contentDescription="@string/send_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_send" />
+        app:srcCompat="@drawable/ic_send"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:focusable="true"/>
 
     <ImageView
         android:id="@+id/upload_image"
@@ -25,10 +28,13 @@
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginBottom="9dp"
-        android:contentDescription="upload Image"
+        android:contentDescription="@string/upload_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_photo" />
+        app:srcCompat="@drawable/ic_photo"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:focusable="true"/>
 
     <EditText
         android:id="@+id/Chat_edit_text"
@@ -42,7 +48,7 @@
         android:background="@drawable/chat_shape"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="write here...."
+        android:hint="@string/write_here"
         android:inputType="textMultiLine"
         android:padding="10dp"
         android:textSize="18sp"

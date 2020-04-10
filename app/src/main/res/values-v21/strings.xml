@@ -44,6 +44,14 @@
     <string name="this_image_is_for_genaral_notification_row">This image is for genaral notification row</string>
     <string name="menu">Menu</string>
     <string name="security">Security</string>
+    <string name="send_image">send image</string>
+    <string name="upload_image">upload Image</string>
+    <string name="write_here">write here....</string>
+    <string name="type_old_password">Type old password</string>
+    <string name="type_new_password">type new password</string>
+    <string name="re_type_new_password">Re-type new password</string>
+    <string name="change_password">Change Password</string>
+    <string name="confirm">Confirm</string>
 
 
 </resources>

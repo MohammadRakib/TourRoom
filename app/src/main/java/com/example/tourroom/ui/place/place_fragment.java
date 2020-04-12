@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,8 @@ public class place_fragment extends Fragment {
 
     private PlaceFragmentViewModel mViewModel;
     private NavController navController;
+    RecyclerView parent_vertical_recycle_view;
+    place_vertical_parent_recycle_view_adapter place_vertical_parent_recycle_view_adapter;
 
     public static place_fragment newInstance() {
         return new place_fragment();
@@ -45,7 +48,13 @@ public class place_fragment extends Fragment {
         if(!Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).isShowing()){
             Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).show();
         }
-        Button button = view.findViewById(R.id.add_new_place_btn);
+
+        parent_vertical_recycle_view = view.findViewById(R.id.place_vertical_parent_Recycle_view);
+        place_vertical_parent_recycle_view_adapter = new place_vertical_parent_recycle_view_adapter();
+        parent_vertical_recycle_view.setAdapter(place_vertical_parent_recycle_view_adapter);
+
+
+        /*Button button = view.findViewById(R.id.add_new_place_btn);
         Button button1 = view.findViewById(R.id.place_info_btn);
         navController = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.after_login_host_fragment);
         button.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +69,7 @@ public class place_fragment extends Fragment {
             public void onClick(View v) {
                 navController.navigate(R.id.place_info_fragment);
             }
-        });
+        });*/
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

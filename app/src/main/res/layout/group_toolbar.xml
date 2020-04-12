@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="@+id/group_title"
                 app:layout_constraintTop_toBottomOf="@+id/group_title" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/group_state_popup_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

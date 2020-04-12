@@ -52,6 +52,10 @@
     <string name="re_type_new_password">Re-type new password</string>
     <string name="change_password">Change Password</string>
     <string name="confirm">Confirm</string>
+    <string name="recommended_places_for_you">Recommended Places For You</string>
+    <string name="tour_places">Tour Places</string>
+    <string name="add_a_new_place">Add a new place</string>
+    <string name="add_visited">ADD VISITED</string>
 
 
 </resources>

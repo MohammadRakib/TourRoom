@@ -6,22 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.chat.Chat_fragment">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/send_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="10dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
         android:contentDescription="@string/send_image"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_send"
-        android:clickable="true"
-        android:background="?android:attr/selectableItemBackground"
-        android:focusable="true"/>
+        app:srcCompat="@drawable/ic_send" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/upload_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

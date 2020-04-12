@@ -21,8 +21,10 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
 
         if(position == 0){
             return 0;
+        }else if (position == 1){
+            return 1;
         }
-        return 1;
+       return 2;
 
     }
 
@@ -32,17 +34,19 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view;
         if(viewType == 0){
+            view = layoutInflater.inflate(R.layout.place_vertical_parent_recycle_view_row_0,parent,false);
+            return new row_0_view_holder(view);
+        }else if(viewType == 1){
             view = layoutInflater.inflate(R.layout.place_vertical_parent_recycle_view_row_1,parent,false);
             return new row_1_view_holder(view);
         }
-
         view = layoutInflater.inflate(R.layout.place_vertical_parent_recycle_view_row_2,parent,false);
         return new row_2_view_holder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-       if (position == 0){
+       if (position == 1){
            place_horizontal_child_recycle_view_adapter place_horizontal_child_recycle_view_adapter = new place_horizontal_child_recycle_view_adapter();
            row_1_view_holder row_1_view_holder = (place_vertical_parent_recycle_view_adapter.row_1_view_holder) holder;
            row_1_view_holder.horizontal_child_recycle_view.setAdapter(place_horizontal_child_recycle_view_adapter);
@@ -54,18 +58,27 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
         return 20;
     }
 
+    class row_0_view_holder extends RecyclerView.ViewHolder{
+
+        TextView add_new_place_text_view;
+        AppCompatImageButton add_new_place_button;
+
+        public row_0_view_holder(@NonNull View itemView) {
+            super(itemView);
+            add_new_place_text_view = itemView.findViewById(R.id.add_new_place_text_view_id);
+            add_new_place_button = itemView.findViewById(R.id.add_new_place_button);
+        }
+    }
+
     class row_1_view_holder extends RecyclerView.ViewHolder{
 
-        TextView add_new_place_text_view, recommend_place_text_view, tour_place_text_view;
-        AppCompatImageButton add_new_place_button;
+        TextView recommend_place_text_view, tour_place_text_view;
         RecyclerView horizontal_child_recycle_view;
 
         public row_1_view_holder(@NonNull View itemView) {
             super(itemView);
-            add_new_place_text_view = itemView.findViewById(R.id.add_new_place_text_view_id);
             recommend_place_text_view = itemView.findViewById(R.id.recommended_place_text_view);
             tour_place_text_view = itemView.findViewById(R.id.tour_places_text_view);
-            add_new_place_button = itemView.findViewById(R.id.add_new_place_button);
             horizontal_child_recycle_view = itemView.findViewById(R.id.place_child_horizontal_recycle_view_id);
         }
     }

@@ -5,29 +5,32 @@
     android:id="@+id/place_horizontal_child_recycle_view_row_layout_id"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
     android:layout_marginTop="5dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginBottom="5dp">
+    android:layout_marginRight="2dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginEnd="2dp">
 
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/place_horizontal_child_recycle_view_row_card_id"
         android:layout_width="216dp"
         android:layout_height="231dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="24dp"
-        app:cardElevation="1dp"
+        app:cardElevation="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -77,14 +80,15 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="13dp"
                 android:fontFamily="@font/cantarell"
                 android:text="@string/add_visited"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:cornerRadius="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/horizontal_recycle_view_Place_name_text_view" />
+                app:layout_constraintTop_toBottomOf="@+id/horizontal_recycle_view_Place_name_text_view"
+                app:strokeColor="@color/colorPrimary" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -57,19 +57,19 @@
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/group_state_popup_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
                 android:contentDescription="@string/use_as_a_popup_button"
+                android:focusable="true"
                 android:onClick="group_popup_menu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.61"
-                app:srcCompat="@drawable/ic_arrow_drop_down_circle_black_24dp"
-                android:clickable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:focusable="true"/>
+                app:srcCompat="@drawable/ic_arrow_drop_down_circle_black_24dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>

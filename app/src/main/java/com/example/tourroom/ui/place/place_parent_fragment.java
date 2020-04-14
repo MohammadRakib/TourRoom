@@ -17,21 +17,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.tourroom.R;
 
 import java.util.Objects;
 
-public class place_fragment extends Fragment {
+public class place_parent_fragment extends Fragment implements com.example.tourroom.ui.place.place_vertical_parent_recycle_view_adapter.place_parent_recycle_view_click_listener_interface {
 
     private PlaceFragmentViewModel mViewModel;
     private NavController navController;
     RecyclerView parent_vertical_recycle_view;
     place_vertical_parent_recycle_view_adapter place_vertical_parent_recycle_view_adapter;
 
-    public static place_fragment newInstance() {
-        return new place_fragment();
+    public static place_parent_fragment newInstance() {
+        return new place_parent_fragment();
     }
 
     @Override
@@ -50,7 +49,7 @@ public class place_fragment extends Fragment {
         }
 
         parent_vertical_recycle_view = view.findViewById(R.id.place_vertical_parent_Recycle_view);
-        place_vertical_parent_recycle_view_adapter = new place_vertical_parent_recycle_view_adapter();
+        place_vertical_parent_recycle_view_adapter = new place_vertical_parent_recycle_view_adapter(this);
         parent_vertical_recycle_view.setAdapter(place_vertical_parent_recycle_view_adapter);
 
 
@@ -77,5 +76,20 @@ public class place_fragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void on_Item_click(int position) {
+        navController = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.after_login_host_fragment);
+        navController.navigate(R.id.place_info_fragment);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void on_add_button_click() {
+        navController = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.after_login_host_fragment);
+        navController.navigate(R.id.add_new_place_fragment);
     }
 }

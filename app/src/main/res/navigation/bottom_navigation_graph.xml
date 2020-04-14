@@ -13,7 +13,7 @@
         tools:layout="@layout/feed_fragment" />
     <fragment
         android:id="@+id/place_fragment"
-        android:name="com.example.tourroom.ui.place.place_fragment"
+        android:name="com.example.tourroom.ui.place.place_parent_fragment"
         android:label="place_fragment"
         tools:layout="@layout/place_fragment" />
     <fragment

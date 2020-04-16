@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -96,14 +97,11 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
     }
 
     static class row_0_view_holder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-        TextView add_new_place_text_view;
-        AppCompatImageButton add_new_place_button;
+        AppCompatButton add_new_place_button;
         place_parent_recycle_view_click_listener_interface place_parent_recycle_view_click_listener_interface;
 
         row_0_view_holder(@NonNull final View itemView , place_parent_recycle_view_click_listener_interface place_parent_recycle_view_click_listener_interface) {
             super(itemView);
-            add_new_place_text_view = itemView.findViewById(R.id.add_new_place_text_view_id);
             add_new_place_button = itemView.findViewById(R.id.add_new_place_button);
             this.place_parent_recycle_view_click_listener_interface = place_parent_recycle_view_click_listener_interface;
             //add button onclick

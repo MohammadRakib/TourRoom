@@ -5,37 +5,21 @@
     android:id="@+id/parent_vertical_parent_recycle_view_row_0_layout_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="25dp">
+    android:layout_marginBottom="15dp">
 
-    <TextView
-        android:id="@+id/add_new_place_text_view_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:fontFamily="@font/cantarell"
-        android:labelFor="@id/add_new_place_button"
-        android:text="@string/add_a_new_place"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/add_new_place_button"
-        app:layout_constraintStart_toEndOf="@+id/add_new_place_button"
-        app:layout_constraintTop_toTopOf="@+id/add_new_place_button" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/add_new_place_button"
-        style="@style/Widget.AppCompat.ImageButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
-        android:contentDescription="@string/add_a_new_place"
-        android:tint="@color/colorPrimary"
+        android:drawableStart="@drawable/ic_add_new_place"
+        android:drawableLeft="@drawable/ic_add_new_place"
+        android:drawablePadding="10dp"
+        android:text="@string/add_a_new_place"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_add_new_place"
-        android:clickable="true"
-        android:background="?android:attr/selectableItemBackground"
-        android:focusable="true"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

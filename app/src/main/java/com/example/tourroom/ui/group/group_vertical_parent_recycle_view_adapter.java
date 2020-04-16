@@ -3,10 +3,12 @@ package com.example.tourroom.ui.group;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourroom.R;
@@ -71,15 +73,13 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
 
     class row_0_view_holder extends RecyclerView.ViewHolder{
 
-        TextView add_new_group_text_view;
-        ImageView imageView_foraddingnewgroup;
+        AppCompatButton foraddingnewgroup;
 
         public row_0_view_holder(@NonNull View itemView) {
             super(itemView);
-            add_new_group_text_view = itemView.findViewById(R.id.createnewgroup_textView);
-            imageView_foraddingnewgroup = itemView.findViewById(R.id.addgroupimagebutton);
+            foraddingnewgroup = itemView.findViewById(R.id.addgroupbutton);
 
-            imageView_foraddingnewgroup.setOnClickListener(new View.OnClickListener() {
+            foraddingnewgroup.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                vRecyclerViewClickInterface.creategrouponclick();

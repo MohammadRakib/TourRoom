@@ -7,26 +7,21 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="15dp">
 
-    <ImageView
-        android:id="@+id/addgroupimagebutton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add" />
-
-    <TextView
-        android:id="@+id/createnewgroup_textView"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addgroupbutton"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:drawableStart="@drawable/ic_create_group_button"
+        android:drawableLeft="@drawable/ic_create_group_button"
+        android:drawablePadding="10dp"
         android:text="@string/create_a_new_group"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#0B0A0A"
-        app:layout_constraintStart_toEndOf="@+id/addgroupimagebutton"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

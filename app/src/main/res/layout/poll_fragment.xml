@@ -6,25 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".ui.Poll.Poll_fragment">
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="264dp"
-        android:text="Poll"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewidforcreatingpoll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
 
-    <Button
-        android:id="@+id/create_poll"
+        >
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_pollfloatingbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
-        android:text="create poll"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:maxImageSize="@dimen/design_fab_size_normal"
+        app:srcCompat="@drawable/plus" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

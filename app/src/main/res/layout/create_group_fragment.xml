@@ -7,12 +7,85 @@
     tools:context=".ui.group.create_group_fragment">
 
     <TextView
+        android:id="@+id/groupname_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="create a new group"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="53dp"
+        android:text="@string/group_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#121111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/groupnameinputedittext"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/boxbg"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/groupname_textview"
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint=" (highest 15 characters)"
+        android:maxLength="15"/>
+
+    <TextView
+        android:id="@+id/groupdescription_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="58dp"
+        android:text="@string/group_description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupname_textview" />
+
+    <EditText
+        android:id="@+id/groupdescriptionedittext"
+        android:layout_width="0dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/boxbg"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupdescription_textview" />
+
+
+    <Button
+        android:id="@+id/newgroupcreatebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="140dp"
+        android:text="@string/create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupdescriptionedittext" />
+
+    <ImageView
+        android:id="@+id/uploadgroupphotoimageview"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/uploadiconforgroupphoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupdescriptionedittext" />
 </androidx.constraintlayout.widget.ConstraintLayout>

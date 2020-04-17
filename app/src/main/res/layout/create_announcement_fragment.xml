@@ -3,33 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/create_announcement_popup_layout_id"
-    android:layout_width="match_parent"
+    android:layout_width="350dp"
     android:layout_height="400dp"
     android:background="@drawable/popupwindow"
     tools:context=".ui.announcement.create_announcement_fragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="create announcement"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <ImageView
-        android:id="@+id/imageView3"
+
+    <TextView
+        android:id="@+id/entermessage_textviewid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="129dp"
-        android:layout_marginLeft="129dp"
-        android:layout_marginTop="57dp"
-        android:layout_marginEnd="174dp"
-        android:layout_marginRight="174dp"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/enter_message"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+
+        android:id="@+id/edittextfornewannouncement"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="75dp"
+        android:background="@drawable/boxbg"
+        android:cursorVisible="true"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/createnewannouncement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entermessage_textviewid" />
+
+    <Button
+        android:id="@+id/createnewannouncement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/create"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.736"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edittextfornewannouncement" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

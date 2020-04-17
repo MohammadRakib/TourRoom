@@ -6,31 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.announcement.announcement_fragment">
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="308dp"
-        android:text="@string/announcements"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleviewforannouncementid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-    <Button
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/create_announcement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
-        android:layout_marginLeft="155dp"
-        android:layout_marginEnd="168dp"
-        android:layout_marginRight="168dp"
-        android:text="Create Announcement"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.603"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.452" />
+        app:maxImageSize="@dimen/design_fab_size_normal"
+        app:srcCompat="@drawable/plus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

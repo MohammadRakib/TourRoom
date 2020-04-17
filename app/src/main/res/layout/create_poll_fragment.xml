@@ -1,48 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/create_poll_popup_layout_id"
-    android:layout_width="match_parent"
-    android:layout_height="475dp"
-    android:background="@drawable/popupwindow"
+    android:layout_width="350dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/popupwindowforrectangularshape"
     tools:context=".ui.Poll.create_poll_fragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="create poll"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+    <LinearLayout
+        android:id="@+id/linearlayoutid_forcreatingpoll"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="151dp"
-        android:layout_marginLeft="151dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginRight="152dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="264dp"
-        android:layout_marginLeft="264dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginRight="59dp"
-        android:layout_marginBottom="329dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/addpolloption_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/addbuttonforpoll" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/add_poll_option"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/option1textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Option 1:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <EditText
+                android:id="@+id/option1_edittext_forcreatingpoll"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/boxbg"
+                android:maxLength="15" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/option2textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Option 2:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <EditText
+                android:id="@+id/option2_edittext_forcreatingpoll"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/boxbg"
+                android:maxLength="15" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/create_newpollbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/create" />
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.core.widget.NestedScrollView>

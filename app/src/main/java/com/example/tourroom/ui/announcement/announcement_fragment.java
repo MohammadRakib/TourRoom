@@ -13,6 +13,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +21,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.tourroom.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
 public class announcement_fragment extends Fragment {
 
     private AnnouncementFragmentViewModel mViewModel;
+    RecyclerView recyclerview_forannouncement;
+    RecyclerAdapterForAnnouncement recyclerAdapterForAnnouncement;
 
     public static announcement_fragment newInstance() {
         return new announcement_fragment();
@@ -41,9 +45,15 @@ public class announcement_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button button= view.findViewById(R.id.create_announcement);
+
+
+        recyclerview_forannouncement=view.findViewById(R.id.recycleviewforannouncementid);
+        recyclerAdapterForAnnouncement=new RecyclerAdapterForAnnouncement();
+
+        recyclerview_forannouncement.setAdapter(recyclerAdapterForAnnouncement);
+        FloatingActionButton actionbutton_forannouncement= view.findViewById(R.id.create_announcement);
         final Dialog create_announcement_popup_dialog = new Dialog(view.getContext());
-        button.setOnClickListener(new View.OnClickListener() {
+        actionbutton_forannouncement.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {

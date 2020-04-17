@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +23,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.tourroom.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
 public class Poll_fragment extends Fragment {
 
     private PollFragmentViewModel mViewModel;
+    RecyclerView recyclerview_forcreatingpoll;
+    RecyclerAdapterForCreatePoll recyclerAdapterForCreatePoll;
 
     public static Poll_fragment newInstance() {
         return new Poll_fragment();
@@ -44,9 +48,16 @@ public class Poll_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button button= view.findViewById(R.id.create_poll);
+
+        recyclerview_forcreatingpoll=view.findViewById(R.id.recyclerviewidforcreatingpoll);
+        recyclerAdapterForCreatePoll=new  RecyclerAdapterForCreatePoll();
+
+        recyclerview_forcreatingpoll.setAdapter(recyclerAdapterForCreatePoll);
+
         final Dialog create_poll_popup_dialog = new Dialog(view.getContext());
-        button.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton actionbutton_forpoll= view.findViewById(R.id.create_pollfloatingbutton);
+
+        actionbutton_forpoll.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {

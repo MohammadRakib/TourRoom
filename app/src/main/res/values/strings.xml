@@ -79,6 +79,8 @@
         forests, agriculturally used land, mudflats and barren land, and is intersected by multiple tidal
         streams and channels.</string>
     <string name="enter_message">Enter Message :</string>
+    <string name="highest_15_characters">highest 15 characters</string>
+    <string name="create_a_event">Create An Event</string>
 
 
 </resources>

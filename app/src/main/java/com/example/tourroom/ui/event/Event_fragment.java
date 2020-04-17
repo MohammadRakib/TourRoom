@@ -2,9 +2,9 @@ package com.example.tourroom.ui.event;
 
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.tourroom.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -51,14 +50,13 @@ public class Event_fragment extends Fragment {
 
         recyclerview_forevent.setAdapter(recyclerAdapterforevent);
         FloatingActionButton actionbutton_forevent= view.findViewById(R.id.create_eventfloatingactionbutton);
-        final Dialog create_event_popup_dialog = new Dialog(view.getContext());
+
         actionbutton_forevent.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                create_event_popup_dialog.setContentView(R.layout.create_event_fragment);
-                Objects.requireNonNull(create_event_popup_dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                create_event_popup_dialog.show();
+                Intent intent = new Intent(getActivity(), create_event_activity.class);
+                startActivity(intent);
             }
         });
     }

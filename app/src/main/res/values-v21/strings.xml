@@ -71,6 +71,8 @@
     <string name="event_day">Event Day :</string>
     <string name="journey_start">Journey Start :</string>
     <string name="enter_message">Enter Message :</string>
+    <string name="highest_15_characters">highest 15 characters</string>
+    <string name="create_a_event">Create An Event</string>
 
 
 </resources>

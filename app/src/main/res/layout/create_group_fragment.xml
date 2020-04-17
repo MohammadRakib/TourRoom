@@ -9,89 +9,111 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/groupname_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="53dp"
-        android:text="@string/group_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#121111"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/groupname_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/cantarell"
+            android:text="@string/group_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#121111"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/create_group_text_view_id" />
 
-    <EditText
-        android:id="@+id/groupnameinputedittext"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/boxbg"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/groupname_textview"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint=" (highest 15 characters)"
-        android:maxLength="15"/>
+        <EditText
+            android:id="@+id/groupnameinputedittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/boxbg"
+            android:ems="10"
+            android:hint="@string/highest_15_characters"
+            android:inputType="textPersonName"
+            android:maxLength="15"
+            android:padding="5dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/groupname_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/groupname_textview"
+            app:layout_constraintTop_toTopOf="@+id/groupname_textview" />
 
-    <TextView
-        android:id="@+id/groupdescription_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="58dp"
-        android:text="@string/group_description"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupname_textview" />
+        <TextView
+            android:id="@+id/groupdescription_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="58dp"
+            android:fontFamily="@font/cantarell"
+            android:text="@string/group_description"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#121111"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupname_textview" />
 
-    <EditText
-        android:id="@+id/groupdescriptionedittext"
-        android:layout_width="0dp"
-        android:layout_height="240dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/boxbg"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupdescription_textview" />
+        <EditText
+            android:id="@+id/groupdescriptionedittext"
+            android:layout_width="0dp"
+            android:layout_height="240dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/boxbg"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupdescription_textview" />
 
 
-    <Button
-        android:id="@+id/newgroupcreatebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="97dp"
-        android:text="@string/create"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadgroupphotoimageview" />
+        <Button
+            android:id="@+id/newgroupcreatebutton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/create"
+            app:cornerRadius="13dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uploadgroupphotoimageview"
+            app:strokeColor="@color/colorPrimary" />
 
-    <ImageView
-        android:id="@+id/uploadgroupphotoimageview"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/uploadiconforgroupphoto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupdescriptionedittext" />
+        <ImageView
+            android:id="@+id/uploadgroupphotoimageview"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/uploadiconforgroupphoto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupdescriptionedittext" />
+
+        <TextView
+            android:id="@+id/create_group_text_view_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:fontFamily="@font/fresca"
+            android:text="@string/create_a_new_group"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

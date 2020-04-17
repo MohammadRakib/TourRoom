@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/create_poll_popup_layout_id"
-    android:layout_width="350dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/popupwindowforrectangularshape"
-    tools:context=".ui.Poll.create_poll_fragment">
+    tools:context=".ui.Poll.create_poll_activity">
 
     <LinearLayout
         android:id="@+id/linearlayoutid_forcreatingpoll"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
 
         android:orientation="vertical">
 
@@ -27,21 +26,27 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="30dp"
-                android:src="@drawable/addbuttonforpoll" />
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/addbuttonforpoll"
+                android:layout_marginStart="15dp" />
 
             <TextView
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/fresca"
                 android:text="@string/add_poll_option"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="30sp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="10dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:orientation="horizontal">
 
@@ -50,22 +55,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:fontFamily="@font/cantarell"
                 android:text="Option 1:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <EditText
                 android:id="@+id/option1_edittext_forcreatingpoll"
-                android:layout_width="220dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/boxbg"
-                android:maxLength="15" />
+                android:maxLength="15"
+                android:padding="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:orientation="horizontal">
 
@@ -74,16 +85,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:fontFamily="@font/cantarell"
                 android:text="Option 2:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <EditText
                 android:id="@+id/option2_edittext_forcreatingpoll"
-                android:layout_width="220dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/boxbg"
-                android:maxLength="15" />
+                android:maxLength="15"
+                android:padding="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="5dp"/>
 
         </LinearLayout>
 
@@ -93,10 +110,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
             android:layout_marginTop="40dp"
-            android:text="@string/create" />
-
-
-
+            android:layout_marginBottom="10dp"
+            android:text="@string/create"
+            android:layout_marginStart="200dp" />
 
 
     </LinearLayout>

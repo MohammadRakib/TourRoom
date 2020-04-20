@@ -1,23 +1,21 @@
 package com.example.tourroom.ui.chat;
 
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tourroom.R;
-
 public class Chat_fragment extends Fragment {
 
-    private ChatFragmentViewModel mViewModel;
+    RecyclerView chat_recycle_view;
+
 
     public static Chat_fragment newInstance() {
         return new Chat_fragment();
@@ -30,10 +28,8 @@ public class Chat_fragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ChatFragmentViewModel.class);
-        // TODO: Use the ViewModel
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        chat_recycle_view = view.findViewById(R.id.show_chat_recycle_view);
     }
-
 }

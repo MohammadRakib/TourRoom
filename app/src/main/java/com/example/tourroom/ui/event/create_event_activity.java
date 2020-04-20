@@ -34,11 +34,15 @@ public class create_event_activity extends AppCompatActivity {
         createbutton_forevent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
 

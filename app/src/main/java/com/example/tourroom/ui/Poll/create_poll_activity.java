@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,7 +31,19 @@ public class create_poll_activity extends AppCompatActivity {
         option1_edittext_forpoll=findViewById(R.id.option1_edittext_forcreatingpoll);
         option2_edittext_forpoll=findViewById(R.id.option2_edittext_forcreatingpoll);
         createnewpollbutton=findViewById(R.id.create_newpollbutton);
+        createnewpollbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override

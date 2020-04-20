@@ -45,12 +45,27 @@ public class announcement_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         recyclerview_forannouncement=view.findViewById(R.id.recycleviewforannouncementid);
+        final FloatingActionButton actionbutton_forannouncement= view.findViewById(R.id.create_announcement);
         recyclerAdapterForAnnouncement=new RecyclerAdapterForAnnouncement();
-
         recyclerview_forannouncement.setAdapter(recyclerAdapterForAnnouncement);
-        FloatingActionButton actionbutton_forannouncement= view.findViewById(R.id.create_announcement);
+        recyclerview_forannouncement.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy < 0) {
+                    actionbutton_forannouncement.show();
+
+                } else if (dy > 0) {
+                    actionbutton_forannouncement.hide();
+                }
+            }
+        });
+
 
         actionbutton_forannouncement.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -58,6 +73,7 @@ public class announcement_fragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), create_announcement_activity.class);
                 startActivity(intent);
+                requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }

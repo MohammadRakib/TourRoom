@@ -46,10 +46,29 @@ public class Event_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerview_forevent=view.findViewById(R.id.recycleviewidforevent);
+        final FloatingActionButton actionbutton_forevent= view.findViewById(R.id.create_eventfloatingactionbutton);
         recyclerAdapterforevent=new RecyclerAdapterForEvent();
-
         recyclerview_forevent.setAdapter(recyclerAdapterforevent);
-        FloatingActionButton actionbutton_forevent= view.findViewById(R.id.create_eventfloatingactionbutton);
+        recyclerview_forevent.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy < 0) {
+                    actionbutton_forevent.show();
+
+                } else if (dy > 0) {
+                    actionbutton_forevent.hide();
+                }
+
+            }
+        });
+
+
+
 
         actionbutton_forevent.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -57,6 +76,7 @@ public class Event_fragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), create_event_activity.class);
                 startActivity(intent);
+                requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }

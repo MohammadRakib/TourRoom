@@ -5,6 +5,7 @@
     android:id="@+id/create_announcement_popup_layout_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1F1F1"
     tools:context=".ui.announcement.create_announcement_activity">
 
     <androidx.constraintlayout.widget.ConstraintLayout

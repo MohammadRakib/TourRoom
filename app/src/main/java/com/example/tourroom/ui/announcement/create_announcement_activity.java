@@ -29,11 +29,15 @@ public class create_announcement_activity extends AppCompatActivity {
         createnew_forannouncement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override

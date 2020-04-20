@@ -3,6 +3,7 @@ package com.example.tourroom.ui.Poll;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -29,6 +30,7 @@ public class Poll_fragment extends Fragment {
     private PollFragmentViewModel mViewModel;
     RecyclerView recyclerview_forcreatingpoll;
     RecyclerAdapterForCreatePoll recyclerAdapterForCreatePoll;
+    FloatingActionButton actionbutton_forpoll;
 
     public static Poll_fragment newInstance() {
         return new Poll_fragment();
@@ -47,11 +49,29 @@ public class Poll_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerview_forcreatingpoll=view.findViewById(R.id.recyclerviewidforcreatingpoll);
+        actionbutton_forpoll= view.findViewById(R.id.create_pollfloatingbutton);
+
         recyclerAdapterForCreatePoll=new  RecyclerAdapterForCreatePoll();
 
         recyclerview_forcreatingpoll.setAdapter(recyclerAdapterForCreatePoll);
+        recyclerview_forcreatingpoll.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
 
-        FloatingActionButton actionbutton_forpoll= view.findViewById(R.id.create_pollfloatingbutton);
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy < 0) {
+                    actionbutton_forpoll.show();
+
+                } else if (dy > 0) {
+                    actionbutton_forpoll.hide();
+                }
+            }
+        });
+
+
 
         actionbutton_forpoll.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -59,10 +79,10 @@ public class Poll_fragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), create_poll_activity.class);
                 startActivity(intent);
+                requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
 
     }
-
 
 }

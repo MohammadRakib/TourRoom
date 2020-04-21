@@ -31,13 +31,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="92dp"
+                    android:layout_height="92dp"
                     android:layout_marginTop="32dp"
                     android:contentDescription="@string/menu_Profile"
-                    android:src="@mipmap/ic_launcher_round"
+                    android:src="@drawable/coxbazar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

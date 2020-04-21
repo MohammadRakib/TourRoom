@@ -18,22 +18,22 @@
             android:layout_height="match_parent">
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/group_image"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
+                android:layout_width="56dp"
+                android:layout_height="45dp"
                 android:contentDescription="@string/group_image"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/googleg_standard_color_18" />
+                android:src="@drawable/coxbazar" />
 
             <TextView
                 android:id="@+id/group_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="5dp"
                 android:text="coxbazar_group"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -58,7 +58,7 @@
                 android:layout_height="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:contentDescription="@string/use_as_a_popup_button"
                 android:focusable="true"
@@ -67,7 +67,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.61"
-                app:srcCompat="@drawable/ic_arrow_drop_down_circle_black_24dp" />
+                app:srcCompat="@drawable/ic_arrow_drop_down_circle_black_24dp"
+                tools:targetApi="lollipop" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>

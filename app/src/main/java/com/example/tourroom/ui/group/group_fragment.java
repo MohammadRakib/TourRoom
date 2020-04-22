@@ -18,6 +18,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,18 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Fade fade = new Fade();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            fade.excludeTarget(requireActivity().findViewById(R.id.main_toolbar_layout_id), true);
+            fade.excludeTarget(requireActivity().findViewById(R.id.bottom_home_nav),true);
+            fade.excludeTarget(requireActivity().findViewById(R.id.bottom_nav_host_fragment),true);
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+            requireActivity().getWindow().setEnterTransition(fade);
+            requireActivity().getWindow().setExitTransition(fade);
+        }
+
         if(!Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()){
             Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
         }

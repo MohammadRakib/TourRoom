@@ -52,8 +52,8 @@ public class HomeFragment extends Fragment {
 
         //toolbar
         main_toolbar = root.findViewById(R.id.main_toolbar);
-        ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(main_toolbar);
-        Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle("Tour Room");
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(main_toolbar);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Tour Room");
 
 
         //bottom navigation
@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
 
         inflater.inflate(R.menu.main_toolbar, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchManager searchManager = (SearchManager) Objects.requireNonNull(getActivity()).getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) requireActivity().getSystemService(Context.SEARCH_SERVICE);
         if (searchItem != null) {
             searchView = (SearchView) searchItem.getActionView();
             int search_background=R.drawable.search_background;

@@ -15,6 +15,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,11 +47,17 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         navController = Navigation.findNavController(this,R.id.group_nav_host_id);
         toolbar = findViewById(R.id.groupToolbar);
         setSupportActionBar(toolbar);
+
+        //share animation flash fix
+        share_animation_flash_fix();
+
+        //layout component
         state = findViewById(R.id.group_state);
         group_image = findViewById(R.id.group_image);
         group_name = findViewById(R.id.group_title);
         chat_box = findViewById(R.id.chat_box);
 
+        // problem with activity when go to landscape mode fix
         activity_open_fix();
 
         Bundle extras = getIntent().getExtras();
@@ -59,6 +66,21 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
             int position = extras.getInt("position");
             group_image.setTransitionName("gimg"+position);
             group_name.setTransitionName("gnm"+position);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void share_animation_flash_fix() {
+        Fade fade = new Fade();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            fade.excludeTarget(findViewById(R.id.group_appbar_layout_id), true);
+            fade.excludeTarget(chat_box,true);
+            fade.excludeTarget(findViewById(R.id.group_nav_host_id),true);
+            fade.excludeTarget(R.layout.group_navhost,true);
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+            getWindow().setEnterTransition(fade);
+            getWindow().setExitTransition(fade);
         }
     }
 

@@ -2,6 +2,9 @@ package com.example.tourroom.ui.group;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -19,10 +22,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.tourroom.R;
 
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class group_fragment extends Fragment  implements  VRecyclerViewClickInterface {
 
@@ -47,21 +53,27 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(!Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).isShowing()){
-            Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).show();
+        if(!Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()){
+            Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
         }
 
         verticalparent_recyclerView=view.findViewById(R.id.group_vertical_parent_Recycle_view);
         group_vertical_parent_recycle_view_adapterVariable = new group_vertical_parent_recycle_view_adapter(this);
         verticalparent_recyclerView.setAdapter(group_vertical_parent_recycle_view_adapterVariable);
-        navController = Navigation.findNavController(Objects.requireNonNull(getActivity()),R.id.after_login_host_fragment);
+        navController = Navigation.findNavController(requireActivity(),R.id.after_login_host_fragment);
 
     }
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
+
     @Override
-    public void onItemClickV(int position) {
+    public void onItemClickV(int position, CircleImageView group_img, TextView group_name) {
+        Pair[] pairs = new Pair[2];
+        pairs[0] = new Pair<View,String>(group_img,"gimg"+position);
+        pairs[1] = new Pair<View,String>(group_name,"gnm"+position);
         Intent intent = new Intent(getActivity(),group_host_activity.class);
-        startActivity(intent);
+        intent.putExtra("position",position);
+        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(),pairs);
+        startActivity(intent,activityOptionsCompat.toBundle());
     }
 
     @Override

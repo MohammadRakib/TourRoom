@@ -1,6 +1,7 @@
 package com.example.tourroom.ui.group;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
@@ -11,6 +12,7 @@ import androidx.navigation.Navigation;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -21,13 +23,16 @@ import android.widget.Toast;
 
 import com.example.tourroom.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class group_host_activity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     public Toolbar toolbar;
     NavController navController;
-    TextView state;
+    TextView state,group_name;
+    CircleImageView group_image;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,14 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         toolbar = findViewById(R.id.groupToolbar);
         setSupportActionBar(toolbar);
         state = findViewById(R.id.group_state);
+        group_image = findViewById(R.id.group_image);
+        group_name = findViewById(R.id.group_title);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            int position = extras.getInt("position");
+            group_image.setTransitionName("gimg"+position);
+            group_name.setTransitionName("gnm"+position);
+        }
     }
 
     @Override

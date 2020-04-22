@@ -26,7 +26,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/coxbazar" />
+                android:src="@drawable/coxbazar"
+                tools:targetApi="lollipop" />
 
             <TextView
                 android:id="@+id/group_title"
@@ -35,12 +36,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/cantarell"
                 android:text="coxbazar_group"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#000000"
-                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/group_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="lollipop" />
 
             <TextView
                 android:id="@+id/group_state"

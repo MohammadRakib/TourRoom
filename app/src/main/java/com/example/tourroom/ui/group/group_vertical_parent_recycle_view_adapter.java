@@ -1,5 +1,6 @@
 package com.example.tourroom.ui.group;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourroom.R;
 import com.google.android.material.card.MaterialCardView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class group_vertical_parent_recycle_view_adapter extends RecyclerView.Adapter implements HRecyclerViewClickInterface {
 
@@ -34,6 +38,7 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
         return 2;
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -104,22 +109,25 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
 
     class row_2_view_holder extends RecyclerView.ViewHolder{
 
-        ImageView vertical_recycle_view_place_image;
-        TextView vertical_recycle_view_place_name;
+        CircleImageView vertical_recycle_view_group_image;
+        TextView vertical_recycle_view_group_name;
         MaterialCardView group_vertical_parent_recycle_view_row_card;
 
 
 
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         public row_2_view_holder(@NonNull View itemView) {
             super(itemView);
-            vertical_recycle_view_place_image = itemView.findViewById(R.id.owngroupimageview);
-            vertical_recycle_view_place_name = itemView.findViewById(R.id.owngroupnametextview);
+            vertical_recycle_view_group_image = itemView.findViewById(R.id.owngroupimageview);
+            vertical_recycle_view_group_name = itemView.findViewById(R.id.owngroupnametextview);
             group_vertical_parent_recycle_view_row_card = itemView.findViewById(R.id.group_vertical_parent_recycle_view_row_card_id);
+            vertical_recycle_view_group_image.setTransitionName("gimg"+getAdapterPosition());
+            vertical_recycle_view_group_name.setTransitionName("gnm"+getAdapterPosition());
 
             group_vertical_parent_recycle_view_row_card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                      vRecyclerViewClickInterface.onItemClickV(getAdapterPosition());
+                      vRecyclerViewClickInterface.onItemClickV(getAdapterPosition(),vertical_recycle_view_group_image,vertical_recycle_view_group_name);
                 }
             });
         }

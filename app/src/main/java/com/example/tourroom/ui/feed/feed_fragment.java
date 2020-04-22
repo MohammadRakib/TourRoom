@@ -11,9 +11,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +23,6 @@ import java.util.Objects;
 
 public class feed_fragment extends Fragment {
 
-    private FeedFragmentViewModel mViewModel;
-
     public static feed_fragment newInstance() {
         return new feed_fragment();
     }
@@ -35,7 +30,7 @@ public class feed_fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(FeedFragmentViewModel.class);
+        FeedFragmentViewModel mViewModel = new ViewModelProvider(this).get(FeedFragmentViewModel.class);
         return inflater.inflate(R.layout.feed_fragment, container, false);
     }
 
@@ -43,8 +38,8 @@ public class feed_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(!Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).isShowing()){
-            Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).show();
+        if(!Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()){
+            Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
         }
 
         Button button=view.findViewById(R.id.other_profile_from_feed);

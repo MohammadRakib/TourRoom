@@ -1,24 +1,18 @@
 package com.example.tourroom.ui.noti_fication;
 
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.tourroom.R;
 
 public class invitation_notification_tab extends Fragment {
 
-    private Invitation_Notification_Tab_ViewModel mViewModel;
     RecyclerView recyclerView;
     invitation_adapter invitation_adapter;
 
@@ -30,7 +24,7 @@ public class invitation_notification_tab extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel =new ViewModelProvider(this).get(Invitation_Notification_Tab_ViewModel.class);
+        Invitation_Notification_Tab_ViewModel mViewModel = new ViewModelProvider(this).get(Invitation_Notification_Tab_ViewModel.class);
         return inflater.inflate(R.layout.invitation_notification_tab_fragment, container, false);
     }
 

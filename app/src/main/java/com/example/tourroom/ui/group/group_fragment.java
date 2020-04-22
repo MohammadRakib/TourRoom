@@ -4,36 +4,27 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
-import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.tourroom.R;
-
 import java.util.Objects;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class group_fragment extends Fragment  implements  VRecyclerViewClickInterface {
 
-    private GroupFragmentViewModel mViewModel;
     private NavController navController;
     RecyclerView verticalparent_recyclerView;
     group_vertical_parent_recycle_view_adapter group_vertical_parent_recycle_view_adapterVariable;
@@ -46,7 +37,7 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(GroupFragmentViewModel.class);
+        GroupFragmentViewModel mViewModel = new ViewModelProvider(this).get(GroupFragmentViewModel.class);
         // TODO: Use the ViewModel
     }
 
@@ -60,6 +51,7 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
             fade.excludeTarget(requireActivity().findViewById(R.id.main_toolbar_layout_id), true);
             fade.excludeTarget(requireActivity().findViewById(R.id.bottom_home_nav),true);
             fade.excludeTarget(requireActivity().findViewById(R.id.bottom_nav_host_fragment),true);
+            fade.excludeTarget(requireActivity().findViewById(R.id.id_home_fragment),true);
             fade.excludeTarget(android.R.id.statusBarBackground, true);
             fade.excludeTarget(android.R.id.navigationBarBackground, true);
             requireActivity().getWindow().setEnterTransition(fade);

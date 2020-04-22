@@ -1,28 +1,19 @@
 package com.example.tourroom.ui.place;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.tourroom.R;
 
 
 public class place_info_fragment extends Fragment {
-
-    private Place_Info_Fragment_ViewModel mViewModel;
 
     public static place_info_fragment newInstance() {
         return new place_info_fragment();
@@ -37,7 +28,7 @@ public class place_info_fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(Place_Info_Fragment_ViewModel.class);
+        Place_Info_Fragment_ViewModel mViewModel = new ViewModelProvider(this).get(Place_Info_Fragment_ViewModel.class);
         // TODO: Use the ViewModel
     }
 

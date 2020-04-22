@@ -42,11 +42,11 @@ public class main_menu_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).isShowing()){
-            Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).hide();
+        if(Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()){
+            Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
         }
 
-        final NavController navController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.after_login_host_fragment);
+        final NavController navController = Navigation.findNavController(requireActivity(), R.id.after_login_host_fragment);
 
         MaterialCardView profile = view.findViewById(R.id.option_profile);
         MaterialCardView security = view.findViewById(R.id.option_security);

@@ -2,22 +2,16 @@ package com.example.tourroom.ui.noti_fication;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.tourroom.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -26,7 +20,6 @@ import java.util.Objects;
 
 public class notification_fragment extends Fragment {
 
-    private NotificationFragmentViewModel mViewModel;
     private TabLayoutMediator tabLayoutMediator;
 
     public static notification_fragment newInstance() {
@@ -36,7 +29,7 @@ public class notification_fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(NotificationFragmentViewModel.class);
+        NotificationFragmentViewModel mViewModel = new ViewModelProvider(this).get(NotificationFragmentViewModel.class);
         return inflater.inflate(R.layout.notification_fragment, container, false);
     }
 
@@ -44,8 +37,8 @@ public class notification_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).isShowing()){
-            Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).hide();
+        if(Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()){
+            Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
         }
         TabLayout tabLayout = view.findViewById(R.id.notification_tab_layout);
         ViewPager2 viewPager2 = view.findViewById(R.id.notification_viewpager);

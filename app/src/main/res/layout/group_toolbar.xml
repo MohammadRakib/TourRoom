@@ -48,7 +48,6 @@
                 android:id="@+id/group_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/chat"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/group_title"
                 app:layout_constraintStart_toStartOf="@+id/group_title"

@@ -6,66 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.chat.Chat_fragment">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/send_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="10dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:contentDescription="@string/send_image"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_send"
-        tools:targetApi="lollipop" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/upload_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="9dp"
-        android:contentDescription="@string/upload_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_photo"
-        android:clickable="true"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:focusable="true"
-        tools:targetApi="lollipop" />
-
-    <EditText
-        android:id="@+id/Chat_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/chat_shape"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/write_here"
-        android:inputType="textMultiLine"
-        android:padding="10dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/send_message"
-        app:layout_constraintStart_toEndOf="@+id/upload_image"
-        android:autofillHints="write" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/show_chat_recycle_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/Chat_edit_text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

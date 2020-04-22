@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tourroom.R;
+import com.example.tourroom.ui.announcement.RecyclerAdapterForAnnouncement;
+
 public class Chat_fragment extends Fragment {
 
     RecyclerView chat_recycle_view;
-
+    RecyclerAdapterForAnnouncement recyclerAdapterForAnnouncement;
 
     public static Chat_fragment newInstance() {
         return new Chat_fragment();
@@ -31,5 +33,7 @@ public class Chat_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         chat_recycle_view = view.findViewById(R.id.show_chat_recycle_view);
+        recyclerAdapterForAnnouncement = new RecyclerAdapterForAnnouncement();
+        chat_recycle_view.setAdapter(recyclerAdapterForAnnouncement);
     }
 }

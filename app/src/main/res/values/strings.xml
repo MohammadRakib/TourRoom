@@ -58,18 +58,18 @@
     <string name="add_a_new_place">Add a new place</string>
     <string name="add_visited">ADD VISITED</string>
     <string name="create_a_new_group">Create A New Group</string>
-    <string name="recommened_groups_for_you">Recommened Groups For You</string>
+    <string name="recommened_groups_for_you">Recommended Groups For You</string>
     <string name="your_groups">Your Groups</string>
-    <string name="group_name">Group Name :</string>
-    <string name="group_description">Group Description :</string>
+    <string name="group_name">Group Name</string>
+    <string name="group_description">Group Description</string>
     <string name="create">CREATE</string>
     <string name="add_poll_option">Add Poll Option</string>
-    <string name="option_1">Option 1 :</string>
-    <string name="option_2">Option 2 :</string>
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
     <string name="where_to_go">Where to go</string>
-    <string name="event_name">Event Name :</string>
-    <string name="event_date">Event Date :</string>
-    <string name="event_day">Event Day :</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_date">Event Date</string>
+    <string name="event_day">Event Day</string>
     <string name="journey_start">Journey Start :</string>
 
 

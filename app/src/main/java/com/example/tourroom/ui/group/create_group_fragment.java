@@ -1,6 +1,7 @@
 package com.example.tourroom.ui.group;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,7 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.tourroom.R;
-
+import com.google.android.material.textfield.TextInputLayout;
 
 
 public class create_group_fragment extends Fragment {
@@ -50,9 +51,9 @@ public class create_group_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        EditText groupnameinput_edittext,groupdescription_edittext;
+        TextInputLayout groupnameinput_edittext,groupdescription_edittext;
         Button newgroupcreate_button;
-        ImageView  uploadgroupphoto_imageview;
+        AppCompatImageButton uploadgroupphoto_imageview;
 
 
         groupnameinput_edittext=view.findViewById(R.id.groupnameinputedittext);

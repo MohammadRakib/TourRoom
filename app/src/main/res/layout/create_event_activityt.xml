@@ -17,149 +17,113 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/create"
             app:cornerRadius="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/uploadimageforcreateevent"
+            app:layout_constraintTop_toBottomOf="@+id/event_image"
             app:strokeColor="@color/colorPrimary" />
 
-        <TextView
-            android:id="@+id/eventnametextviewid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/cantarell"
-            android:text="@string/event_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/create_event_text_view_id" />
-
-        <EditText
-            android:id="@+id/eventnameeditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eventnameeditText_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:layout_marginLeft="11dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
-            android:hint="(highest 15 characters)"
-            android:inputType="textPersonName"
-            android:maxLength="15"
-            app:layout_constraintBottom_toBottomOf="@+id/eventnametextviewid"
+            app:boxBackgroundColor="@android:color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="15"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/eventnametextviewid"
-            app:layout_constraintTop_toTopOf="@+id/eventnametextviewid" />
-
-        <TextView
-            android:id="@+id/eventdatetextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="50dp"
-            android:fontFamily="@font/cantarell"
-            android:text="@string/event_date"
-            android:textColor="@color/black"
-            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventnametextviewid" />
+            app:layout_constraintTop_toBottomOf="@+id/create_event_text_view_id">
 
-        <EditText
-            android:id="@+id/eventdateeditText"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/event_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/event_name"
+                android:inputType="text" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eventdateeditText_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
-            android:inputType="date"
-            app:layout_constraintBottom_toBottomOf="@+id/eventdatetextView"
+            app:boxBackgroundColor="@android:color/white"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.323"
-            app:layout_constraintStart_toEndOf="@+id/eventdatetextView"
-            app:layout_constraintTop_toTopOf="@+id/eventdatetextView" />
-
-        <TextView
-            android:id="@+id/eventdaytextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="50dp"
-            android:fontFamily="@font/cantarell"
-            android:text="@string/event_day"
-            android:textColor="@color/black"
-            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventdatetextView" />
+            app:layout_constraintTop_toBottomOf="@+id/eventnameeditText_layout">
 
-        <EditText
-            android:id="@+id/eventdayeditText"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/event_date_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/event_date" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/journeystarteditText_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginLeft="28dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="@+id/eventdaytextView"
+            app:boxBackgroundColor="@android:color/white"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.449"
-            app:layout_constraintStart_toEndOf="@+id/eventdaytextView"
-            app:layout_constraintTop_toTopOf="@+id/eventdaytextView" />
-
-        <TextView
-            android:id="@+id/journeystarttextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="50dp"
-            android:fontFamily="@font/cantarell"
-            android:text="@string/journey_start"
-            android:textColor="@color/black"
-            android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventdaytextView" />
+            app:layout_constraintTop_toBottomOf="@+id/eventdateeditText_layout">
 
-        <EditText
-            android:id="@+id/journeystarteditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="@+id/journeystarttextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/journeystarttextView"
-            app:layout_constraintTop_toTopOf="@+id/journeystarttextView" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/journey_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/journey_start" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/uploadimageforcreateevent"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="45dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/journeystarttextView" />
+            app:layout_constraintTop_toBottomOf="@+id/journeystarteditText_layout"
+            app:srcCompat="@drawable/ic_photo"
+            tools:targetApi="lollipop" />
 
         <TextView
             android:id="@+id/create_event_text_view_id"
@@ -172,6 +136,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/event_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="50dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@+id/uploadimageforcreateevent"
+            app:layout_constraintStart_toEndOf="@+id/uploadimageforcreateevent"
+            app:layout_constraintTop_toTopOf="@+id/uploadimageforcreateevent"
+            app:srcCompat="@drawable/dummyimage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

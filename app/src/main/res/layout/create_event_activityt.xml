@@ -17,7 +17,7 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="45dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
@@ -25,7 +25,7 @@
             app:cornerRadius="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/event_image"
+            app:layout_constraintTop_toBottomOf="@+id/uploadimageforcreateevent"
             app:strokeColor="@color/colorPrimary" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -110,19 +110,25 @@
                 android:hint="@string/journey_start" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/uploadimageforcreateevent"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="8dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:clickable="true"
+            android:drawableStart="@drawable/ic_photo"
+            android:drawableLeft="@drawable/ic_photo"
+            android:drawablePadding="10dp"
             android:focusable="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/journeystarteditText_layout"
-            app:srcCompat="@drawable/ic_photo"
+            android:onClick="upload_image"
+            android:text="@string/upload_image"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/event_image"
+            app:layout_constraintStart_toStartOf="@+id/event_image"
+            app:layout_constraintTop_toBottomOf="@+id/event_image"
             tools:targetApi="lollipop" />
 
         <TextView
@@ -139,16 +145,15 @@
 
         <ImageView
             android:id="@+id/event_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="50dp"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="32dp"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="@+id/uploadimageforcreateevent"
-            app:layout_constraintStart_toEndOf="@+id/uploadimageforcreateevent"
-            app:layout_constraintTop_toTopOf="@+id/uploadimageforcreateevent"
-            app:srcCompat="@drawable/dummyimage" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/journeystarteditText_layout"
+            android:src="@drawable/dummyimage"
+            android:contentDescription="@string/event_image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -1,5 +1,7 @@
 package com.example.tourroom.ui.event;
 
+import android.net.Uri;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -14,7 +16,11 @@ public class create_event_view_model extends ViewModel {
     private MutableLiveData<Integer> e_day;
     private MutableLiveData<String> time_format;
     private MutableLiveData<String> event_name;
+    private MutableLiveData<Uri> image_uri;
 
+    MutableLiveData<Uri> getImage_uri() {
+        return image_uri;
+    }
 
     public create_event_view_model() {
         hour = new MutableLiveData<>();
@@ -27,6 +33,7 @@ public class create_event_view_model extends ViewModel {
         e_day = new MutableLiveData<>();
         time_format = new MutableLiveData<>();
         event_name = new MutableLiveData<>();
+        image_uri = new MutableLiveData<>();
     }
 
     MutableLiveData<String> getEvent_name() {
@@ -109,5 +116,9 @@ public class create_event_view_model extends ViewModel {
 
     void setEvent_name(String event_name) {
         this.event_name.setValue(event_name);
+    }
+
+    void setImage_uri(Uri image_uri) {
+        this.image_uri.setValue(image_uri);
     }
 }

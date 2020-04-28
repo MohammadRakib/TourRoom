@@ -55,7 +55,7 @@ public class login_fragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), After_login_Activity.class);
                 startActivity(intent);
-                Objects.requireNonNull(getActivity()).finishAffinity();
+                requireActivity().finishAffinity();
 
             }
         });

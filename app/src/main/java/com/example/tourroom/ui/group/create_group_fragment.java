@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,25 +74,12 @@ public class create_group_fragment extends Fragment {
         uploadgroupphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = CropImage.activity()
+               Intent intent = CropImage.activity()  //opening crop image activity for choosing image from gallery and cropping, this activity is from a custom api library
                         .getIntent(requireContext());
                 startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
             }
         });
 
-        create_group_fragment_viewModel_ob.getGroup_name().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                groupnameinput_edittext.setText(s);
-            }
-        });
-
-        create_group_fragment_viewModel_ob.getGroup_description().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                groupdescription_edittext.setText(s);
-            }
-        });
 
         create_group_fragment_viewModel_ob.getImage_uri().observe(getViewLifecycleOwner(), new Observer<Uri>() {
             @Override
@@ -98,12 +87,14 @@ public class create_group_fragment extends Fragment {
                 group_image.setImageURI(uri);
             }
         });
+        groupnameinput_edittext.addTextChangedListener(textWatcher);
+        groupdescription_edittext.addTextChangedListener(textWatcher);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {  //requesting for pick image from gallery
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 assert result != null;
@@ -118,12 +109,32 @@ public class create_group_fragment extends Fragment {
         group_image.setImageURI(group_image_uri);
     }
 
+    //watch edit text if it is empty or not
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+          String group_name = Objects.requireNonNull(groupnameinput_edittext.getText()).toString().trim();
+          String group_description = Objects.requireNonNull(groupdescription_edittext.getText()).toString().trim();
+          newgroupcreate_button.setEnabled(!group_name.isEmpty() && !group_description.isEmpty());  //setting the button enable if all edit text are not empty
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        create_group_fragment_viewModel_ob.setGroup_name(Objects.requireNonNull(groupnameinput_edittext.getText()).toString());
-        create_group_fragment_viewModel_ob.setGroup_description(Objects.requireNonNull(groupdescription_edittext.getText()).toString());
     }
 
 }

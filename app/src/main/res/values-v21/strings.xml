@@ -74,6 +74,7 @@
     <string name="highest_15_characters">highest 15 characters</string>
     <string name="create_a_event">Create An Event</string>
     <string name="event_image">event image</string>
+    <string name="create_poll">Create A Poll</string>
 
 
 </resources>

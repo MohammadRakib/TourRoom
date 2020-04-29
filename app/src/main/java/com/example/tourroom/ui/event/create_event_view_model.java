@@ -13,9 +13,7 @@ public class create_event_view_model extends ViewModel {
     private MutableLiveData<Integer> day;
     private MutableLiveData<Integer> year;
     private MutableLiveData<String> date_format;
-    private MutableLiveData<Integer> e_day;
     private MutableLiveData<String> time_format;
-    private MutableLiveData<String> event_name;
     private MutableLiveData<Uri> image_uri;
 
     MutableLiveData<Uri> getImage_uri() {
@@ -30,18 +28,8 @@ public class create_event_view_model extends ViewModel {
         year = new MutableLiveData<>();
         am_pm = new MutableLiveData<>();
         date_format = new MutableLiveData<>();
-        e_day = new MutableLiveData<>();
         time_format = new MutableLiveData<>();
-        event_name = new MutableLiveData<>();
         image_uri = new MutableLiveData<>();
-    }
-
-    MutableLiveData<String> getEvent_name() {
-        return event_name;
-    }
-
-    public MutableLiveData<Integer> getE_day() {
-        return e_day;
     }
 
     MutableLiveData<String> getTime_format() {
@@ -106,16 +94,8 @@ public class create_event_view_model extends ViewModel {
         this.date_format.setValue(date_format);
     }
 
-    public void setE_day(int e_day) {
-        this.e_day.setValue(e_day);
-    }
-
     public void setTime_format(String time_format) {
         this.time_format.setValue(time_format);
-    }
-
-    void setEvent_name(String event_name) {
-        this.event_name.setValue(event_name);
     }
 
     void setImage_uri(Uri image_uri) {

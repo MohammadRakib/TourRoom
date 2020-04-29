@@ -16,99 +16,81 @@
 
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/create_poll_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/fresca"
+            android:text="@string/create_poll"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addpolloption_imageview"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/colorPrimary"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_add_circle_outline_black_24dp"
+            android:drawableLeft="@drawable/ic_add_circle_outline_black_24dp"
+            android:drawablePadding="10dp"
+            android:focusable="true"
+            android:text="@string/add_poll_option"
+            tools:ignore="NewApi" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/option1_edittext_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
+            app:boxBackgroundColor="@android:color/white">
 
-            <ImageView
-                android:id="@+id/addpolloption_imageview"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/addbuttonforpoll" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/fresca"
-                android:text="@string/add_poll_option"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="30sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/option1textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/cantarell"
-                android:text="Option 1:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <EditText
-                android:id="@+id/option1_edittext_forcreatingpoll"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/option_1_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/boxbg"
-                android:maxLength="15"
-                android:padding="5dp" />
+                android:layout_height="match_parent"
+                android:hint="@string/option_1"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/option2_edittext_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            app:boxBackgroundColor="@android:color/white">
 
-            <TextView
-                android:id="@+id/option2textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/cantarell"
-                android:text="Option 2:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <EditText
-                android:id="@+id/option2_edittext_forcreatingpoll"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/option_2_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/boxbg"
-                android:maxLength="15"
-                android:padding="5dp" />
-
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:hint="@string/option_2"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/create_newpollbutton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:cornerRadius="13dp"
+            app:strokeColor="@color/colorPrimary"
             android:layout_gravity="end"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="15dp"

@@ -16,6 +16,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -94,12 +96,6 @@ public class create_event_activity extends AppCompatActivity {
             }
         });
 
-        create_event_view_model_ob.getEvent_name().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                event_name_edit.setText(s);
-            }
-        });
 
         create_event_view_model_ob.getImage_uri().observe(this, new Observer<Uri>() {
             @Override
@@ -108,6 +104,9 @@ public class create_event_activity extends AppCompatActivity {
             }
         });
 
+        event_name_edit.addTextChangedListener(textWatcher);
+        event_date_edit.addTextChangedListener(textWatcher);
+        journey_edit.addTextChangedListener(textWatcher);
     }
 
     @Override
@@ -121,11 +120,10 @@ public class create_event_activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        create_event_view_model_ob.setEvent_name(Objects.requireNonNull(event_name_edit.getText()).toString());
     }
 
-    public void upload_image(View view) {
-        CropImage.activity()
+    public void upload_image(View view) { //upload image on_clicker
+        CropImage.activity()  //opening crop image activity for choosing image from gallery and cropping, this activity is from a custom api library
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .start(this);
 
@@ -134,7 +132,7 @@ public class create_event_activity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) { //requesting for pick image from gallery
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 assert result != null;
@@ -148,4 +146,27 @@ public class create_event_activity extends AppCompatActivity {
         }
         event_image.setImageURI(event_image_Uri);
     }
+
+    //watch edit text if it is empty or not
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String event_name = Objects.requireNonNull(event_name_edit.getText()).toString().trim();
+            String event_date = Objects.requireNonNull(event_date_edit.getText()).toString().trim();
+            String journey_start = Objects.requireNonNull(journey_edit.getText()).toString().trim();
+            createbutton_forevent.setEnabled(!event_name.isEmpty() && !event_date.isEmpty() && !journey_start.isEmpty()); //setting the button enable if all edit text are not empty
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
 }

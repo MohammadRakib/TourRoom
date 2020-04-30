@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourroom.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class general_notification_adapter extends RecyclerView.Adapter<general_notification_adapter.general_notification_viewholder> {
 
     @NonNull
@@ -33,7 +35,7 @@ public class general_notification_adapter extends RecyclerView.Adapter<general_n
 
     class general_notification_viewholder extends RecyclerView.ViewHolder{
 
-        ImageView general_notification_img;
+        CircleImageView general_notification_img;
         TextView general_notification_text_view;
 
         public general_notification_viewholder(@NonNull View itemView) {

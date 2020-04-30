@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourroom.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class invitation_adapter extends RecyclerView.Adapter<invitation_adapter.invitation_view_holder>{
 
     @NonNull
@@ -34,7 +36,7 @@ public class invitation_adapter extends RecyclerView.Adapter<invitation_adapter.
 
     class invitation_view_holder extends RecyclerView.ViewHolder{
 
-        ImageView invitation_notification_img;
+        CircleImageView invitation_notification_img;
         TextView invitation_notification_text_view;
         Button reject,join;
 

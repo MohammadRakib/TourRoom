@@ -2,8 +2,9 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/invitation_notification_card_view"
     android:layout_width="match_parent"
-    android:layout_height="115dp"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="4dp"
     android:layout_marginTop="15dp"
     android:layout_marginRight="4dp"
@@ -11,8 +12,8 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="35dp"
-    app:cardElevation="2dp">
+    app:strokeColor="@color/colorPrimary"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,35 +21,36 @@
 
         <Button
             android:id="@+id/reject"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="106dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/reject"
+            android:textColor="#DE912D2D"
             android:textSize="12sp"
-            app:cornerRadius="12dp"
-            app:iconPadding="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/join"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/invitation_notification_img_id"
             app:layout_constraintTop_toBottomOf="@+id/invitation_notification_textv_id"
-            app:layout_constraintVertical_bias="0.555" />
+            app:layout_constraintVertical_bias="0.0" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/invitation_notification_img_id"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
             android:contentDescription="@string/this_image_is_for_invitation_row"
+            android:src="@drawable/coxbazar"
+            app:layout_constraintBottom_toBottomOf="@+id/invitation_notification_textv_id"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            app:layout_constraintTop_toTopOf="@+id/invitation_notification_textv_id" />
 
         <TextView
             android:id="@+id/invitation_notification_textv_id"
@@ -56,10 +58,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:text="group24333333333 has invited you to join the group"
+            android:text="group333333333333 has invited you to join the group"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -68,22 +70,25 @@
 
         <Button
             android:id="@+id/join"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="106dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/join"
+            android:textColor="#438708"
             android:textSize="12sp"
-            app:cornerRadius="12dp"
-            app:iconPadding="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/reject"
-            app:layout_constraintTop_toBottomOf="@+id/invitation_notification_textv_id" />
+            app:layout_constraintTop_toBottomOf="@+id/invitation_notification_textv_id"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

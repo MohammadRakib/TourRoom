@@ -2,8 +2,12 @@
   <dictionary name="moham">
     <words>
       <w>creategrouponclick</w>
+      <w>dummyavatar</w>
+      <w>edittext</w>
       <w>eeee</w>
       <w>groupinfoonclick</w>
+      <w>lastmsg</w>
+      <w>textview</w>
       <w>verticalparent</w>
     </words>
   </dictionary>

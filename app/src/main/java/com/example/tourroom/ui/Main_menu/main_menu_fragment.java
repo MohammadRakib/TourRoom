@@ -1,5 +1,6 @@
 package com.example.tourroom.ui.Main_menu;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,21 +15,35 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.example.tourroom.After_login_Activity;
+import com.example.tourroom.MainActivity;
 import com.example.tourroom.R;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.example.tourroom.After_login_Activity.UserEmail;
+import static com.example.tourroom.After_login_Activity.UserImage;
+import static com.example.tourroom.After_login_Activity.UserName;
+import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class main_menu_fragment extends Fragment {
 
-    public main_menu_fragment() {
-        // Required empty public constructor
-    }
+    MaterialCardView profile, security, about, logout;
+    NavController navController;
+    TextView UserNameTextView, UserEmailTextView;
+    CircleImageView profileImage;
+
 
 
     @Override
@@ -46,15 +61,29 @@ public class main_menu_fragment extends Fragment {
             Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
         }
 
-        final NavController navController = Navigation.findNavController(requireActivity(), R.id.after_login_host_fragment);
+        navController = Navigation.findNavController(requireActivity(), R.id.after_login_host_fragment);
 
-        MaterialCardView profile = view.findViewById(R.id.option_profile);
-        MaterialCardView security = view.findViewById(R.id.option_security);
-        MaterialCardView about = view.findViewById(R.id.option_about);
-        MaterialCardView logout = view.findViewById(R.id.option_logout);
+        profile = view.findViewById(R.id.option_profile);
+        security = view.findViewById(R.id.option_security);
+        about = view.findViewById(R.id.option_about);
+        logout = view.findViewById(R.id.option_logout);
+        UserNameTextView = view.findViewById(R.id.user_name_text_view);
+        UserEmailTextView = view.findViewById(R.id.user_Id_text_view);
+        profileImage = view.findViewById(R.id.profile_image);
+
+        //setting up user name, user email and user profile image
+        UserNameTextView.setText(UserName);
+        UserEmailTextView.setText(UserEmail);
+        if(UserImage != null){
+            Glide.with(requireActivity())
+                    .load(UserImage)
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .dontAnimate()
+                    .placeholder(R.drawable.dummyavatar)
+                    .into(profileImage);
+        }
 
         //onclick methods
-
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +108,10 @@ public class main_menu_fragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Log out", Toast.LENGTH_SHORT).show();
+                getINSTANCE().getMAuth().signOut();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                requireActivity().finishAffinity();
             }
         });
 

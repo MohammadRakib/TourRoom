@@ -18,5 +18,9 @@
         android:id="@+id/registration_fragment"
         android:name="com.example.tourroom.ui.Registration.Registration_fragment"
         android:label="registration_fragment"
-        tools:layout="@layout/registration_fragment" />
+        tools:layout="@layout/registration_fragment" >
+        <action
+            android:id="@+id/action_registration_fragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
+    </fragment>
 </navigation>

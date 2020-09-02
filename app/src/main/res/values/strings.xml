@@ -84,5 +84,18 @@
     <string name="event_image">event image</string>
     <string name="create_poll">Create A Poll</string>
 
+    <string name="app_icon">App Icon</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="password">Password</string>
+    <string name="e_mail">E-mail</string>
+    <string name="create_a_new_account">Create a New Account</string>
+    <string name="sign_in">Sign in</string>
+    <string name="or">OR</string>
+    <string name="user_name">User Name</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="already_have_an_account">Already Have an Account</string>
+    <string name="loading">Loading...</string>
+
 
 </resources>

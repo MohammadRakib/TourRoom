@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/id_fragment_login"
@@ -7,30 +7,148 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.login_fragment">
 
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
 
-    <Button
-        android:id="@+id/login"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
-        android:layout_marginLeft="170dp"
-        android:layout_marginTop="349dp"
-        android:layout_marginEnd="154dp"
-        android:layout_marginRight="154dp"
-        android:text="@string/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+       <androidx.appcompat.widget.AppCompatImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:srcCompat="@drawable/ic_tourroomappiconforgroungp"
+           android:layout_gravity="center"
+           android:layout_marginTop="25dp"
+           />
 
-    <Button
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:text="@string/register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+       <TextView
+           android:id="@+id/AppName"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:fontFamily="@font/fresca"
+           android:text="@string/app_name"
+           android:textColor="#0E1B61"
+           android:textSize="30sp"
+           android:textStyle="bold"
+           android:layout_gravity="center" />
+
+
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/email_edittext_layout"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           android:layout_width="match_parent"
+           android:layout_height="69dp"
+           android:layout_marginStart="32dp"
+           android:layout_marginLeft="32dp"
+           android:layout_marginTop="32dp"
+           android:layout_marginEnd="32dp"
+           android:layout_marginRight="32dp"
+           app:boxCornerRadiusBottomEnd="20dp"
+           app:boxCornerRadiusBottomStart="20dp"
+           app:boxCornerRadiusTopEnd="20dp"
+           app:boxCornerRadiusTopStart="20dp"
+           app:boxStrokeColor="@color/colorPrimary"
+           app:boxStrokeWidth="2dp"
+           app:errorEnabled="true"
+           >
+
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/email_edittext"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:drawableStart="@drawable/email_vector_asset"
+               android:drawableLeft="@drawable/email_vector_asset"
+               android:drawablePadding="10dp"
+               android:fontFamily="@font/cantarell"
+               android:hint="@string/e_mail"
+               android:inputType="text"
+               android:textColor="@color/black" />
+       </com.google.android.material.textfield.TextInputLayout>
+
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/password_edittext_layout"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           android:layout_width="match_parent"
+           android:layout_height="61dp"
+           android:layout_marginStart="32dp"
+           android:layout_marginLeft="32dp"
+           android:layout_marginTop="16dp"
+           android:layout_marginEnd="32dp"
+           android:layout_marginRight="32dp"
+           app:boxCornerRadiusBottomEnd="20dp"
+           app:boxCornerRadiusBottomStart="20dp"
+           app:boxCornerRadiusTopEnd="20dp"
+           app:boxCornerRadiusTopStart="20dp"
+           app:boxStrokeColor="@color/colorPrimary"
+           app:boxStrokeWidth="2dp"
+           app:errorEnabled="true"
+           app:passwordToggleEnabled="true">
+
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/password_edittext"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:drawableStart="@drawable/security_vector_asset"
+               android:drawableLeft="@drawable/security_vector_asset"
+               android:drawablePadding="10dp"
+               android:fontFamily="@font/cantarell"
+               android:hint="@string/password"
+               android:inputType="textPassword"
+               android:textColor="@color/black" />
+       </com.google.android.material.textfield.TextInputLayout>
+
+       <TextView
+           android:id="@+id/forget_password_textview"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="16dp"
+           android:fontFamily="@font/cantarell"
+           android:text="@string/forget_password"
+           android:layout_gravity="center" />
+
+       <Button
+           android:id="@+id/login"
+           style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="32dp"
+           android:layout_marginLeft="32dp"
+           android:layout_marginTop="16dp"
+           android:layout_marginEnd="32dp"
+           android:layout_marginRight="32dp"
+           android:fontFamily="@font/cantarell"
+           android:text="@string/sign_in"
+           android:textColor="@color/colorPrimaryDark"
+           android:textStyle="bold"
+           app:cornerRadius="13dp"
+           app:rippleColor="#C5CAE9"
+           app:strokeColor="@color/colorPrimary"
+           app:strokeWidth="2dp" />
+
+       <TextView
+           android:id="@+id/OR"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="8dp"
+           android:fontFamily="@font/cantarell"
+           android:text="@string/or"
+           android:layout_gravity="center"/>
+
+       <Button
+           android:id="@+id/register"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="32dp"
+           android:layout_marginLeft="32dp"
+           android:layout_marginTop="8dp"
+           android:layout_marginBottom="16dp"
+           android:layout_marginEnd="32dp"
+           android:layout_marginRight="32dp"
+           android:fontFamily="@font/cantarell"
+           android:text="@string/create_a_new_account"
+           android:textStyle="bold"
+           app:cornerRadius="13dp" />
+
+   </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

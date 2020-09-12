@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,23 +26,38 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.tourroom.Data.group_data;
+import com.example.tourroom.Data.yourGroupData;
 import com.example.tourroom.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
+import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
 
 
 public class create_group_fragment extends Fragment {
 
-    private Create_Group_Fragment_ViewModel create_group_fragment_viewModel_ob;
+   // private Create_Group_Fragment_ViewModel create_group_fragment_viewModel_ob;
     Uri group_image_uri;
     TextInputEditText groupnameinput_edittext,groupdescription_edittext;
     Button newgroupcreate_button;
-    AppCompatButton uploadgroupphoto;
-    ImageView group_image;
+   // AppCompatButton uploadgroupphoto;
+   // ImageView group_image;
+
+    private String currentUser, localGroupId, groupImage;
+   // private StorageReference groupImagesRef;
+    private ProgressDialog loadingBar;
+    private NavController navController;
 
     public static create_group_fragment newInstance() {
         return new create_group_fragment();
@@ -60,38 +78,45 @@ public class create_group_fragment extends Fragment {
         groupnameinput_edittext=view.findViewById(R.id.group_name_edit_text);
         groupdescription_edittext=view.findViewById(R.id.group_description_edit_text);
         newgroupcreate_button=view.findViewById(R.id.newgroupcreatebutton);
-        uploadgroupphoto=view.findViewById(R.id.upload_image_for_create_group);
-        group_image = view.findViewById(R.id.group_image);
-        create_group_fragment_viewModel_ob = new ViewModelProvider(this).get(Create_Group_Fragment_ViewModel.class);
+        navController = Navigation.findNavController(requireActivity(),R.id.after_login_host_fragment);
+       // uploadgroupphoto=view.findViewById(R.id.upload_image_for_create_group);
+      //  group_image = view.findViewById(R.id.group_image);
+       // create_group_fragment_viewModel_ob = new ViewModelProvider(this).get(Create_Group_Fragment_ViewModel.class);
+
+        loadingBar = new ProgressDialog(getContext());
+
+        currentUser = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
+       // groupImagesRef = FirebaseStorage.getInstance().getReference("GroupImage");
+
 
         newgroupcreate_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                createAnewGroup();
             }
         });
 
-        uploadgroupphoto.setOnClickListener(new View.OnClickListener() {
+       /* uploadgroupphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Intent intent = CropImage.activity()  //opening crop image activity for choosing image from gallery and cropping, this activity is from a custom api library
                         .getIntent(requireContext());
                 startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
             }
-        });
+        });*/
 
 
-        create_group_fragment_viewModel_ob.getImage_uri().observe(getViewLifecycleOwner(), new Observer<Uri>() {
+       /* create_group_fragment_viewModel_ob.getImage_uri().observe(getViewLifecycleOwner(), new Observer<Uri>() {
             @Override
             public void onChanged(Uri uri) {
                 group_image.setImageURI(uri);
             }
-        });
+        });*/
         groupnameinput_edittext.addTextChangedListener(textWatcher);
         groupdescription_edittext.addTextChangedListener(textWatcher);
     }
 
-    @Override
+   /* @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {  //requesting for pick image from gallery
@@ -107,7 +132,7 @@ public class create_group_fragment extends Fragment {
             }
         }
         group_image.setImageURI(group_image_uri);
-    }
+    }*/
 
     //watch edit text if it is empty or not
     private TextWatcher textWatcher = new TextWatcher() {
@@ -129,6 +154,63 @@ public class create_group_fragment extends Fragment {
 
         }
     };
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void createAnewGroup(){
+        final String group_name, group_description, group_id;
+
+        loadingBar.setTitle("Create Group");
+        loadingBar.setMessage("Please wait, your group is creating...");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
+        group_name = Objects.requireNonNull(groupnameinput_edittext.getText()).toString().trim();
+        group_description = Objects.requireNonNull(groupdescription_edittext.getText()).toString().trim();
+        group_id = getINSTANCE().getRootRef().child("GROUP").push().getKey();
+        // localGroupId = group_id;
+        group_data groupData = new group_data(group_id,group_name,group_description,currentUser,"0");
+
+        final Map<String, Object> update = new HashMap<>(); //this hashmap is used to write different data in different path in the database at once or atomically
+        update.put("GROUP/"+group_id+"/members/"+currentUser,true);
+        update.put("Users/"+currentUser+"/joinedGroups/"+group_id+"/msgCountUser","0");
+
+        assert group_id != null;
+        getINSTANCE().getRootRef().child("GROUP").child(group_id).setValue(groupData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        getINSTANCE().getRootRef().updateChildren(update).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                loadingBar.dismiss();
+                                //update newly created group in the list
+                                yourGroupData groupData = new yourGroupData(group_id,group_name,"0","0");
+                                getYourGroupListInstance().getYourGroupList().add(0,groupData);
+
+                                Toast.makeText(getContext(), "Group Created Successfully", Toast.LENGTH_SHORT).show();
+                                navController.popBackStack();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "Error "+e.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Error "+e.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

@@ -9,38 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/group_image"
-            android:layout_width="170dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="32dp"
-            android:contentDescription="@string/group_image"
-            android:scaleType="fitXY"
-            android:src="@drawable/dummyimage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/groupdescriptionedittext_layout" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/upload_image_for_create_group"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:drawableStart="@drawable/ic_photo"
-            android:drawableLeft="@drawable/ic_photo"
-            android:drawablePadding="10dp"
-            android:focusable="true"
-            android:text="@string/upload_image"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/group_image"
-            app:layout_constraintStart_toStartOf="@+id/group_image"
-            app:layout_constraintTop_toBottomOf="@+id/group_image"
-            tools:targetApi="lollipop" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/groupnameinputedittext_layout"
             android:layout_width="0dp"
@@ -99,16 +67,16 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="16dp"
+            android:enabled="false"
             android:text="@string/create"
             app:cornerRadius="13dp"
-            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/upload_image_for_create_group"
+            app:layout_constraintTop_toBottomOf="@+id/groupdescriptionedittext_layout"
             app:strokeColor="@color/colorPrimary" />
 
         <TextView

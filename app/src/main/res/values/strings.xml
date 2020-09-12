@@ -96,6 +96,7 @@
     <string name="sign_up">Sign up</string>
     <string name="already_have_an_account">Already Have an Account</string>
     <string name="loading">Loading...</string>
+    <string name="above99">99+</string>
 
 
 </resources>

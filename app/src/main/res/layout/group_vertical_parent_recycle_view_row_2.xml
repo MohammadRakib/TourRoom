@@ -33,13 +33,15 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/owngroupimageview"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:src="@drawable/coxbazar"
+                android:src="@drawable/dummygroupimage"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -57,13 +59,61 @@
                 android:text="coxbazar_group"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="@+id/owngroupimageview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/owngroupimageview"
                 app:layout_constraintTop_toTopOf="@+id/owngroupimageview"
                 tools:targetApi="lollipop" />
 
+            <TextView
+                android:id="@+id/last_group_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintEnd_toEndOf="@+id/owngroupnametextview"
+                app:layout_constraintStart_toStartOf="@+id/owngroupnametextview"
+                app:layout_constraintTop_toBottomOf="@+id/owngroupnametextview" />
+
+            <TextView
+                android:id="@+id/time_messege"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/owngroupimageview"
+                app:layout_constraintEnd_toEndOf="@+id/last_group_message"
+                app:layout_constraintStart_toStartOf="@+id/last_group_message"
+                app:layout_constraintTop_toBottomOf="@+id/last_group_message"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/messageCounter"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/notification_counter"
+                android:fontFamily="@font/cantarell"
+                android:gravity="center_horizontal"
+                android:paddingLeft="2dp"
+                android:paddingTop="5dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="5dp"
+                android:text="@string/above99"
+                android:visibility="invisible"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#FFFFFF"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@+id/owngroupimageview"
+                app:layout_constraintEnd_toEndOf="@+id/owngroupimageview"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/owngroupimageview"
+                app:layout_constraintTop_toTopOf="@+id/owngroupimageview"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="SmallSp" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

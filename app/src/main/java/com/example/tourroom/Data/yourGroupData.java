@@ -8,12 +8,11 @@ public class yourGroupData implements Serializable {
     public yourGroupData() {
     }
 
-
-    public yourGroupData(String msgCountUser, String lastmsgUserName, String lastMessage, String lastmsgTime) {
+    public yourGroupData(String groupId, String groupName, String msgCountUser, String msgCount) {
+        this.groupId = groupId;
+        this.groupName = groupName;
         this.msgCountUser = msgCountUser;
-        this.lastmsgUserName = lastmsgUserName;
-        this.lastMessage = lastMessage;
-        this.lastmsgTime = lastmsgTime;
+        this.msgCount = msgCount;
     }
 
     public String getMsgCountUser() {

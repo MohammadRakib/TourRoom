@@ -19,27 +19,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.tourroom.Data.group_data;
+import com.example.tourroom.Data.yourGroupData;
 import com.example.tourroom.R;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
+import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
 
 public class group_fragment extends Fragment  implements  VRecyclerViewClickInterface {
 
     private NavController navController;
     RecyclerView verticalparent_recyclerView;
     group_vertical_parent_recycle_view_adapter group_vertical_parent_recycle_view_adapterVariable;
+
+    private String currentUserID;
+
+    //use for tracking which group user opened
+    static int yourGroupIntoPosition = -1;
+    static String yourGroupIntoId = null;
+
+    //listener and query for newMessageTracker
+    Query newMessageQuery;
+    ChildEventListener newMessageListener;
+
+    boolean breaks = false; //for breaking the loop in the listener;
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.group_fragment, container, false);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        GroupFragmentViewModel mViewModel = new ViewModelProvider(this).get(GroupFragmentViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -63,11 +88,27 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
         }
 
         verticalparent_recyclerView=view.findViewById(R.id.group_vertical_parent_Recycle_view);
-        group_vertical_parent_recycle_view_adapterVariable = new group_vertical_parent_recycle_view_adapter(this);
-        verticalparent_recyclerView.setAdapter(group_vertical_parent_recycle_view_adapterVariable);
         navController = Navigation.findNavController(requireActivity(),R.id.after_login_host_fragment);
 
+        currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
+
+        //setting up adapter
+        group_vertical_parent_recycle_view_adapterVariable = new group_vertical_parent_recycle_view_adapter(requireActivity(),this, getYourGroupListInstance().getYourGroupList());
+        verticalparent_recyclerView.setAdapter(group_vertical_parent_recycle_view_adapterVariable);
+        //sending to adapter
+        group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();
+
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+
+
 
 
     @Override

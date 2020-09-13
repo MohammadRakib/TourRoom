@@ -84,7 +84,7 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) { //child add
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) { //child add
         if (position == 1){
 
             recyclerAdapterForHorizontalScroll = new RecyclerAdapterForHorizontalScroll(context,this, RecommendedGroupDataList);
@@ -94,7 +94,7 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
             loadGroup();
 
         }else if(position > 1){
-            row_2_view_holder row_2_view_holder = (group_vertical_parent_recycle_view_adapter.row_2_view_holder) holder;
+            final row_2_view_holder row_2_view_holder = (group_vertical_parent_recycle_view_adapter.row_2_view_holder) holder;
 
             final yourGroupData groupData = groupDataList.get(position - 2);
 
@@ -168,6 +168,14 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
             }
 
 
+            row_2_view_holder.group_vertical_parent_recycle_view_row_card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    vRecyclerViewClickInterface.onItemClickV(position, row_2_view_holder.vertical_recycle_view_group_image, row_2_view_holder.vertical_recycle_view_group_name);
+                }
+            });
+
+
         }
     }
 
@@ -177,8 +185,8 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
     }
 
     @Override
-    public void onItemClickH(int position) {
-        vRecyclerViewClickInterface.groupinfoonclick(position);
+    public void onItemClickH(group_data group_data) {
+        vRecyclerViewClickInterface.groupinfoonclick(group_data);
     }
 
     class row_0_view_holder extends RecyclerView.ViewHolder{
@@ -232,13 +240,6 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
             last_message = itemView.findViewById(R.id.last_group_message);
             messageCounter = itemView.findViewById(R.id.messageCounter);
             time = itemView.findViewById(R.id.time_messege);
-
-            group_vertical_parent_recycle_view_row_card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                      vRecyclerViewClickInterface.onItemClickV(getAdapterPosition(),vertical_recycle_view_group_image,vertical_recycle_view_group_name);
-                }
-            });
         }
     }
 

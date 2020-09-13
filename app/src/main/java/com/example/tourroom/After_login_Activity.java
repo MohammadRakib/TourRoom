@@ -109,8 +109,6 @@ public class After_login_Activity extends AppCompatActivity {
                                 getYourGroupListInstance().getYourGroupList().get(finalI).setGroupImage(Objects.requireNonNull(dataSnapshot.child("groupImage").getValue()).toString());
                             }
 
-                            loadingBar.dismiss();
-
                         }
 
                         @Override
@@ -119,6 +117,7 @@ public class After_login_Activity extends AppCompatActivity {
                         }
                     });
                 }
+                loadingBar.dismiss();
             }
 
             @Override

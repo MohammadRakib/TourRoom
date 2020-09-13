@@ -44,7 +44,7 @@ public class RecyclerAdapterForHorizontalScroll extends RecyclerView.Adapter< Re
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        group_data group_data = groupDataList.get(position);
+        final group_data group_data = groupDataList.get(position);
         holder.suggestgroupName_horizontal_textview.setText(group_data.getGroupName());
         if(group_data.getGroupImage() != null){
             Glide.with(context)
@@ -54,7 +54,12 @@ public class RecyclerAdapterForHorizontalScroll extends RecyclerView.Adapter< Re
                     .placeholder(R.drawable.dummyimage)
                     .into(holder.suggestgroup_horizontal_imageview);
         }
-
+        holder.group_horizontal_child_recycle_view_row_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hRecyclerViewClickInterface.onItemClickH(group_data);
+            }
+        });
 
     }
 
@@ -74,13 +79,6 @@ public class RecyclerAdapterForHorizontalScroll extends RecyclerView.Adapter< Re
             suggestgroup_horizontal_imageview=itemView.findViewById(R.id.suggestedgroupimage);
             suggestgroupName_horizontal_textview=itemView.findViewById(R.id.suggestedgroupname);
             group_horizontal_child_recycle_view_row_card=itemView.findViewById(R.id.group_horizontal_child_recycle_view_row_card_id);
-
-            group_horizontal_child_recycle_view_row_card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    hRecyclerViewClickInterface.onItemClickH(getAdapterPosition());
-                }
-            });
 
           }
 

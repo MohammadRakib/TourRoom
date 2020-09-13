@@ -15,6 +15,12 @@ public class yourGroupData implements Serializable {
         this.msgCount = msgCount;
     }
 
+    public yourGroupData(String groupId, String groupName, String groupImage) {
+        this.groupId = groupId;
+        this.groupName = groupName;
+        this.groupImage = groupImage;
+    }
+
     public String getMsgCountUser() {
         return msgCountUser;
     }

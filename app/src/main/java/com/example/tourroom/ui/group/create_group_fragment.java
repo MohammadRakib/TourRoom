@@ -159,6 +159,7 @@ public class create_group_fragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void createAnewGroup(){
+
         final String group_name, group_description, group_id;
 
         loadingBar.setTitle("Create Group");

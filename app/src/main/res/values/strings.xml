@@ -19,7 +19,6 @@
     <string name="group">Group</string>
     <string name="notification">Notification</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="notification_counter_img">notification_counter_img</string>
     <string name="after_login">After Login</string>
@@ -97,6 +96,6 @@
     <string name="already_have_an_account">Already Have an Account</string>
     <string name="loading">Loading...</string>
     <string name="above99">99+</string>
-
+    <string name="see_new_messages">See New Messages</string>
 
 </resources>

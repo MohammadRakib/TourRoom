@@ -119,12 +119,13 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
 
 
     @Override
-    public void onItemClickV(int position, CircleImageView group_img, TextView group_name) {
+    public void onItemClickV(int position, CircleImageView group_img, TextView group_name, int newMessage) {
         Pair[] pairs = new Pair[2];
         pairs[0] = new Pair<View,String>(group_img,"gimg"+position);
         pairs[1] = new Pair<View,String>(group_name,"gnm"+position);
         Intent intent = new Intent(getActivity(),group_host_activity.class);
         intent.putExtra("position",position);
+        intent.putExtra("newMessage",newMessage);
         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(),pairs);
         startActivity(intent,activityOptionsCompat.toBundle());
     }

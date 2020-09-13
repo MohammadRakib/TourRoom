@@ -11,10 +11,86 @@
         android:id="@+id/show_chat_recycle_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/Chat_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/send_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/send_image"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_chat_recycle_view"
+        app:srcCompat="@drawable/ic_send"
+        tools:targetApi="lollipop" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/upload_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/upload_image"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat_edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_chat_recycle_view"
+        app:srcCompat="@drawable/ic_photo"
+        tools:targetApi="lollipop" />
+
+    <EditText
+        android:id="@+id/Chat_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:autofillHints="write"
+        android:background="@drawable/chat_shape"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/write_here"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/send_message"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/upload_image"
+        app:layout_constraintTop_toBottomOf="@+id/show_chat_recycle_view" />
+
+    <TextView
+        android:id="@+id/seeNewMessages"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/new_message_shape"
+        android:fontFamily="@font/fresca"
+        android:gravity="center"
+        android:text="@string/see_new_messages"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

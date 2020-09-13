@@ -23,11 +23,17 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.example.tourroom.Data.yourGroupData;
 import com.example.tourroom.R;
 
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
+import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
 
 
 public class group_host_activity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -36,8 +42,8 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
     NavController navController;
     TextView state,group_name;
     CircleImageView group_image;
-    ConstraintLayout chat_box;
-
+    private int position;
+    private int newMessageNumber;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -55,7 +61,7 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         state = findViewById(R.id.group_state);
         group_image = findViewById(R.id.group_image);
         group_name = findViewById(R.id.group_title);
-        chat_box = findViewById(R.id.chat_box);
+
 
         // problem with activity when go to landscape mode fix
         activity_open_fix();
@@ -63,18 +69,20 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             //for shared activity animation
-            int position = extras.getInt("position");
+            position = extras.getInt("position");
+            newMessageNumber = extras.getInt("newMessage");
             group_image.setTransitionName("gimg"+position);
             group_name.setTransitionName("gnm"+position);
+            loadGroupData(position);
         }
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void share_animation_flash_fix() {
         Fade fade = new Fade();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             fade.excludeTarget(findViewById(R.id.group_appbar_layout_id), true);
-            fade.excludeTarget(chat_box,true);
             fade.excludeTarget(findViewById(R.id.group_nav_host_id),true);
             fade.excludeTarget(R.layout.group_navhost,true);
             fade.excludeTarget(android.R.id.statusBarBackground, true);
@@ -91,7 +99,6 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
 
         if(Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.chat_fragment){ //if activity don't open with chat fragment
 
-            chat_box.setVisibility(View.INVISIBLE);//chat box set invisible
             if(Objects.requireNonNull(navController.getCurrentDestination()).getId() == R.id.members_fragment){ //if activity open with member fragment
 
                 state.setText(R.string.members);
@@ -166,49 +173,37 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
             case R.id.chat:
                 navController.navigate(R.id.chat_fragment);
                 state.setText(R.string.chat);
-                if(!chat_box.isShown()){
-                    chat_box.setVisibility(View.VISIBLE);
-                }
+
                 return true;
 
             case R.id.member:
                 navController.navigate(R.id.members_fragment);
                 state.setText(R.string.members);
-                if(chat_box.isShown()){
-                    chat_box.setVisibility(View.INVISIBLE);
-                }
+
                 return true;
 
             case R.id.poll:
                 navController.navigate(R.id.poll_fragment);
                 state.setText(R.string.poll);
-                if(chat_box.isShown()){
-                    chat_box.setVisibility(View.INVISIBLE);
-                }
+
                 return true;
 
             case R.id.event:
                 navController.navigate(R.id.event_fragment);
                 state.setText(R.string.events);
-                if(chat_box.isShown()){
-                    chat_box.setVisibility(View.INVISIBLE);
-                }
+
                 return true;
 
             case R.id.announcement:
                 navController.navigate(R.id.announcement_fragment);
                 state.setText(R.string.announcements);
-                if(chat_box.isShown()){
-                    chat_box.setVisibility(View.INVISIBLE);
-                }
+
                 return true;
 
             case R.id.member_request:
                 navController.navigate(R.id.member_Requests_fragment);
                 state.setText(R.string.member_requests);
-                if(chat_box.isShown()){
-                    chat_box.setVisibility(View.INVISIBLE);
-                }
+
                 return true;
 
             default:
@@ -216,13 +211,49 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         }
     }
 
+
+    private void loadGroupData(int position) {
+
+        yourGroupData group_data = getYourGroupListInstance().getYourGroupList().get(position);
+
+        if(group_data != null && group_data.getGroupImage() == null){
+
+            String groupName = group_data.getGroupName();
+            group_name.setText(groupName);
+
+        }else if (group_data != null && group_data.getGroupImage() != null){
+
+            String groupName = group_data.getGroupName();
+            String groupImageUri = group_data.getGroupImage();
+
+            group_name.setText(groupName);
+
+            Glide.with(group_host_activity.this)
+                    .load(groupImageUri)
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .dontAnimate()
+                    .placeholder(R.drawable.dummyimage)
+                    .into(group_image);
+
+        }
+
+    }
+
+
+    public int getPosition() {
+        return position;
+    }
+
+    public int getNewMessageNumber() {
+        return newMessageNumber;
+    }
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         state.setText(R.string.chat);
-        if(!chat_box.isShown()){
-            chat_box.setVisibility(View.VISIBLE);
-        }
+
         navController.popBackStack(R.id.chat_fragment,false);
     }
 }

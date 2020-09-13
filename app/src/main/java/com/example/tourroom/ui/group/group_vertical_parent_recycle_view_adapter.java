@@ -171,7 +171,7 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
             row_2_view_holder.group_vertical_parent_recycle_view_row_card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    vRecyclerViewClickInterface.onItemClickV(position, row_2_view_holder.vertical_recycle_view_group_image, row_2_view_holder.vertical_recycle_view_group_name);
+                    vRecyclerViewClickInterface.onItemClickV(position-2, row_2_view_holder.vertical_recycle_view_group_image, row_2_view_holder.vertical_recycle_view_group_name, Integer.parseInt(newMessageNumber) );
                 }
             });
 
@@ -275,7 +275,6 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
         });
 
     }
-
 
 }
 

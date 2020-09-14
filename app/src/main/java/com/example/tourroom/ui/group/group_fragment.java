@@ -112,14 +112,120 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     public void onStart() {
         super.onStart();
 
+        //dynamic updating last message for which group user last entered and send a message
+        if(yourGroupIntoPosition != -1 && yourGroupIntoId != null){
+
+            getINSTANCE().getRootRef().child("Users").child(currentUserID).child("joinedGroups").child(yourGroupIntoId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChild("lastmsgUserName")){
+
+                        getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastmsgUserName(Objects.requireNonNull(dataSnapshot.child("lastmsgUserName").getValue()).toString());
+                        getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastMessage(Objects.requireNonNull(dataSnapshot.child("lastMessage").getValue()).toString());
+                        getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastmsgTime(Objects.requireNonNull(dataSnapshot.child("lastmsgTime").getValue()).toString());
+                        group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();
+
+                    }
+
+
+                    yourGroupIntoPosition = -1;
+                    yourGroupIntoId = null;
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+
+        //track new message dynamically
+        newMessageTracker();
+
+
     }
 
 
+
+    private void newMessageTracker(){
+
+        newMessageQuery = getINSTANCE().getRootRef().child("Users").child(currentUserID).child("joinedGroups");
+        newMessageListener = newMessageQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                for (int i=0; i<getYourGroupListInstance().getYourGroupList().size(); i++){
+                    if(getYourGroupListInstance().getYourGroupList().get(i).getGroupId().equals(dataSnapshot.getKey())){
+
+                        //updating last message
+                        getYourGroupListInstance().getYourGroupList().get(i).setLastmsgUserName(Objects.requireNonNull(dataSnapshot.child("lastmsgUserName").getValue()).toString());
+                        getYourGroupListInstance().getYourGroupList().get(i).setLastMessage(Objects.requireNonNull(dataSnapshot.child("lastMessage").getValue()).toString());
+                        getYourGroupListInstance().getYourGroupList().get(i).setLastmsgTime(Objects.requireNonNull(dataSnapshot.child("lastmsgTime").getValue()).toString());
+
+                        // updating user message count
+                        /*long tempMessageCountUser =  Long.parseLong(getYourGroupListInstance().getYourGroupList().get(i).getMsgCountUser()) + 1;
+                        String messageCountUser = String.valueOf(tempMessageCountUser);*/
+
+                        final int finalI = i;
+
+                        getINSTANCE().getRootRef().child("GROUP").child(dataSnapshot.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                getYourGroupListInstance().getYourGroupList().get(finalI).setMsgCount(Objects.requireNonNull(dataSnapshot.child("msgCount").getValue()).toString());
+                                yourGroupData temp =  getYourGroupListInstance().getYourGroupList().remove(finalI);
+                                getYourGroupListInstance().getYourGroupList().add(0,temp);
+
+                                group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();
+                                breaks = true;
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                    if(breaks){
+                        breaks = false;
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 
 
     @Override
     public void onItemClickV(int position, CircleImageView group_img, TextView group_name, int newMessage) {
+
+        yourGroupIntoPosition = position;
+        yourGroupIntoId = getYourGroupListInstance().getYourGroupList().get(position).getGroupId();
+
         Pair[] pairs = new Pair[2];
         pairs[0] = new Pair<View,String>(group_img,"gimg"+position);
         pairs[1] = new Pair<View,String>(group_name,"gnm"+position);
@@ -202,4 +308,9 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
 
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        newMessageQuery.removeEventListener(newMessageListener);
+    }
 }

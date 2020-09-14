@@ -89,7 +89,7 @@ public class chat_adapter extends RecyclerView.Adapter {
             chatViewHolder_other.other_message_time.setText(date_time);
 
             String userImage = chat_message_data.getUserImage();
-            if(!userImage.isEmpty()){
+            if(userImage != null){
                 Glide.with(context)
                         .load(userImage)
                         .format(DecodeFormat.PREFER_ARGB_8888)

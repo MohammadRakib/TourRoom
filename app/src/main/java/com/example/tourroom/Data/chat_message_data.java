@@ -2,12 +2,12 @@ package com.example.tourroom.Data;
 
 public class chat_message_data {
    private String messageId, userId, username, userImage , messageText,timeDate;
-   private boolean image, link;
+   private boolean image;
 
     public chat_message_data() {
     }
 
-    public chat_message_data(String messageId, String userId, String username, String userImage, String messageText, String timeDate, boolean image, boolean link) {
+    public chat_message_data(String messageId, String userId, String username, String userImage, String messageText, String timeDate, boolean image) {
         this.messageId = messageId;
         this.userId = userId;
         this.username = username;
@@ -15,7 +15,6 @@ public class chat_message_data {
         this.messageText = messageText;
         this.timeDate = timeDate;
         this.image = image;
-        this.link = link;
     }
 
     public String getUserId() {
@@ -75,11 +74,4 @@ public class chat_message_data {
         this.image = image;
     }
 
-    public boolean isLink() {
-        return link;
-    }
-
-    public void setLink(boolean link) {
-        this.link = link;
-    }
 }

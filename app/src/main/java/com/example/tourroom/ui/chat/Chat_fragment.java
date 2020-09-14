@@ -308,7 +308,7 @@ public class Chat_fragment extends Fragment {
             final String date_time = String.valueOf(System.currentTimeMillis()/1000);
 
             //create object for new message
-            chat_message_data chat_message_data = new chat_message_data(messageKey, currentUser, currentUserName, currentUserImage, message, date_time, false, false);
+            chat_message_data chat_message_data = new chat_message_data(messageKey, currentUser, currentUserName, currentUserImage, message, date_time, false);
             final Map<String, Object> update = new HashMap<>();
 
             //put the new message

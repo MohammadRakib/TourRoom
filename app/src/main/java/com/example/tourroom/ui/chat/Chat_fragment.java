@@ -1,6 +1,8 @@
 package com.example.tourroom.ui.chat;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -9,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +35,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
 import static java.util.Objects.requireNonNull;
@@ -47,6 +54,7 @@ public class Chat_fragment extends Fragment {
     private AppCompatImageButton upload, send;
     private EditText messageBox;
     private TextView seeNewMessage;
+    private ImageView messageImageView;
 
     private String chat_message, currentUser, currentUserName, currentUserImage;
     private String groupId;
@@ -65,6 +73,9 @@ public class Chat_fragment extends Fragment {
     ChildEventListener quryloadChildListener;
 
     int position, newMessageNumber;
+
+    Uri group_image_uri;
+    private ChatFragmentViewModel chatFragmentViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -85,6 +96,8 @@ public class Chat_fragment extends Fragment {
         send = view.findViewById(R.id.send_message);
         messageBox = view.findViewById(R.id.Chat_edit_text);
         seeNewMessage = view.findViewById(R.id.seeNewMessages);
+        messageImageView = view.findViewById(R.id.messageImage);
+        chatFragmentViewModel = new ViewModelProvider(this).get(ChatFragmentViewModel.class);
 
         currentUser = requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
 
@@ -100,14 +113,23 @@ public class Chat_fragment extends Fragment {
         chat_adapter = new chat_adapter(chatList, currentUser, requireActivity());
         chat_recycle_view.setAdapter(chat_adapter);
 
-
+        chatFragmentViewModel.getImage_uri().observe(getViewLifecycleOwner(), new Observer<Uri>() {
+            @Override
+            public void onChanged(Uri uri) {
+                messageImageView.setImageURI(uri);
+                messageImageView.setVisibility(View.VISIBLE);
+            }
+        });
 
         getCurrentUserData();
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "upload", Toast.LENGTH_SHORT).show();
+
+                Intent intent = CropImage.activity()  //opening crop image activity for choosing image from gallery and cropping, this activity is from a custom api library
+                        .getIntent(requireContext());
+                startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -133,6 +155,27 @@ public class Chat_fragment extends Fragment {
         loadMessageOnScroll();
 
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {  //requesting for pick image from gallery
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                assert result != null;
+                group_image_uri = result.getUri();
+                chatFragmentViewModel.setImage_uri(group_image_uri);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                assert result != null;
+                Exception error = result.getError();
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        messageImageView.setVisibility(View.VISIBLE);
+        messageImageView.setImageURI(group_image_uri);
+    }
+
 
     private void getCurrentMessegeCounter() { //grab the message counter for that group
 

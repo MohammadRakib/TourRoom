@@ -44,9 +44,9 @@ public class feed_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(!Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()){
+        if(!Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()) {
             Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
-
+           }
             feed_recycler_view=view.findViewById(R.id.feed_recyclerview);
             feed_recycler_adapter=new Feed_Recycler_Adapter();
 
@@ -56,7 +56,7 @@ public class feed_fragment extends Fragment {
 
             DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(requireActivity(),DividerItemDecoration.VERTICAL);
             feed_recycler_view.addItemDecoration(dividerItemDecoration);
-        }
+
 
        /* Button button=view.findViewById(R.id.other_profile_from_feed);
         button.setOnClickListener(new View.OnClickListener() {

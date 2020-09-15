@@ -219,7 +219,6 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     }
 
 
-
     @Override
     public void onItemClickV(int position, CircleImageView group_img, TextView group_name, int newMessage) {
 

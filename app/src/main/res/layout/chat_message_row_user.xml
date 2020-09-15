@@ -49,28 +49,16 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/message_seen_sent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
-        android:text="sent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/chat_message_row_card_user"
-        app:layout_constraintTop_toBottomOf="@+id/chat_message_row_card_user" />
-
-    <TextView
         android:id="@+id/chat_message_row_time_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="5dp"
         android:text="time"
-        app:layout_constraintBottom_toBottomOf="@+id/message_seen_sent"
-        app:layout_constraintEnd_toStartOf="@+id/message_seen_sent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/chat_message_row_card_user"
-        app:layout_constraintTop_toTopOf="@+id/message_seen_sent" />
+        app:layout_constraintTop_toBottomOf="@+id/chat_message_row_card_user" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

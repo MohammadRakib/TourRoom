@@ -1,6 +1,7 @@
 package com.example.tourroom.ui.chat;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -28,19 +29,26 @@ import android.widget.Toast;
 import com.example.tourroom.Data.chat_message_data;
 import com.example.tourroom.R;
 import com.example.tourroom.ui.group.group_host_activity;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
@@ -48,7 +56,7 @@ import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupList
 import static java.util.Objects.requireNonNull;
 
 
-public class Chat_fragment extends Fragment {
+public class Chat_fragment extends Fragment implements chatInterface{
 
     private RecyclerView chat_recycle_view;
     private AppCompatImageButton upload, send;
@@ -75,7 +83,9 @@ public class Chat_fragment extends Fragment {
     int position, newMessageNumber;
 
     Uri group_image_uri;
-    private ChatFragmentViewModel chatFragmentViewModel;
+
+    private StorageReference chatImageMessageReference;
+    private ProgressDialog loadingBar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -97,9 +107,10 @@ public class Chat_fragment extends Fragment {
         messageBox = view.findViewById(R.id.Chat_edit_text);
         seeNewMessage = view.findViewById(R.id.seeNewMessages);
         messageImageView = view.findViewById(R.id.messageImage);
-        chatFragmentViewModel = new ViewModelProvider(this).get(ChatFragmentViewModel.class);
+        loadingBar = new ProgressDialog(requireActivity());
 
         currentUser = requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
+        chatImageMessageReference = FirebaseStorage.getInstance().getReference("chatImage");
 
         //getting data from activity
         group_host_activity = (group_host_activity) requireActivity();
@@ -110,16 +121,9 @@ public class Chat_fragment extends Fragment {
         chatList = new ArrayList<>();
         newchatList = new ArrayList<>();
 
-        chat_adapter = new chat_adapter(chatList, currentUser, requireActivity());
+        chat_adapter = new chat_adapter(chatList, currentUser, requireActivity(),this);
         chat_recycle_view.setAdapter(chat_adapter);
 
-        chatFragmentViewModel.getImage_uri().observe(getViewLifecycleOwner(), new Observer<Uri>() {
-            @Override
-            public void onChanged(Uri uri) {
-                messageImageView.setImageURI(uri);
-                messageImageView.setVisibility(View.VISIBLE);
-            }
-        });
 
         getCurrentUserData();
 
@@ -165,7 +169,6 @@ public class Chat_fragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 assert result != null;
                 group_image_uri = result.getUri();
-                chatFragmentViewModel.setImage_uri(group_image_uri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 assert result != null;
                 Exception error = result.getError();
@@ -174,6 +177,8 @@ public class Chat_fragment extends Fragment {
         }
         messageImageView.setVisibility(View.VISIBLE);
         messageImageView.setImageURI(group_image_uri);
+        messageBox.setText("");
+        messageBox.setEnabled(false);
     }
 
 
@@ -293,8 +298,7 @@ public class Chat_fragment extends Fragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                //currentItem = layoutManager.getChildCount();
-                //TotalItem = layoutManager.getItemCount();
+
                 checkTopItem = layoutManager.findFirstCompletelyVisibleItemPosition();
 
                 if(isScrolling && checkTopItem == 0){
@@ -311,7 +315,7 @@ public class Chat_fragment extends Fragment {
 
                                 chat_message_data chat_message_data = snapshot.getValue(chat_message_data.class);
                                 newchatList.add(chat_message_data);
-                                // Toast.makeText(group_host_activity, String.valueOf(newchatList.size()), Toast.LENGTH_SHORT).show();
+
                                 if(!flag){
                                     assert chat_message_data != null;
                                     lastMessegeOnScrolled = chat_message_data.getMessageId();
@@ -333,10 +337,6 @@ public class Chat_fragment extends Fragment {
 
                         }
                     });
-
-                    // Toast.makeText(group_host_activity, String.valueOf(newchatList.size()), Toast.LENGTH_SHORT).show();
-
-
                 }
             }
         });
@@ -366,16 +366,13 @@ public class Chat_fragment extends Fragment {
             getYourGroupListInstance().getYourGroupList().get(position).setMsgCountUser(groupMessageCount);
             getYourGroupListInstance().getYourGroupList().get(position).setMsgCount(groupMessageCount);
 
-                /*//create object for last message
-                final yourGroupData assignLastMessage = new yourGroupData(groupMessageCount,currentUserName,message,date_time);
-*/
 
             //find group member
             getINSTANCE().getRootRef().child("GROUP").child(groupId).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    //grab the group members and updating their last message
+                    //grab the group members and updating their last message for dynamic message count in the yourGroup List
                     for (DataSnapshot data : dataSnapshot.getChildren()){
 
                         update.put("Users/"+data.getKey()+"/joinedGroups/"+groupId+"/lastmsgUserName",currentUserName);
@@ -400,7 +397,117 @@ public class Chat_fragment extends Fragment {
                 public void onCancelled(@NonNull DatabaseError databaseError) { }
             });
 
+        }else if(group_image_uri != null) {
+
+            loadingBar.setTitle("Sending Image");
+            loadingBar.setMessage("Please wait, sending your image...");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
+
+            //get the message
+            String messageKey = getINSTANCE().getRootRef().child("groupMessage").push().getKey();
+
+
+            //message send time
+            final String date_time = String.valueOf(System.currentTimeMillis()/1000);
+
+            uploadChatImageToStorage(messageKey, date_time);
+
+
+            messageBox.setEnabled(true);
+            group_image_uri = null;
+            messageImageView.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void uploadChatImageToStorage(final String messageKey, final String date_time ) {
+
+        final StorageReference filePath = chatImageMessageReference.child(groupId).child(messageKey+".jpg");
+        UploadTask uploadTask =filePath.putFile(group_image_uri);
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw Objects.requireNonNull(task.getException());
+                }
+
+                // Continue with the task to get the download URL
+                return filePath.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+
+                if (task.isSuccessful()) {
+                    final Uri downloadUri = task.getResult();
+                    assert downloadUri != null;
+
+                    loadingBar.dismiss();
+                    //create object for new message
+                    chat_message_data chat_message_data = new chat_message_data(messageKey, currentUser, currentUserName, currentUserImage, downloadUri.toString(), date_time, true);
+                    final Map<String, Object> update = new HashMap<>();
+
+                    //put the new message
+                    update.put("groupMessage/"+groupId+"/"+messageKey,chat_message_data);
+
+                    //updating group message count for that group
+                    Long TempCount = Long.parseLong(groupMessageCount) + 1;
+                    groupMessageCount = String.valueOf(TempCount);
+
+                    update.put("GROUP/"+groupId+"/msgCount",groupMessageCount);//update the new one
+                    update.put("Users/"+currentUser+"/joinedGroups/"+groupId+"/msgCountUser",groupMessageCount);//update the user message count
+                    getYourGroupListInstance().getYourGroupList().get(position).setMsgCountUser(groupMessageCount);
+                    getYourGroupListInstance().getYourGroupList().get(position).setMsgCount(groupMessageCount);
+
+
+                    //find group member
+                    getINSTANCE().getRootRef().child("GROUP").child(groupId).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            //grab the group members and updating their last message for dynamic message count in the yourGroup List
+                            for (DataSnapshot data : dataSnapshot.getChildren()){
+
+                                update.put("Users/"+data.getKey()+"/joinedGroups/"+groupId+"/lastmsgUserName",currentUserName);
+                                update.put("Users/"+data.getKey()+"/joinedGroups/"+groupId+"/lastMessage",downloadUri.toString());
+                                update.put("Users/"+data.getKey()+"/joinedGroups/"+groupId+"/lastmsgTime",date_time);
+                            }
+
+                            // update the all child at once
+                            getINSTANCE().getRootRef().updateChildren(update).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    messageBox.setText("");//clear message box after sending message
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(group_host_activity, "Error"+e, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                    });
+
+
+
+                } else {
+                    Toast.makeText(requireActivity(), "could not send image, try again", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                }
+
+            }
+        });
+
+    }
+
+    @Override
+    public void chatImageClick(String chatImageUrl) {
+        Intent intent = new Intent(getActivity(),chatImageShowActivity.class);
+        intent.putExtra("chatImageUrl",chatImageUrl);
+        startActivity(intent);
     }
 
     @Override
@@ -410,5 +517,6 @@ public class Chat_fragment extends Fragment {
         queryLoad.removeEventListener(quryloadChildListener);
 
     }
+
 
 }

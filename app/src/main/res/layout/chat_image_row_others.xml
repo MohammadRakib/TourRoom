@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chat_image_row_rootLayout_other"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/chat_image_row_card_other"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/chat_image_row_userImage_other"
+        app:layout_constraintTop_toBottomOf="@+id/chat_image_row_userName_other">
+
+        <ImageView
+            android:id="@+id/chat_image_row_ImageMessege_other"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/using_as_placeholder_for_chat_image"
+            android:scaleType="fitXY"
+            android:src="@drawable/dummyimage" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/chat_image_row_userImage_other"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/dummyavatar"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_image_row_card_other"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/chat_image_row_userName_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading..."
+        app:layout_constraintStart_toStartOf="@+id/chat_image_row_card_other"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/chat_image_row_time_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/chat_image_row_card_other"
+        app:layout_constraintStart_toStartOf="@+id/chat_image_row_card_other"
+        app:layout_constraintTop_toBottomOf="@+id/chat_image_row_card_other" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

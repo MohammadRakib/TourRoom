@@ -174,8 +174,6 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
                     vRecyclerViewClickInterface.onItemClickV(position-2, row_2_view_holder.vertical_recycle_view_group_image, row_2_view_holder.vertical_recycle_view_group_name, Integer.parseInt(newMessageNumber) );
                 }
             });
-
-
         }
     }
 

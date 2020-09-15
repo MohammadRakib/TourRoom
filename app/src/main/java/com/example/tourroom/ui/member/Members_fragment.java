@@ -14,6 +14,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,11 @@ import java.util.Objects;
 public class Members_fragment extends Fragment {
 
     private MembersFragmentViewModel mViewModel;
+    private View view;
+    @Nullable
+    private Bundle savedInstanceState;
+    RecyclerView memberRecycleView;
+    memberAdapter memberAdapter;
 
     public static Members_fragment newInstance() {
         return new Members_fragment();
@@ -43,14 +49,17 @@ public class Members_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button button= view.findViewById(R.id.other_profile_from_member);
+        /*Button button= view.findViewById(R.id.other_profile_from_member);
         button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), other_profile_activity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getActivity(), other_profile_activity.class);
+                //startActivity(intent);
             }
-        });
+        });*/
+        memberRecycleView = view.findViewById(R.id.member_recycleview);
+        memberAdapter = new memberAdapter();
+        memberRecycleView.setAdapter(memberAdapter);
     }
 }

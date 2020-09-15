@@ -7,12 +7,142 @@
     tools:context=".ui.place.add_new_place_fragment">
 
     <TextView
+        android:id="@+id/addNewPlace_textid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add new place"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/fresca"
+        android:text="ADD A NEW PLACE"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/placename_textinput_layout"
+        android:layout_width="308dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNewPlace_textid">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/placename_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Place NAME"
+            android:inputType="text"
+            android:textColorHint="@color/black"
+            android:textIsSelectable="false" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/placeaddress_textinput_layout"
+        android:layout_width="307dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/placename_textinput_layout"
+        app:layout_constraintStart_toStartOf="@+id/placename_textinput_layout"
+        app:layout_constraintTop_toBottomOf="@+id/placename_textinput_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/placeaddress_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Place Address"
+            android:inputType="text"
+            android:textColorHint="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/placdiscription_textinput_layout"
+        android:layout_width="303dp"
+        android:layout_height="124dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/placeaddress_textinput_layout"
+        app:layout_constraintStart_toStartOf="@+id/placeaddress_textinput_layout"
+        app:layout_constraintTop_toBottomOf="@+id/placeaddress_textinput_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/placediscription_for_addnewplace_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Place Discription"
+            android:inputType="textLongMessage|textMultiLine"
+            android:textColorHint="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/upload_image_for_add_place"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="148dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_photo"
+        android:drawableLeft="@drawable/ic_photo"
+        android:drawablePadding="10dp"
+        android:focusable="true"
+        android:text="@string/upload_image"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/addplace_imageview"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/addplace_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/addplace_imageview"
+        tools:targetApi="lollipop" />
+
+    <Button
+        android:id="@+id/confirm_for_addnewplace_button"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:enabled="false"
+        android:text="Confirm"
+        app:cornerRadius="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_image_for_add_place"
+        app:layout_constraintVertical_bias="1.0"
+        app:strokeColor="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/addplace_imageview"
+        android:layout_width="157dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/group_image"
+        android:scaleType="fitXY"
+        android:src="@drawable/dummyimage"
+        app:layout_constraintEnd_toEndOf="@+id/placdiscription_textinput_layout"
+        app:layout_constraintStart_toStartOf="@+id/placdiscription_textinput_layout"
+        app:layout_constraintTop_toBottomOf="@+id/placdiscription_textinput_layout" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/addnewplace_for_addnewplace_imageview"
+        android:layout_width="44dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/use_as_a_popup_button"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/placeaddress_textinput_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/placeaddress_textinput_layout"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_baseline_add_location_24"
+        tools:targetApi="lollipop" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

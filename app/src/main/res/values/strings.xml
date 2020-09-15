@@ -98,5 +98,7 @@
     <string name="above99">99+</string>
     <string name="see_new_messages">See New Messages</string>
     <string name="using_as_placeholder_for_chat_image">Using as placeholder for chat image</string>
+    <string name="edit">Edit</string>
+    <string name="select_all">Select All</string>
 
 </resources>

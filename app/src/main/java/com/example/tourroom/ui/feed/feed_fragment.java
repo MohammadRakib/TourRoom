@@ -29,7 +29,9 @@ public class feed_fragment extends Fragment {
     RecyclerView feed_recycler_view;
     Feed_Recycler_Adapter feed_recycler_adapter;
 
-
+    public static feed_fragment newInstance() {
+        return new feed_fragment();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -44,17 +46,17 @@ public class feed_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if(!Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()){
             Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
+
+            feed_recycler_view=view.findViewById(R.id.feed_recyclerview);
+            feed_recycler_adapter=new Feed_Recycler_Adapter();
+
+            feed_recycler_view.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
+            feed_recycler_view.setAdapter(feed_recycler_adapter);
+
+            DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(requireActivity(),DividerItemDecoration.VERTICAL);
+            feed_recycler_view.addItemDecoration(dividerItemDecoration);
         }
-
-        feed_recycler_view=view.findViewById(R.id.feed_recyclerview);
-        feed_recycler_adapter=new Feed_Recycler_Adapter();
-
-        feed_recycler_view.setLayoutManager(new LinearLayoutManager(requireActivity()));
-
-        feed_recycler_view.setAdapter(feed_recycler_adapter);
-
-        DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(requireActivity(),DividerItemDecoration.VERTICAL);
-        feed_recycler_view.addItemDecoration(dividerItemDecoration);
 
        /* Button button=view.findViewById(R.id.other_profile_from_feed);
         button.setOnClickListener(new View.OnClickListener() {

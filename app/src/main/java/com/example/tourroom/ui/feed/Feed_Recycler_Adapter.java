@@ -33,7 +33,7 @@ public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Ad
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView user_imagev,post_imagev,like_imagev,comment_imagev,share_imagev;
-        TextView username_textv,post_textv,like_count_textv,comment_count_textv,like_textv,comment_textv,share_textv;
+        TextView username_textv,post_textv,like_count_textv,comment_count_textv;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -44,11 +44,8 @@ public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Ad
             like_count_textv=itemView.findViewById(R.id.like_count_textview);
             comment_count_textv=itemView.findViewById(R.id.comment_count_textview);
             like_imagev=itemView.findViewById(R.id.like_imageview);
-            like_textv=itemView.findViewById(R.id.like_textview);
             comment_imagev=itemView.findViewById(R.id.comment_imageview);
-            comment_textv=itemView.findViewById(R.id.comment_textview);
             share_imagev=itemView.findViewById(R.id.share_imageview);
-            share_textv=itemView.findViewById(R.id.share_textview);
         }
     }
 }

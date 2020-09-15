@@ -18,10 +18,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourroom.R;
 
 public class profileFragment extends Fragment {
+    RecyclerView profile_recycler_view;
+    Profile_Recycler_Adapter profile_recycler_adapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,14 +47,24 @@ public class profileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button button=view.findViewById(R.id.edit_profile);
+        /*Button button=view.findViewById(R.id.edit_profile);
         final NavController navController = Navigation.findNavController(view);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.edit_profile_fragment);
             }
-        });
+        });*/
+
+        profile_recycler_view=view.findViewById(R.id.profile_recyclerview);
+        profile_recycler_adapter=new Profile_Recycler_Adapter();
+
+        profile_recycler_view.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
+        profile_recycler_view.setAdapter(profile_recycler_adapter);
+
+        DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(requireActivity(),DividerItemDecoration.VERTICAL);
+        profile_recycler_view.addItemDecoration(dividerItemDecoration);
 
     }
 

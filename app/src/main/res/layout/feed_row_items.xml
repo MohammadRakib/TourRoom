@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feed_recyclerview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/user_imageview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/username_textview"
+        app:layout_constraintStart_toEndOf="@+id/user_imageview"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Jumara"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/post_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_imageview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="My trip to Europe"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#0E0E0E"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/post_imageview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_textview"
+        app:srcCompat="@drawable/place_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/like_count_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:text="70 Likes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#101010"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/comment_count_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="4 comment"
+        android:textColor="#0E0E0E"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/like_imageview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        app:srcCompat="@drawable/like_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp" />
+
+    <TextView
+        android:id="@+id/like_textview"
+        app:layout_constraintStart_toEndOf="@+id/like_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="60dp"
+        android:text="Like"
+        android:textColor="#101010"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/comment_imageview"
+        app:layout_constraintStart_toEndOf="@+id/like_textview"
+        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        app:srcCompat="@drawable/comment_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="50dp" />
+
+    <TextView
+        android:id="@+id/comment_textview"
+        app:layout_constraintStart_toEndOf="@+id/comment_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="60dp"
+        android:text="Comment"
+        android:textColor="#171616"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/share_imageview"
+        app:layout_constraintEnd_toStartOf="@+id/share_textview"
+        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        app:srcCompat="@drawable/share_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/share_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Share"
+        android:textColor="#131313"
+        android:textSize="16sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

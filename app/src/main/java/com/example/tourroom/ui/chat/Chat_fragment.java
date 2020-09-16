@@ -53,6 +53,7 @@ import java.util.Objects;
 import static android.app.Activity.RESULT_OK;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
+import static com.example.tourroom.ui.group.group_fragment.group_vertical_parent_recycle_view_adapterVariable;
 import static java.util.Objects.requireNonNull;
 
 
@@ -232,6 +233,7 @@ public class Chat_fragment extends Fragment implements chatInterface{
                     chat_message_data chat_message_data = dataSnapshot.getValue(chat_message_data.class);
                     chatList.add(chat_message_data);
                     chat_adapter.notifyDataSetChanged();
+                    getCurrentMessegeCounter();
                     chat_recycle_view.smoothScrollToPosition(requireNonNull(chat_recycle_view.getAdapter()).getItemCount());
                     assert chat_message_data != null;
                     if(!flag && firsLoad){

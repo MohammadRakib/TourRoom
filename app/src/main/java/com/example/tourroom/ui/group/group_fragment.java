@@ -60,6 +60,7 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     static int yourGroupIntoPosition = -1;
     static String yourGroupIntoId = null;
 
+
 //    //listener and query for newMessageTracker
 //    Query newMessageQuery;
 //    ChildEventListener newMessageListener;

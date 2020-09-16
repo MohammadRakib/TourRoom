@@ -36,7 +36,7 @@ public class After_login_Activity extends AppCompatActivity {
     ChildEventListener newMessageListener;
 
     boolean breaks = false; //for breaking the loop in the listener;
-
+    static public boolean firstTimeNewMessageCount = false;
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -57,8 +57,8 @@ public class After_login_Activity extends AppCompatActivity {
         loadUserProfile();
         loadGroup();
 
-        //track new message dynamically
-        newMessageTracker();
+//        //track new message dynamically
+//        newMessageTracker();
 
 
     }
@@ -127,7 +127,7 @@ public class After_login_Activity extends AppCompatActivity {
                             if(dataSnapshot.hasChild("groupImage")){ //if has group image
                                 getYourGroupListInstance().getYourGroupList().get(finalI).setGroupImage(Objects.requireNonNull(dataSnapshot.child("groupImage").getValue()).toString());
                             }
-                            loadingBar.dismiss();
+
                         }
 
                         @Override
@@ -136,6 +136,9 @@ public class After_login_Activity extends AppCompatActivity {
                         }
                     });
                 }
+                loadingBar.dismiss();
+                //track new message dynamically
+                newMessageTracker();
             }
 
             @Override

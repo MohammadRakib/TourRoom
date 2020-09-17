@@ -82,7 +82,7 @@ public class profileFragment extends Fragment implements profileInterface {
             }
         });*/
         currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
-        ProfileImageReference = FirebaseStorage.getInstance().getReference("dummyImage");
+        ProfileImageReference = FirebaseStorage.getInstance().getReference("UserImage");
         profileInterface = this;
         loadingBar = new ProgressDialog(requireActivity());
         DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(requireActivity(),DividerItemDecoration.VERTICAL);
@@ -155,7 +155,7 @@ public class profileFragment extends Fragment implements profileInterface {
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
-        final StorageReference filePath = ProfileImageReference.child("dummyGroupImage.jpg");
+        final StorageReference filePath = ProfileImageReference.child(currentUserID+".jpg");
         UploadTask uploadTask =filePath.putFile(profile_image_uri);
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)

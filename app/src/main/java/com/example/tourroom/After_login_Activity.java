@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
+import com.example.tourroom.Data.User_Data;
 import com.example.tourroom.Data.yourGroupData;
 import com.example.tourroom.ui.group.group_vertical_parent_recycle_view_adapter;
 import com.google.firebase.database.ChildEventListener;
@@ -29,6 +30,9 @@ import static com.example.tourroom.ui.group.group_fragment.group_vertical_parent
 public class After_login_Activity extends AppCompatActivity {
 
     public static String UserName, UserEmail, UserImage;
+    public static final String dummyAvatarDownloadUrl = "https://firebasestorage.googleapis.com/v0/b/tour-room-40e3d.appspot.com/o/dummyImage%2FdummyAvatar.jpg?alt=media&token=d5de9c76-60fb-4262-9acd-729d0a666d70";
+    public static final String dummyImage = "https://firebasestorage.googleapis.com/v0/b/tour-room-40e3d.appspot.com/o/dummyImage%2FdummyAllImage.jpg?alt=media&token=b3b41e91-e7f1-4fb9-b101-ac4d748a776f";
+    public static final String dummyGroupImage = "https://firebasestorage.googleapis.com/v0/b/tour-room-40e3d.appspot.com/o/dummyImage%2FdummyGroupImage.jpg?alt=media&token=3ccf7f10-fc7a-4dc6-8f31-a955be6aca28";
     private String currentUserID;
     private ProgressDialog loadingBar;
     //listener and query for newMessageTracker
@@ -77,17 +81,13 @@ public class After_login_Activity extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists() && dataSnapshot.hasChild("image")){
-                            UserName = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
-                            UserEmail = Objects.requireNonNull(dataSnapshot.child("UEmail").getValue()).toString();
-                            UserImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
-                            loadingBar.dismiss();
 
-                        }else if(dataSnapshot.exists()) {
-                            UserName = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
-                            UserEmail = Objects.requireNonNull(dataSnapshot.child("UEmail").getValue()).toString();
-                           // loadingBar.dismiss();
-                        }
+                        User_Data user_data = dataSnapshot.getValue(User_Data.class);
+                        assert user_data != null;
+                        UserName = user_data.getName();
+                        UserEmail = user_data.getuEmail();
+                        UserImage = user_data.getImage();
+
                     }
 
                     @Override

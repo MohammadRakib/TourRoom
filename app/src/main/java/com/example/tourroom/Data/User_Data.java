@@ -2,6 +2,7 @@ package com.example.tourroom.Data;
 
 public class User_Data {
     String uid;
+    String uEmail;
     String name;
     String image;
 
@@ -9,13 +10,9 @@ public class User_Data {
 
     }
 
-    public User_Data(String uid, String name) {
+    public User_Data(String uid, String uEmail, String name, String image) {
         this.uid = uid;
-        this.name = name;
-    }
-
-    public User_Data(String uid, String name, String image) {
-        this.uid = uid;
+        this.uEmail = uEmail;
         this.name = name;
         this.image = image;
     }
@@ -42,5 +39,13 @@ public class User_Data {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getuEmail() {
+        return uEmail;
+    }
+
+    public void setuEmail(String uEmail) {
+        this.uEmail = uEmail;
     }
 }

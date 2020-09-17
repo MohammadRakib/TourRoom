@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_imageview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="1dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile_image" />
+        android:src="@drawable/dummyavatar" />
 
     <TextView
         android:id="@+id/profilename_textview"
@@ -22,12 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="35dp"
         android:text="Jumara"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_imageview"
         app:layout_constraintStart_toEndOf="@+id/profile_imageview"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/profile_imageview" />
 
     <TextView
         android:id="@+id/post_textview"
@@ -111,5 +113,21 @@
         app:layout_constraintEnd_toEndOf="@+id/following_textview"
         app:layout_constraintStart_toStartOf="@+id/following_textview"
         app:layout_constraintTop_toBottomOf="@+id/following_textview" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/editProfileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/use_as_a_popup_button"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/profilename_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profilename_textview"
+        app:srcCompat="@drawable/ic_baseline_edit_24"
+        tools:targetApi="lollipop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

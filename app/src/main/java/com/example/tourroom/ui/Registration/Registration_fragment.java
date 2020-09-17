@@ -21,6 +21,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.tourroom.After_login_Activity;
+import com.example.tourroom.Data.User_Data;
 import com.example.tourroom.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,6 +33,7 @@ import com.google.firebase.auth.AuthResult;
 import java.util.HashMap;
 import java.util.Objects;
 
+import static com.example.tourroom.After_login_Activity.dummyAvatarDownloadUrl;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 
 public class Registration_fragment extends Fragment {
@@ -85,7 +87,6 @@ public class Registration_fragment extends Fragment {
                 navController.navigate(R.id.action_registration_fragment_to_login_fragment);
             }
         });
-
     }
 
     //register an account
@@ -116,7 +117,6 @@ public class Registration_fragment extends Fragment {
             loadingBar.setMessage("Please wait, your Account is creating...");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
-
             getINSTANCE().getMAuth().createUserWithEmailAndPassword(email,password)
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
@@ -124,18 +124,26 @@ public class Registration_fragment extends Fragment {
 
                             if(getINSTANCE().getMAuth().getCurrentUser()!=null){
                                 String currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
-                                HashMap<String, Object> UserMap = new HashMap<>();
-                                UserMap.put("uid",currentUserID);
-                                UserMap.put("UEmail",email);
-                                UserMap.put("name",Name);
+                                User_Data user_data = new User_Data(currentUserID,email,Name,dummyAvatarDownloadUrl);
 
-                                getINSTANCE().getRootRef().child("Users").child(currentUserID).setValue(UserMap);
+                                getINSTANCE().getRootRef().child("Users").child(currentUserID).setValue(user_data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        loadingBar.dismiss();
+                                        Toast.makeText(requireActivity(), "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getActivity(), After_login_Activity.class);
+                                        startActivity(intent);
+                                        requireActivity().finishAffinity();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        loadingBar.dismiss();
+                                        Toast.makeText(requireActivity(), "Network Connection error", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
-                                loadingBar.dismiss();
-                                Toast.makeText(requireActivity(), "Account Created Successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getActivity(), After_login_Activity.class);
-                                startActivity(intent);
-                                requireActivity().finishAffinity();
+
                             }else {
                                 loadingBar.dismiss();
                                 Toast.makeText(requireActivity(), "Network Connection error", Toast.LENGTH_SHORT).show();

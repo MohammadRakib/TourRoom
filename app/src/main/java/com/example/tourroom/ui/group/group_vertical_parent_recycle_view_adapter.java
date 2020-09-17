@@ -136,7 +136,7 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
                 newMessageNumber = String.valueOf(tempNewMessageNumber);
 
 
-                if(tempNewMessageNumber != 0){
+                if(tempNewMessageNumber > 0){
 
                     row_2_view_holder.last_message.setTypeface(null, Typeface.BOLD);
                     row_2_view_holder.time.setTypeface(null, Typeface.BOLD);

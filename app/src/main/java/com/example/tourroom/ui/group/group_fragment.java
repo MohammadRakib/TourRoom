@@ -44,6 +44,8 @@ import java.util.Map;
 import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.tourroom.After_login_Activity.yourGroupIntoId;
+import static com.example.tourroom.After_login_Activity.yourGroupIntoPosition;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
 
@@ -55,10 +57,6 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     static public group_vertical_parent_recycle_view_adapter group_vertical_parent_recycle_view_adapterVariable;
 
     private String currentUserID;
-
-    //use for tracking which group user opened
-    static int yourGroupIntoPosition = -1;
-    static String yourGroupIntoId = null;
 
 
 //    //listener and query for newMessageTracker

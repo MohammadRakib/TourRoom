@@ -38,6 +38,11 @@ public class After_login_Activity extends AppCompatActivity {
     boolean breaks = false; //for breaking the loop in the listener;
     static public boolean firstTimeNewMessageCount = false;
 
+    //use for tracking which group user opened
+    static public int yourGroupIntoPosition = -1;
+    static public String yourGroupIntoId = null;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -163,8 +168,12 @@ public class After_login_Activity extends AppCompatActivity {
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 for (int i=0; i<getYourGroupListInstance().getYourGroupList().size(); i++){
+
                     if(getYourGroupListInstance().getYourGroupList().get(i).getGroupId().equals(dataSnapshot.getKey())){
 
+                        if(i == yourGroupIntoPosition && getYourGroupListInstance().getYourGroupList().get(i).getGroupId().equals(yourGroupIntoId)){
+                            break;
+                        }
                         //updating last message
                         getYourGroupListInstance().getYourGroupList().get(i).setLastmsgUserName(Objects.requireNonNull(dataSnapshot.child("lastmsgUserName").getValue()).toString());
                         getYourGroupListInstance().getYourGroupList().get(i).setLastMessage(Objects.requireNonNull(dataSnapshot.child("lastMessage").getValue()).toString());

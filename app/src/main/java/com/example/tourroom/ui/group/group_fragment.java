@@ -7,6 +7,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -43,6 +44,8 @@ import java.util.Map;
 import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.tourroom.After_login_Activity.yourGroupIntoId;
+import static com.example.tourroom.After_login_Activity.yourGroupIntoPosition;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
 
@@ -50,20 +53,18 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
 
     private NavController navController;
     RecyclerView verticalparent_recyclerView;
-    group_vertical_parent_recycle_view_adapter group_vertical_parent_recycle_view_adapterVariable;
+    @SuppressLint("StaticFieldLeak")
+    static public group_vertical_parent_recycle_view_adapter group_vertical_parent_recycle_view_adapterVariable;
 
     private String currentUserID;
 
-    //use for tracking which group user opened
-    static int yourGroupIntoPosition = -1;
-    static String yourGroupIntoId = null;
 
-    //listener and query for newMessageTracker
-    Query newMessageQuery;
-    ChildEventListener newMessageListener;
-
-    boolean breaks = false; //for breaking the loop in the listener;
-
+//    //listener and query for newMessageTracker
+//    Query newMessageQuery;
+//    ChildEventListener newMessageListener;
+//
+//    boolean breaks = false; //for breaking the loop in the listener;
+//
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -101,11 +102,19 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
 
         //setting up adapter
         group_vertical_parent_recycle_view_adapterVariable = new group_vertical_parent_recycle_view_adapter(requireActivity(),this, getYourGroupListInstance().getYourGroupList());
+
         verticalparent_recyclerView.setAdapter(group_vertical_parent_recycle_view_adapterVariable);
         //sending to adapter
         group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();
 
+
+
     }
+
+
+
+
+
 
 
     @Override
@@ -141,86 +150,14 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
         }
 
 
-        //track new message dynamically
-        newMessageTracker();
-
 
     }
 
 
-
-    private void newMessageTracker(){
-
-        newMessageQuery = getINSTANCE().getRootRef().child("Users").child(currentUserID).child("joinedGroups");
-        newMessageListener = newMessageQuery.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                for (int i=0; i<getYourGroupListInstance().getYourGroupList().size(); i++){
-                    if(getYourGroupListInstance().getYourGroupList().get(i).getGroupId().equals(dataSnapshot.getKey())){
-
-                        //updating last message
-                        getYourGroupListInstance().getYourGroupList().get(i).setLastmsgUserName(Objects.requireNonNull(dataSnapshot.child("lastmsgUserName").getValue()).toString());
-                        getYourGroupListInstance().getYourGroupList().get(i).setLastMessage(Objects.requireNonNull(dataSnapshot.child("lastMessage").getValue()).toString());
-                        getYourGroupListInstance().getYourGroupList().get(i).setLastmsgTime(Objects.requireNonNull(dataSnapshot.child("lastmsgTime").getValue()).toString());
-
-                        // updating user message count
-                        /*long tempMessageCountUser =  Long.parseLong(getYourGroupListInstance().getYourGroupList().get(i).getMsgCountUser()) + 1;
-                        String messageCountUser = String.valueOf(tempMessageCountUser);*/
-
-                        final int finalI = i;
-
-                        getINSTANCE().getRootRef().child("GROUP").child(dataSnapshot.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                getYourGroupListInstance().getYourGroupList().get(finalI).setMsgCount(Objects.requireNonNull(dataSnapshot.child("msgCount").getValue()).toString());
-                                yourGroupData temp =  getYourGroupListInstance().getYourGroupList().remove(finalI);
-                                getYourGroupListInstance().getYourGroupList().add(0,temp);
-
-                                group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();
-                                breaks = true;
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-                    if(breaks){
-                        breaks = false;
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
 
     @Override
-    public void onItemClickV(int position, CircleImageView group_img, TextView group_name, int newMessage) {
+    public void onItemClickV(int position, CircleImageView group_img, TextView group_name) {
 
         yourGroupIntoPosition = position;
         yourGroupIntoId = getYourGroupListInstance().getYourGroupList().get(position).getGroupId();
@@ -230,7 +167,7 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
         pairs[1] = new Pair<View,String>(group_name,"gnm"+position);
         Intent intent = new Intent(getActivity(),group_host_activity.class);
         intent.putExtra("position",position);
-        intent.putExtra("newMessage",newMessage);
+
         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(),pairs);
         startActivity(intent,activityOptionsCompat.toBundle());
     }
@@ -310,6 +247,5 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     @Override
     public void onStop() {
         super.onStop();
-        newMessageQuery.removeEventListener(newMessageListener);
     }
 }

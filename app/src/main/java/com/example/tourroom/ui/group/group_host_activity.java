@@ -43,7 +43,6 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
     TextView state,group_name;
     CircleImageView group_image;
     private int position;
-    private int newMessageNumber;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -70,7 +69,7 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         if (extras != null) {
             //for shared activity animation
             position = extras.getInt("position");
-            newMessageNumber = extras.getInt("newMessage");
+
             group_image.setTransitionName("gimg"+position);
             group_name.setTransitionName("gnm"+position);
             loadGroupData(position);
@@ -244,9 +243,6 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         return position;
     }
 
-    public int getNewMessageNumber() {
-        return newMessageNumber;
-    }
 
 
     @Override

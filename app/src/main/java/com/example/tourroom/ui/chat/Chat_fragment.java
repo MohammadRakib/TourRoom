@@ -53,6 +53,7 @@ import java.util.Objects;
 import static android.app.Activity.RESULT_OK;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
+import static com.example.tourroom.ui.group.group_fragment.group_vertical_parent_recycle_view_adapterVariable;
 import static java.util.Objects.requireNonNull;
 
 
@@ -61,7 +62,6 @@ public class Chat_fragment extends Fragment implements chatInterface{
     private RecyclerView chat_recycle_view;
     private AppCompatImageButton upload, send;
     private EditText messageBox;
-    private TextView seeNewMessage;
     private ImageView messageImageView;
 
     private String chat_message, currentUser, currentUserName, currentUserImage;
@@ -80,7 +80,7 @@ public class Chat_fragment extends Fragment implements chatInterface{
     Query queryLoad;
     ChildEventListener quryloadChildListener;
 
-    int position, newMessageNumber;
+    int position;
 
     Uri group_image_uri;
 
@@ -105,7 +105,6 @@ public class Chat_fragment extends Fragment implements chatInterface{
         upload = view.findViewById(R.id.upload_image);
         send = view.findViewById(R.id.send_message);
         messageBox = view.findViewById(R.id.Chat_edit_text);
-        seeNewMessage = view.findViewById(R.id.seeNewMessages);
         messageImageView = view.findViewById(R.id.messageImage);
         loadingBar = new ProgressDialog(requireActivity());
 
@@ -116,7 +115,6 @@ public class Chat_fragment extends Fragment implements chatInterface{
         group_host_activity = (group_host_activity) requireActivity();
         position = group_host_activity.getPosition();
         groupId = getYourGroupListInstance().getYourGroupList().get(position).getGroupId();
-        newMessageNumber = group_host_activity.getNewMessageNumber();
 
         chatList = new ArrayList<>();
         newchatList = new ArrayList<>();
@@ -145,13 +143,7 @@ public class Chat_fragment extends Fragment implements chatInterface{
             }
         });
 
-        seeNewMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chat_recycle_view.smoothScrollToPosition(requireNonNull(chat_recycle_view.getAdapter()).getItemCount() - newMessageNumber);
-                seeNewMessage.setVisibility(View.INVISIBLE);
-            }
-        });
+
 
 
         getCurrentMessegeCounter();
@@ -192,9 +184,12 @@ public class Chat_fragment extends Fragment implements chatInterface{
                 groupMessageCount = requireNonNull(dataSnapshot.child("msgCount").getValue()).toString(); //grab previous message count
 
                 //updating last message count when user going offline for that user
-                getINSTANCE().getRootRef().child("Users").child(currentUser).child("joinedGroups").child(groupId).child("msgCountUser").setValue(groupMessageCount);
-                getYourGroupListInstance().getYourGroupList().get(position).setMsgCountUser(groupMessageCount);
-
+                getINSTANCE().getRootRef().child("Users").child(currentUser).child("joinedGroups").child(groupId).child("msgCountUser").setValue(groupMessageCount).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        getYourGroupListInstance().getYourGroupList().get(position).setMsgCountUser(groupMessageCount);
+                    }
+                });
             }
 
             @Override
@@ -226,14 +221,6 @@ public class Chat_fragment extends Fragment implements chatInterface{
 
     private void loadMessage() {
 
-        if(newMessageNumber > 0){
-            seeNewMessage.setVisibility(View.VISIBLE);
-            String concate = newMessageNumber+" New Messages";
-            seeNewMessage.setText(concate);
-        }else {
-            seeNewMessage.setVisibility(View.INVISIBLE);
-        }
-
         queryLoad = getINSTANCE().getRootRef().child("groupMessage").child(groupId)
                 .limitToLast(12);
 
@@ -246,6 +233,7 @@ public class Chat_fragment extends Fragment implements chatInterface{
                     chat_message_data chat_message_data = dataSnapshot.getValue(chat_message_data.class);
                     chatList.add(chat_message_data);
                     chat_adapter.notifyDataSetChanged();
+                    getCurrentMessegeCounter();
                     chat_recycle_view.smoothScrollToPosition(requireNonNull(chat_recycle_view.getAdapter()).getItemCount());
                     assert chat_message_data != null;
                     if(!flag && firsLoad){
@@ -351,7 +339,7 @@ public class Chat_fragment extends Fragment implements chatInterface{
             final String date_time = String.valueOf(System.currentTimeMillis()/1000);
 
             //create object for new message
-            chat_message_data chat_message_data = new chat_message_data(messageKey, currentUser, currentUserName, currentUserImage, message, date_time, false);
+            chat_message_data chat_message_data = new chat_message_data(messageKey, currentUser, currentUserName, currentUserImage, message, date_time, false,false);
             final Map<String, Object> update = new HashMap<>();
 
             //put the new message
@@ -445,7 +433,7 @@ public class Chat_fragment extends Fragment implements chatInterface{
 
                     loadingBar.dismiss();
                     //create object for new message
-                    chat_message_data chat_message_data = new chat_message_data(messageKey, currentUser, currentUserName, currentUserImage, downloadUri.toString(), date_time, true);
+                    chat_message_data chat_message_data = new chat_message_data(messageKey, currentUser, currentUserName, currentUserImage, downloadUri.toString(), date_time, true,false);
                     final Map<String, Object> update = new HashMap<>();
 
                     //put the new message

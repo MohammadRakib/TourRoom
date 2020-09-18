@@ -101,4 +101,10 @@
     <string name="edit">Edit</string>
     <string name="select_all">Select All</string>
 
+
+    <string name="sendEmail">Send</string>
+    <string name="important_notice_forgotten_password">We will email you a link after when you provide your valid sign up  email
+    and click the send button,then check your email inbox and click the link to reset your password.</string>
+
+
 </resources>

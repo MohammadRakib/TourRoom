@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_login_fragment_to_registration_fragment"
             app:destination="@id/registration_fragment" />
+        <action
+            android:id="@+id/action_login_fragment_to_forgottenPasswordFragment3"
+            app:destination="@id/forgottenPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registration_fragment"
@@ -23,4 +26,9 @@
             android:id="@+id/action_registration_fragment_to_login_fragment"
             app:destination="@id/login_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/forgottenPasswordFragment"
+        android:name="com.example.tourroom.ForgottenPasswordFragment"
+        android:label="fragment_forgotten_password"
+        tools:layout="@layout/fragment_forgotten_password" />
 </navigation>

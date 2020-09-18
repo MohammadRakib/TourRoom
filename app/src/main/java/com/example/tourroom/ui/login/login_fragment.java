@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,11 +15,17 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tourroom.After_login_Activity;
@@ -41,12 +48,11 @@ public class login_fragment extends Fragment {
     public static login_fragment newInstance() {
         return new login_fragment();
     }
-
     NavController navController;
     TextInputEditText email, password;
     private FirebaseUser currentUser;
     private ProgressDialog loadingBar;
-
+    private TextView forget_Password_TextView;
     @Override
     public void onStart() {
         super.onStart();
@@ -56,18 +62,13 @@ public class login_fragment extends Fragment {
             requireActivity().finishAffinity();
         }
     }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.login_fragment, container, false);
         LoginFragmentViewModel loginFragmentViewModel = new ViewModelProvider(this).get(LoginFragmentViewModel.class);
-
-
         return root;
     }
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -76,10 +77,26 @@ public class login_fragment extends Fragment {
         email = view.findViewById(R.id.email_edittext);
         password = view.findViewById(R.id.password_edittext);
         loadingBar = new ProgressDialog(requireActivity());
-
+        forget_Password_TextView=view.findViewById(R.id.forget_password_textview);
         currentUser = getINSTANCE().getMAuth().getCurrentUser();
         navController = Navigation.findNavController(view);
 
+        String text="Forget Password";
+        SpannableString spannableString=new SpannableString(text);
+        ClickableSpan clickableSpan=new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                navController.navigate(R.id.action_login_fragment_to_forgottenPasswordFragment3);
+            }
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(Color.BLUE);
+            }
+        };
+        spannableString.setSpan(clickableSpan,0,15, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        forget_Password_TextView.setText(spannableString);
+        forget_Password_TextView.setMovementMethod(LinkMovementMethod.getInstance());
         button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -96,7 +113,6 @@ public class login_fragment extends Fragment {
             }
         });
     }
-
     //login user
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void login() {

@@ -5,7 +5,8 @@
     android:id="@+id/main_toolbar_layout_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    app:elevation="0dp">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_toolbar"
@@ -17,7 +18,23 @@
         app:contentInsetStartWithNavigation="0dp"
         app:layout_scrollFlags="scroll|enterAlways|snap"
         android:paddingStart="3dp"
-        android:paddingEnd="3dp" />
+        android:paddingEnd="3dp" >
+
+        <TextView
+            android:id="@+id/SearchBoxInMainToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Search here..."
+            android:background="@drawable/search_background"
+            android:padding="15dp"
+            android:fontFamily="@font/cantarell"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="5dp"
+            app:drawableRightCompat="@drawable/ic_search"
+            app:drawableEndCompat="@drawable/ic_search" />
+
+    </androidx.appcompat.widget.Toolbar>
 
 
 </com.google.android.material.appbar.AppBarLayout>

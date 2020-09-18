@@ -47,16 +47,14 @@ public class HomeFragment extends Fragment {
         //toolbar
         main_toolbar = root.findViewById(R.id.main_toolbar);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(main_toolbar);
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Tour Room");
-
-
         //bottom navigation
         bottomNavigationView = root.findViewById(R.id.bottom_home_nav);
         final NavController navController = Navigation.findNavController(root.findViewById(R.id.bottom_nav_host_fragment));
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
 
         Menu bottom_menu = bottomNavigationView.getMenu();
-        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottom_menu.getItem(3).getItemId());        badgeDrawable.setVisible(true);
+        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottom_menu.getItem(3).getItemId());
+        badgeDrawable.setVisible(true);
 
         //view model related
         homeViewModel.get_pending_notification().observe(getViewLifecycleOwner(), new Observer<Integer>() {
@@ -66,59 +64,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        setHasOptionsMenu(true);
+
 
         return root;
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-
-        inflater.inflate(R.menu.main_toolbar, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchManager searchManager = (SearchManager) requireActivity().getSystemService(Context.SEARCH_SERVICE);
-        if (searchItem != null) {
-            searchView = (SearchView) searchItem.getActionView();
-            int search_background=R.drawable.search_background;
-            searchView.setBackground(this.getResources().getDrawable(search_background) );
-            searchView.setQueryHint("people, groups, places");
-        }
-        if (searchView != null) {
-            assert searchManager != null;
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().getComponentName()));
-
-            queryTextListener = new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    Log.i("onQueryTextChange", newText);
-
-                    return true;
-                }
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    Log.i("onQueryTextSubmit", query);
-
-                    return true;
-                }
-            };
-            searchView.setOnQueryTextListener(queryTextListener);
-
-            super.onCreateOptionsMenu(menu, inflater);
-        }
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if (item.getItemId() == R.id.action_search) {
-            return false;
-        }
-        searchView.setOnQueryTextListener(queryTextListener);
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

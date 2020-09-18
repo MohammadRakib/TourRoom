@@ -3,6 +3,7 @@
     <words>
       <w>addnew</w>
       <w>creategrouponclick</w>
+      <w>datavar</w>
       <w>dummyavatar</w>
       <w>dummyimage</w>
       <w>edittext</w>
@@ -17,6 +18,7 @@
       <w>messege</w>
       <w>newchat</w>
       <w>otherprofile</w>
+      <w>recommened</w>
       <w>textv</w>
       <w>textview</w>
       <w>usernamermember</w>

@@ -8,7 +8,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public interface VRecyclerViewClickInterface {
 
-    void onItemClickV(int position, CircleImageView group_img, TextView group_name);
+    void onItemClickV(int position);
     void creategrouponclick();
     void groupinfoonclick(group_data group_data);
 }

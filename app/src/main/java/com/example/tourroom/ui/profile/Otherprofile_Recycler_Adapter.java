@@ -1,5 +1,6 @@
 package com.example.tourroom.ui.profile;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.example.tourroom.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -17,6 +20,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
 
+    Context context;
+    String userName, userImage;
+
+    public Otherprofile_Recycler_Adapter(Context context, String userName, String userImage) {
+        this.context = context;
+        this.userName = userName;
+        this.userImage = userImage;
+    }
 
     @NonNull
     @Override
@@ -36,6 +47,16 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(position == 0){
             Otherprofile_Recycler_Adapter.otherprofileUpperPartViewHolder profileUpperPartViewHolder = (Otherprofile_Recycler_Adapter.otherprofileUpperPartViewHolder) holder;
+            profileUpperPartViewHolder.name_textv.setText(userName);
+
+            Glide.with(context)
+                    .load(userImage)
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .dontAnimate()
+                    .placeholder(R.drawable.dummyavatar)
+                    .into(profileUpperPartViewHolder.profile_imagev);
+
+
         }else {
             Otherprofile_Recycler_Adapter.otherprofileLowerViewHolder profileLowerViewHolder = (Otherprofile_Recycler_Adapter.otherprofileLowerViewHolder) holder;
 

@@ -39,7 +39,7 @@ import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE
  */
 public class main_menu_fragment extends Fragment {
 
-    MaterialCardView profile, security, about, logout;
+    MaterialCardView profile, security, about, logout, addNewPost;
     NavController navController;
     TextView UserNameTextView, UserEmailTextView;
     CircleImageView profileImage;
@@ -67,6 +67,7 @@ public class main_menu_fragment extends Fragment {
         security = view.findViewById(R.id.option_security);
         about = view.findViewById(R.id.option_about);
         logout = view.findViewById(R.id.option_logout);
+        addNewPost = view.findViewById(R.id.addNewPostCard);
         UserNameTextView = view.findViewById(R.id.user_name_text_view);
         UserEmailTextView = view.findViewById(R.id.user_Id_text_view);
         profileImage = view.findViewById(R.id.profile_image);
@@ -74,14 +75,15 @@ public class main_menu_fragment extends Fragment {
         //setting up user name, user email and user profile image
         UserNameTextView.setText(UserName);
         UserEmailTextView.setText(UserEmail);
-        if(UserImage != null){
+
+
             Glide.with(requireActivity())
                     .load(UserImage)
                     .format(DecodeFormat.PREFER_ARGB_8888)
                     .dontAnimate()
                     .placeholder(R.drawable.dummyavatar)
                     .into(profileImage);
-        }
+
 
         //onclick methods
         profile.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +114,13 @@ public class main_menu_fragment extends Fragment {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
                 requireActivity().finishAffinity();
+            }
+        });
+
+        addNewPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.addNewPostFragment);
             }
         });
 

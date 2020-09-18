@@ -52,5 +52,10 @@
         android:name="com.example.tourroom.ui.profile.edit_profile_fragment"
         android:label="edit_profile_fragment"
         tools:layout="@layout/edit_profile_fragment" />
+    <fragment
+        android:id="@+id/addNewPostFragment"
+        android:name="com.example.tourroom.ui.feed.addNewPostFragment"
+        android:label="fragment_add_new_post"
+        tools:layout="@layout/fragment_add_new_post" />
 
 </navigation>

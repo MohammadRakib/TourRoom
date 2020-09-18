@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="moham">
     <words>
+      <w>addnew</w>
       <w>creategrouponclick</w>
       <w>dummyavatar</w>
       <w>dummyimage</w>
@@ -8,6 +9,7 @@
       <w>eeee</w>
       <w>groupinfoonclick</w>
       <w>hashmap</w>
+      <w>imagermember</w>
       <w>imagev</w>
       <w>imageview</w>
       <w>lastmsg</w>
@@ -17,6 +19,7 @@
       <w>otherprofile</w>
       <w>textv</w>
       <w>textview</w>
+      <w>usernamermember</w>
       <w>verticalparent</w>
     </words>
   </dictionary>

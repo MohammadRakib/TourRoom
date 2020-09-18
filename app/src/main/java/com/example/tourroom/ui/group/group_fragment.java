@@ -44,6 +44,7 @@ import java.util.Map;
 import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.tourroom.After_login_Activity.intoGroup;
 import static com.example.tourroom.After_login_Activity.yourGroupIntoId;
 import static com.example.tourroom.After_login_Activity.yourGroupIntoPosition;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
@@ -79,17 +80,6 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Fade fade = new Fade();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            fade.excludeTarget(requireActivity().findViewById(R.id.main_toolbar_layout_id), true);
-            fade.excludeTarget(requireActivity().findViewById(R.id.bottom_home_nav),true);
-            fade.excludeTarget(requireActivity().findViewById(R.id.bottom_nav_host_fragment),true);
-            fade.excludeTarget(requireActivity().findViewById(R.id.id_home_fragment),true);
-            fade.excludeTarget(android.R.id.statusBarBackground, true);
-            fade.excludeTarget(android.R.id.navigationBarBackground, true);
-            requireActivity().getWindow().setEnterTransition(fade);
-            requireActivity().getWindow().setExitTransition(fade);
-        }
 
         if(!Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()){
             Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
@@ -120,6 +110,8 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     @Override
     public void onStart() {
         super.onStart();
+
+        intoGroup = false;
 
         //dynamic updating last message for which group user last entered and send a message
         if(yourGroupIntoPosition != -1 && yourGroupIntoId != null){
@@ -157,19 +149,16 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
 
 
     @Override
-    public void onItemClickV(int position, CircleImageView group_img, TextView group_name) {
+    public void onItemClickV(int position) {
 
         yourGroupIntoPosition = position;
         yourGroupIntoId = getYourGroupListInstance().getYourGroupList().get(position).getGroupId();
 
-        Pair[] pairs = new Pair[2];
-        pairs[0] = new Pair<View,String>(group_img,"gimg"+position);
-        pairs[1] = new Pair<View,String>(group_name,"gnm"+position);
         Intent intent = new Intent(getActivity(),group_host_activity.class);
         intent.putExtra("position",position);
 
-        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(),pairs);
-        startActivity(intent,activityOptionsCompat.toBundle());
+        intoGroup = true;
+        startActivity(intent);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.example.tourroom.Data;
 
 public class User_Data {
     String uid;
-    String uEmail;
+    String UEmail;
     String name;
     String image;
 
@@ -10,9 +10,9 @@ public class User_Data {
 
     }
 
-    public User_Data(String uid, String uEmail, String name, String image) {
+    public User_Data(String uid, String UEmail, String name, String image) {
         this.uid = uid;
-        this.uEmail = uEmail;
+        this.UEmail = UEmail;
         this.name = name;
         this.image = image;
     }
@@ -41,11 +41,11 @@ public class User_Data {
         this.image = image;
     }
 
-    public String getuEmail() {
-        return uEmail;
+    public String getUEmail() {
+        return UEmail;
     }
 
-    public void setuEmail(String uEmail) {
-        this.uEmail = uEmail;
+    public void setUEmail(String uEmail) {
+        this.UEmail = uEmail;
     }
 }

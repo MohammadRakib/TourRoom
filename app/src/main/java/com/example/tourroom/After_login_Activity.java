@@ -40,7 +40,7 @@ public class After_login_Activity extends AppCompatActivity {
     ChildEventListener newMessageListener;
 
     boolean breaks = false; //for breaking the loop in the listener;
-    static public boolean firstTimeNewMessageCount = false;
+    static public boolean intoGroup = false;
 
     //use for tracking which group user opened
     static public int yourGroupIntoPosition = -1;
@@ -85,7 +85,7 @@ public class After_login_Activity extends AppCompatActivity {
                         User_Data user_data = dataSnapshot.getValue(User_Data.class);
                         assert user_data != null;
                         UserName = user_data.getName();
-                        UserEmail = user_data.getuEmail();
+                        UserEmail = user_data.getUEmail();
                         UserImage = user_data.getImage();
 
                     }
@@ -186,8 +186,10 @@ public class After_login_Activity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 getYourGroupListInstance().getYourGroupList().get(finalI).setMsgCount(Objects.requireNonNull(dataSnapshot.child("msgCount").getValue()).toString());
-                                yourGroupData temp =  getYourGroupListInstance().getYourGroupList().remove(finalI);
-                                getYourGroupListInstance().getYourGroupList().add(0,temp);
+                                if(!intoGroup){ //if user did not open group for chat from groupList, dynamic list update will happen
+                                    yourGroupData temp =  getYourGroupListInstance().getYourGroupList().remove(finalI);
+                                    getYourGroupListInstance().getYourGroupList().add(0,temp);
+                                }
 
                                 if(group_vertical_parent_recycle_view_adapterVariable != null){
                                     group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();

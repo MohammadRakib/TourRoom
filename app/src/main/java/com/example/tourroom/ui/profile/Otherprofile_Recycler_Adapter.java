@@ -1,32 +1,50 @@
 package com.example.tourroom.ui.profile;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.example.tourroom.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
+import static java.util.Objects.requireNonNull;
 
 
 public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
 
+    private final String currentUser;
     Context context;
-    String userName, userImage;
+    String userName, userImage,UserId;
+    boolean ifFollowing;
 
-    public Otherprofile_Recycler_Adapter(Context context, String userName, String userImage) {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public Otherprofile_Recycler_Adapter(Context context, String userName, String userImage, String UserId, boolean ifFollowing) {
         this.context = context;
         this.userName = userName;
         this.userImage = userImage;
+        this.UserId = UserId;
+        this.ifFollowing = ifFollowing;
+        currentUser = requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
     }
 
     @NonNull
@@ -46,7 +64,7 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(position == 0){
-            Otherprofile_Recycler_Adapter.otherprofileUpperPartViewHolder profileUpperPartViewHolder = (Otherprofile_Recycler_Adapter.otherprofileUpperPartViewHolder) holder;
+            final Otherprofile_Recycler_Adapter.otherprofileUpperPartViewHolder profileUpperPartViewHolder = (Otherprofile_Recycler_Adapter.otherprofileUpperPartViewHolder) holder;
             profileUpperPartViewHolder.name_textv.setText(userName);
 
             Glide.with(context)
@@ -57,10 +75,46 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
                     .into(profileUpperPartViewHolder.profile_imagev);
 
 
+            if(currentUser.equals(UserId)){
+                profileUpperPartViewHolder.followButton.setVisibility(View.INVISIBLE);
+            }else if(ifFollowing){
+                profileUpperPartViewHolder.followButton.setVisibility(View.INVISIBLE);
+            }else {
+                profileUpperPartViewHolder.followButton.setVisibility(View.VISIBLE);
+            }
+
+            profileUpperPartViewHolder.followButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    followTheUser(profileUpperPartViewHolder.followButton);
+                }
+            });
+
         }else {
             Otherprofile_Recycler_Adapter.otherprofileLowerViewHolder profileLowerViewHolder = (Otherprofile_Recycler_Adapter.otherprofileLowerViewHolder) holder;
 
         }
+    }
+
+    private void followTheUser(final Button followButton) {
+
+        final Map<String, Object> update = new HashMap<>(); //this hashmap is used to write different data in different path in the database at once or atomically
+        update.put("UserFollowing/"+currentUser+"/"+UserId,true);
+        update.put("UserFollower/"+UserId+"/"+currentUser,true);
+
+
+        getINSTANCE().getRootRef().updateChildren(update).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                followButton.setVisibility(View.INVISIBLE);
+                Toast.makeText(context, "Followed the User", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Could not follow,try again", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -81,6 +135,7 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
 
         CircleImageView profile_imagev;
         TextView name_textv,post_textv,followers_textv,following_textv,post_count_textv,followers_count_textv,following_count_textv;
+        Button followButton;
 
 
         public otherprofileUpperPartViewHolder(@NonNull View itemView) {
@@ -94,6 +149,7 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
             post_count_textv=itemView.findViewById(R.id.Other_post_count_textview);
             followers_count_textv=itemView.findViewById(R.id.Other_follower_count_textview);
             following_count_textv=itemView.findViewById(R.id.Other_following_count_textview);
+            followButton = itemView.findViewById(R.id.followButton);
         }
     }
 

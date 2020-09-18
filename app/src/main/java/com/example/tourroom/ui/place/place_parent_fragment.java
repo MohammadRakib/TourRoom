@@ -3,6 +3,8 @@ package com.example.tourroom.ui.place;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -14,14 +16,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.tourroom.Data.place_data;
 import com.example.tourroom.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 
 public class place_parent_fragment extends Fragment implements com.example.tourroom.ui.place.place_vertical_parent_recycle_view_adapter.place_parent_recycle_view_click_listener_interface {
 
     private NavController navController;
     RecyclerView parent_vertical_recycle_view;
     place_vertical_parent_recycle_view_adapter place_vertical_parent_recycle_view_adapter;
+    List<place_data> placeData;
 
     public static place_parent_fragment newInstance() {
         return new place_parent_fragment();
@@ -42,11 +55,38 @@ public class place_parent_fragment extends Fragment implements com.example.tourr
             Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
         }
 
+        placeData=new ArrayList<>();
         parent_vertical_recycle_view = view.findViewById(R.id.place_vertical_parent_Recycle_view);
-        place_vertical_parent_recycle_view_adapter = new place_vertical_parent_recycle_view_adapter(this);
+        place_vertical_parent_recycle_view_adapter=new  place_vertical_parent_recycle_view_adapter(getContext(),this,placeData);
         parent_vertical_recycle_view.setAdapter(place_vertical_parent_recycle_view_adapter);
+        navController = Navigation.findNavController(requireActivity(),R.id.after_login_host_fragment);
+        loadallPlaceListFromDatabase();
 
     }
+
+    private void loadallPlaceListFromDatabase() {
+
+        //getYourPlaceListInstance().getYourPlaceList().clear();
+        getINSTANCE().getRootRef().child("Places").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    final place_data placeDatas = data.getValue(place_data.class);
+                    placeData.add(placeDatas);
+                    place_vertical_parent_recycle_view_adapter.notifyDataSetChanged();
+                }
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -57,9 +97,10 @@ public class place_parent_fragment extends Fragment implements com.example.tourr
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public void on_Item_click(int position) {
-        navController = Navigation.findNavController(requireActivity(),R.id.after_login_host_fragment);
-        navController.navigate(R.id.place_info_fragment);
+    public void on_Item_click(int position,place_data placeData) {
+        Intent intent=new Intent(getActivity(),PlaceInfoActivity.class);
+        intent.putExtra("id",placeData.getPlaceId());
+        startActivity(intent);
 
     }
 

@@ -106,6 +106,7 @@
     <string name="important_notice_forgotten_password">We will email you a link after when you provide your valid sign up  email
     and click the send button,then check your email inbox and click the link to reset your password.</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps_for_place_info">Map</string>
 
 
 </resources>

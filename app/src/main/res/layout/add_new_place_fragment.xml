@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.place.add_new_place_fragment">
 
+
     <TextView
-        android:id="@+id/addNewPlace_textid"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,10 +29,10 @@
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNewPlace_textid">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/placename_edittext"
+            android:id="@+id/enter_place_name_editText_for_add_place_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Place NAME"
@@ -51,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/placename_textinput_layout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/placeaddress_edittext"
+            android:id="@+id/enter_place_address_edittext_for_add_place_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Place Address"
@@ -69,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/placeaddress_textinput_layout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/placediscription_for_addnewplace_edittext"
+            android:id="@+id/enter_place_description_edittext_for_add_place_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Place Discription"
@@ -77,58 +78,24 @@
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/upload_image_for_add_place"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="148dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="16dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:drawableStart="@drawable/ic_photo"
-        android:drawableLeft="@drawable/ic_photo"
-        android:drawablePadding="10dp"
-        android:focusable="true"
-        android:text="@string/upload_image"
-        android:textColor="@color/colorPrimary"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/addplace_imageview"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/addplace_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/addplace_imageview"
-        tools:targetApi="lollipop" />
-
     <Button
-        android:id="@+id/confirm_for_addnewplace_button"
+        android:id="@+id/add_place_information_to_database"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="156dp"
         android:enabled="false"
         android:text="Confirm"
         app:cornerRadius="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload_image_for_add_place"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/placdiscription_textinput_layout"
+        app:layout_constraintVertical_bias="0.984"
         app:strokeColor="@color/colorPrimary" />
 
-    <ImageView
-        android:id="@+id/addplace_imageview"
-        android:layout_width="157dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="24dp"
-        android:contentDescription="@string/group_image"
-        android:scaleType="fitXY"
-        android:src="@drawable/dummyimage"
-        app:layout_constraintEnd_toEndOf="@+id/placdiscription_textinput_layout"
-        app:layout_constraintStart_toStartOf="@+id/placdiscription_textinput_layout"
-        app:layout_constraintTop_toBottomOf="@+id/placdiscription_textinput_layout" />
-
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/addnewplace_for_addnewplace_imageview"
+        android:id="@+id/location_map_icon_imageview"
         android:layout_width="44dp"
         android:layout_height="64dp"
         android:layout_marginEnd="8dp"
@@ -143,6 +110,7 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_baseline_add_location_24"
         tools:targetApi="lollipop" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

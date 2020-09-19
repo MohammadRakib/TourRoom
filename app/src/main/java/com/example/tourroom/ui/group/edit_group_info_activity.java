@@ -52,8 +52,10 @@ public class edit_group_info_activity extends AppCompatActivity {
     private ProgressDialog loadingBar;
     Query groupLoadQuery;
     ValueEventListener groupLoadListener;
+    private String currentUserID;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class edit_group_info_activity extends AppCompatActivity {
         groupImagesRef = FirebaseStorage.getInstance().getReference("GroupImage");
         context = this;
         loadingBar = new ProgressDialog(this);
+        currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +86,6 @@ public class edit_group_info_activity extends AppCompatActivity {
             loadGroupInfo();
 
         }
-
     }
 
     private void loadGroupInfo() {
@@ -104,6 +106,8 @@ public class edit_group_info_activity extends AppCompatActivity {
                         .placeholder(R.drawable.dummyimage)
                         .into(groupImage);
 
+                checkIfAdmin(group_data);
+
             }
 
             @Override
@@ -112,6 +116,15 @@ public class edit_group_info_activity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void checkIfAdmin(group_data group_data) {
+
+        if(currentUserID.equals(group_data.getGroupAdmin())){
+            upload.setVisibility(View.VISIBLE);
+        }else {
+            upload.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

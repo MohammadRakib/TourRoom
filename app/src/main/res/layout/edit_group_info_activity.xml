@@ -79,6 +79,7 @@
             android:clickable="true"
             android:contentDescription="@string/use_as_a_popup_button"
             android:focusable="true"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/editgroupinfo_groupName_textview"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editgroupinfo_groupName_textview"

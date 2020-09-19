@@ -112,10 +112,8 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
                         getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastmsgUserName(Objects.requireNonNull(dataSnapshot.child("lastmsgUserName").getValue()).toString());
                         getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastMessage(Objects.requireNonNull(dataSnapshot.child("lastMessage").getValue()).toString());
                         getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastmsgTime(Objects.requireNonNull(dataSnapshot.child("lastmsgTime").getValue()).toString());
-                        group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();
 
                     }
-
 
                     yourGroupIntoPosition = -1;
                     yourGroupIntoId = null;
@@ -127,6 +125,9 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
                 }
             });
         }
+
+        group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();
+
     }
 
 

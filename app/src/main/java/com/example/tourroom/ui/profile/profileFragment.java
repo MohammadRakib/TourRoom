@@ -32,8 +32,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -53,6 +55,9 @@ public class profileFragment extends Fragment implements profileInterface {
     private StorageReference ProfileImageReference;
     private String currentUserID;
     profileInterface profileInterface;
+    Query profileLoadQuery;
+    ValueEventListener profileLoadListener;
+
 
     private String UserName,UserImage;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -73,14 +78,7 @@ public class profileFragment extends Fragment implements profileInterface {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*Button button=view.findViewById(R.id.edit_profile);
-        final NavController navController = Navigation.findNavController(view);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.edit_profile_fragment);
-            }
-        });*/
+
         currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
         ProfileImageReference = FirebaseStorage.getInstance().getReference("UserImage");
         profileInterface = this;
@@ -93,8 +91,9 @@ public class profileFragment extends Fragment implements profileInterface {
 
     public void loadUserProfile(final View view, final DividerItemDecoration dividerItemDecoration, final profileInterface profileInterface){
 
-        getINSTANCE().getRootRef().child("Users").child(currentUserID)
-                .addValueEventListener(new ValueEventListener() {
+        profileLoadQuery = getINSTANCE().getRootRef().child("Users").child(currentUserID);
+
+       profileLoadListener = profileLoadQuery.addValueEventListener(new ValueEventListener() {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -210,6 +209,7 @@ public class profileFragment extends Fragment implements profileInterface {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        profileLoadQuery.removeEventListener(profileLoadListener);
     }
 
 

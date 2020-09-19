@@ -3,7 +3,7 @@ package com.example.tourroom.Data;
 import java.io.Serializable;
 
 public class group_data implements Serializable {
-    private String groupId, groupName, groupImage , groupDescription, groupAdmin, msgCount /*lastmsgUserName, lastMessage, lastmsgTime*/;
+    private String groupId, groupName, groupImage , groupDescription, groupAdmin, msgCount;
 
     public group_data() {
     }

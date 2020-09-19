@@ -6,8 +6,8 @@
         android:id="@+id/invite_other"
         android:title="@string/invite_others" />
     <item
-        android:id="@+id/edit_group_info"
-        android:title="@string/edit_group_info" />
+        android:id="@+id/group_info"
+        android:title="@string/group_info" />
     <item
         android:id="@+id/leave"
         android:title="@string/leave" />

@@ -60,13 +60,6 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
     private String currentUserID;
 
 
-//    //listener and query for newMessageTracker
-//    Query newMessageQuery;
-//    ChildEventListener newMessageListener;
-//
-//    boolean breaks = false; //for breaking the loop in the listener;
-//
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -101,12 +94,6 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
 
     }
 
-
-
-
-
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -140,12 +127,7 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
                 }
             });
         }
-
-
-
     }
-
-
 
 
     @Override

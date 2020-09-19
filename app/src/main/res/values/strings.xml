@@ -107,6 +107,7 @@
     and click the send button,then check your email inbox and click the link to reset your password.</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_for_place_info">Map</string>
+    <string name="group_info">Group Info</string>
 
 
 </resources>

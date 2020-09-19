@@ -42,7 +42,7 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
     NavController navController;
     TextView state,group_name;
     CircleImageView group_image;
-    private int position;
+    private int position = -1;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -68,11 +68,17 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
             //for shared activity animation
             position = extras.getInt("position");
 
-            loadGroupData(position);
         }
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(position != -1){
+            loadGroupData(position);
+        }
+    }
 
     // problem with activity when go to landscape mode is fixed here
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -122,8 +128,9 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
                 startActivity(intent);
                 return true;
 
-            case R.id.edit_group_info:
+            case R.id.group_info:
                 Intent intent2 = new Intent(this,edit_group_info_activity.class);
+                intent2.putExtra("position",position);
                 startActivity(intent2);
                 return true;
 
@@ -196,27 +203,18 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
     private void loadGroupData(int position) {
 
         yourGroupData group_data = getYourGroupListInstance().getYourGroupList().get(position);
+        String groupName = group_data.getGroupName();
+        String groupImageUri = group_data.getGroupImage();
 
-        if(group_data != null && group_data.getGroupImage() == null){
+        group_name.setText(groupName);
 
-            String groupName = group_data.getGroupName();
-            group_name.setText(groupName);
+        Glide.with(group_host_activity.this)
+                .load(groupImageUri)
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .dontAnimate()
+                .placeholder(R.drawable.dummyimage)
+                .into(group_image);
 
-        }else if (group_data != null && group_data.getGroupImage() != null){
-
-            String groupName = group_data.getGroupName();
-            String groupImageUri = group_data.getGroupImage();
-
-            group_name.setText(groupName);
-
-            Glide.with(group_host_activity.this)
-                    .load(groupImageUri)
-                    .format(DecodeFormat.PREFER_ARGB_8888)
-                    .dontAnimate()
-                    .placeholder(R.drawable.dummyimage)
-                    .into(group_image);
-
-        }
 
     }
 

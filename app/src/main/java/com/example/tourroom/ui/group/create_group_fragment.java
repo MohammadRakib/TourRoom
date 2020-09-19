@@ -41,21 +41,17 @@ import java.util.Map;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.tourroom.After_login_Activity.dummyGroupImage;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
 
 
 public class create_group_fragment extends Fragment {
 
-   // private Create_Group_Fragment_ViewModel create_group_fragment_viewModel_ob;
-    Uri group_image_uri;
     TextInputEditText groupnameinput_edittext,groupdescription_edittext;
     Button newgroupcreate_button;
-   // AppCompatButton uploadgroupphoto;
-   // ImageView group_image;
 
-    private String currentUser, localGroupId, groupImage;
-   // private StorageReference groupImagesRef;
+    private String currentUser;
     private ProgressDialog loadingBar;
     private NavController navController;
 
@@ -79,15 +75,10 @@ public class create_group_fragment extends Fragment {
         groupdescription_edittext=view.findViewById(R.id.group_description_edit_text);
         newgroupcreate_button=view.findViewById(R.id.newgroupcreatebutton);
         navController = Navigation.findNavController(requireActivity(),R.id.after_login_host_fragment);
-       // uploadgroupphoto=view.findViewById(R.id.upload_image_for_create_group);
-      //  group_image = view.findViewById(R.id.group_image);
-       // create_group_fragment_viewModel_ob = new ViewModelProvider(this).get(Create_Group_Fragment_ViewModel.class);
 
         loadingBar = new ProgressDialog(getContext());
 
         currentUser = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
-       // groupImagesRef = FirebaseStorage.getInstance().getReference("GroupImage");
-
 
         newgroupcreate_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,43 +87,10 @@ public class create_group_fragment extends Fragment {
             }
         });
 
-       /* uploadgroupphoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent intent = CropImage.activity()  //opening crop image activity for choosing image from gallery and cropping, this activity is from a custom api library
-                        .getIntent(requireContext());
-                startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
-            }
-        });*/
 
-
-       /* create_group_fragment_viewModel_ob.getImage_uri().observe(getViewLifecycleOwner(), new Observer<Uri>() {
-            @Override
-            public void onChanged(Uri uri) {
-                group_image.setImageURI(uri);
-            }
-        });*/
         groupnameinput_edittext.addTextChangedListener(textWatcher);
         groupdescription_edittext.addTextChangedListener(textWatcher);
     }
-
-   /* @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {  //requesting for pick image from gallery
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                assert result != null;
-                group_image_uri = result.getUri();
-                create_group_fragment_viewModel_ob.setImage_uri(group_image_uri);
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                assert result != null;
-                Exception error = result.getError();
-                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        group_image.setImageURI(group_image_uri);
-    }*/
 
     //watch edit text if it is empty or not
     private TextWatcher textWatcher = new TextWatcher() {
@@ -171,7 +129,7 @@ public class create_group_fragment extends Fragment {
         group_description = Objects.requireNonNull(groupdescription_edittext.getText()).toString().trim();
         group_id = getINSTANCE().getRootRef().child("GROUP").push().getKey();
         // localGroupId = group_id;
-        group_data groupData = new group_data(group_id,group_name,group_description,currentUser,"0");
+        group_data groupData = new group_data(group_id,group_name,dummyGroupImage,group_description,currentUser,"0");
 
         final Map<String, Object> update = new HashMap<>(); //this hashmap is used to write different data in different path in the database at once or atomically
         update.put("GROUP/"+group_id+"/members/"+currentUser,true);
@@ -210,8 +168,6 @@ public class create_group_fragment extends Fragment {
                     }
                 });
     }
-
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

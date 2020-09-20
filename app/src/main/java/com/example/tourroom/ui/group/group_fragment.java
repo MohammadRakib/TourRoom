@@ -159,7 +159,8 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
         alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                join_group(group_data);
+                //join_group(group_data);
+                sendJoinRequest(group_data);
             }
         });
         alert.setNegativeButton("no", new DialogInterface.OnClickListener() {
@@ -173,7 +174,40 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
 
     }
 
-    private void join_group(final group_data group_data) {
+    private void sendJoinRequest(final group_data group_data) {
+
+
+        getINSTANCE().getRootRef().child("GROUP").child(group_data.getGroupId()).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 if(!snapshot.hasChild(currentUserID)){
+
+                     getINSTANCE().getRootRef().child("groupMemberRequest").child(group_data.getGroupId()).child(currentUserID).setValue("true")
+                             .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                 @Override
+                                 public void onSuccess(Void aVoid) {
+                                     Toast.makeText(requireActivity(), "Join Request Sent", Toast.LENGTH_SHORT).show();
+                                 }
+                             }).addOnFailureListener(new OnFailureListener() {
+                         @Override
+                         public void onFailure(@NonNull Exception e) {
+                             Toast.makeText(requireActivity(), "Could not sent Join Request, Try Again", Toast.LENGTH_SHORT).show();
+                         }
+                     });
+                 }else {
+                     Toast.makeText(requireActivity(), "Your are already joined in this group", Toast.LENGTH_SHORT).show();
+                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+   /* private void join_group(final group_data group_data) {
 
         final String groupId = group_data.getGroupId();
         Map<String, Object> update = new HashMap<>();
@@ -214,7 +248,7 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
 
         });
 
-    }
+    }*/
 
     @Override
     public void onStop() {

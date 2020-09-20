@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tourroom.Data.User_Data;
@@ -50,6 +51,7 @@ public class Members_fragment extends Fragment implements memberInterface{
     int position;
     private String groupId;
     private group_host_activity group_host_activity;
+    TextView memcount;
 
 
     @Override
@@ -64,12 +66,13 @@ public class Members_fragment extends Fragment implements memberInterface{
         super.onViewCreated(view, savedInstanceState);
 
         memberRecycleView = view.findViewById(R.id.member_recycleview);
+        memcount = view.findViewById(R.id.membercount_textview);
+
         //getting data from activity
         group_host_activity = (group_host_activity) requireActivity();
         position = group_host_activity.getPosition();
         groupId = getYourGroupListInstance().getYourGroupList().get(position).getGroupId();
-
-
+        
         groupMemberList = new ArrayList<>();
         memberAdapter = new memberAdapter(groupMemberList,requireActivity(),this);
         memberRecycleView.setAdapter(memberAdapter);
@@ -87,6 +90,7 @@ public class Members_fragment extends Fragment implements memberInterface{
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         User_Data user_data = snapshot.getValue(User_Data.class);
                         groupMemberList.add(user_data);
+                        memcount.setText(String.valueOf(groupMemberList.size()));
                         memberAdapter.notifyDataSetChanged();
                     }
 

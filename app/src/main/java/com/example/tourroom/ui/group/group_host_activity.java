@@ -141,6 +141,7 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         switch (item.getItemId()){
             case R.id.invite_other:
                 Intent intent = new Intent(this,invite_other_activity.class);
+                intent.putExtra("position",position);
                 startActivity(intent);
                 return true;
 

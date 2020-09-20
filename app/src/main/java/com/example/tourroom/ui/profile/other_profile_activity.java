@@ -13,10 +13,14 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.tourroom.Data.User_Data;
+import com.example.tourroom.Data.postdata;
 import com.example.tourroom.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static java.util.Objects.requireNonNull;
@@ -30,6 +34,8 @@ public class other_profile_activity extends AppCompatActivity {
     otherProfileInterface otherProfileInterface;
     boolean ifFollowing;
     private String currentUser;
+    List<postdata> userPostList;
+    private boolean postLoadComplete = false;
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -40,6 +46,8 @@ public class other_profile_activity extends AppCompatActivity {
 
         currentUser = requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
         otherprofile_recycler_view=findViewById(R.id.otherprofile_recyclerview);
+        userPostList = new ArrayList<>();
+        postLoadComplete = false;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             //for shared activity animation
@@ -70,6 +78,7 @@ public class other_profile_activity extends AppCompatActivity {
         });
     }
 
+
     private void checkIfFollowing(final Context context) {
         getINSTANCE().getRootRef().child("UserFollowing").child(currentUser).addListenerForSingleValueEvent(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -77,13 +86,36 @@ public class other_profile_activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ifFollowing = snapshot.hasChild(UserId);
 
-                otherprofile_recycler_adapter=new Otherprofile_Recycler_Adapter(context,UserName,UserImage,UserId,ifFollowing);
+                otherprofile_recycler_adapter=new Otherprofile_Recycler_Adapter(context,UserName,UserImage,UserId,ifFollowing,userPostList);
                 otherprofile_recycler_view.setLayoutManager(new LinearLayoutManager(context));
 
                 otherprofile_recycler_view.setAdapter(otherprofile_recycler_adapter);
 
                 DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(context,DividerItemDecoration.VERTICAL);
                 otherprofile_recycler_view.addItemDecoration(dividerItemDecoration);
+                if(!postLoadComplete){
+                    loadPost();
+                    postLoadComplete = true;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void loadPost() {
+        getINSTANCE().getRootRef().child("post").child(memberId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot data : snapshot.getChildren()){
+                    postdata postdata = data.getValue(postdata.class);
+                    userPostList.add(postdata);
+                    otherprofile_recycler_adapter.notifyDataSetChanged();
+                }
 
             }
 

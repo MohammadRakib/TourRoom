@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourroom.Data.User_Data;
+import com.example.tourroom.Data.postdata;
 import com.example.tourroom.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,6 +43,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
@@ -57,6 +60,8 @@ public class profileFragment extends Fragment implements profileInterface {
     profileInterface profileInterface;
     Query profileLoadQuery;
     ValueEventListener profileLoadListener;
+    List<postdata> userPostList;
+    boolean postLoadComplete = false;
 
 
     private String UserName,UserImage;
@@ -82,8 +87,10 @@ public class profileFragment extends Fragment implements profileInterface {
         currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
         ProfileImageReference = FirebaseStorage.getInstance().getReference("UserImage");
         profileInterface = this;
+        userPostList = new ArrayList<>();
         loadingBar = new ProgressDialog(requireActivity());
         DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(requireActivity(),DividerItemDecoration.VERTICAL);
+        postLoadComplete = false;
         loadUserProfile(view, dividerItemDecoration, profileInterface);;
 
 
@@ -105,17 +112,40 @@ public class profileFragment extends Fragment implements profileInterface {
 
                         profile_recycler_view=view.findViewById(R.id.profile_recyclerview);
                         profile_recycler_view.setLayoutManager(new LinearLayoutManager(requireActivity()));
-                        profile_recycler_adapter=new Profile_Recycler_Adapter(requireActivity(),profileInterface,UserName,UserImage);
+                        profile_recycler_adapter=new Profile_Recycler_Adapter(requireActivity(),profileInterface,UserName,UserImage,userPostList);
                         profile_recycler_view.setAdapter(profile_recycler_adapter);
                         profile_recycler_view.addItemDecoration(dividerItemDecoration);
 
+                        if(!postLoadComplete){
+                            loadPost();
+                            postLoadComplete = true;
+                        }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
+    }
+
+    private void loadPost() {
+        getINSTANCE().getRootRef().child("post").child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot data : snapshot.getChildren()){
+                    postdata postdata = data.getValue(postdata.class);
+                    userPostList.add(postdata);
+                    profile_recycler_adapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

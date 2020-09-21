@@ -52,7 +52,7 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
     private place_parent_recycle_view_click_listener_interface place_parent_recycle_view_click_listener_interface;
 
 
-    //child recycle view onclick
+
     @Override
     public void on_Item_click(int position,place_data placeData) {
 
@@ -109,7 +109,7 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
             });
 
 
-        }else if (position == 1){//view 1
+        }else if (position == 1){
             if(flag)
             {
                 place_horizontal_child_recycle_view_adapter = new place_horizontal_child_recycle_view_adapter(context,this,RecommendedPlaceDataList);
@@ -122,7 +122,7 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
 
 
 
-        }else if(position>1) {//view 2
+        }else if(position>1) {
             row_2_view_holder row_2_view_holder = (place_vertical_parent_recycle_view_adapter.row_2_view_holder) holder;
 
 

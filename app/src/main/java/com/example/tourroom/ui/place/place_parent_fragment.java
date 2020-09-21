@@ -63,9 +63,6 @@ public class place_parent_fragment extends Fragment implements com.example.tourr
         parent_vertical_recycle_view.setAdapter(place_vertical_parent_recycle_view_adapter);
         navController = Navigation.findNavController(requireActivity(),R.id.after_login_host_fragment);
         loadallPlaceListFromDatabase();
-        place_vertical_parent_recycle_view_adapter.notifyDataSetChanged();
-
-
     }
 
     private void loadallPlaceListFromDatabase() {

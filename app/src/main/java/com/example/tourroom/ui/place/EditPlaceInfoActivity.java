@@ -90,7 +90,7 @@ public class EditPlaceInfoActivity extends AppCompatActivity {
                     {
                         map.put("placeDescription",placeDes);
                         ref.updateChildren(map);
-                        Toast.makeText(getApplicationContext(), "Place descriptionUpdated Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Place description Updated Successfully", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }
                 }
@@ -164,7 +164,7 @@ public class EditPlaceInfoActivity extends AppCompatActivity {
                                 map.put("placeImage",ImageDownloadUrl);
                                 map.put("placeDescription",placeDes);
                                 ref.updateChildren(map);
-                                Toast.makeText(EditPlaceInfoActivity.this, "place Photo an description updated successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditPlaceInfoActivity.this, "place Photo and description updated successfully", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
                         }

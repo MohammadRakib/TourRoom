@@ -36,8 +36,6 @@ public class create_announcement_activity extends AppCompatActivity {
     EditText edittext_fornewannouncement;
     Button createnew_forannouncement;
     String userId,groupId;
-    private ProgressDialog loadingBar;
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -48,9 +46,6 @@ public class create_announcement_activity extends AppCompatActivity {
 
         edittext_fornewannouncement=findViewById(R.id.edittextfornewannouncement);
         createnew_forannouncement=findViewById(R.id.createnewannouncement);
-        // loadingBar = new ProgressDialog(getApplicationContext());
-
-
         Bundle bundle=getIntent().getExtras();
         if(bundle!=null)
         {
@@ -74,11 +69,6 @@ public class create_announcement_activity extends AppCompatActivity {
     }
 
     private void createAnnouncements() {
-     /*   loadingBar.setTitle("Add New Announcement");
-        loadingBar.setMessage("Please wait, your announcement is adding to database...");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
-
         final String date_time = String.valueOf(System.currentTimeMillis()/1000);
         String message,announcementId;
         message=edittext_fornewannouncement.getText().toString();
@@ -91,14 +81,14 @@ public class create_announcement_activity extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
 
                 Toast.makeText(create_announcement_activity.this, "Announcement created", Toast.LENGTH_SHORT).show();
-              //  loadingBar.dismiss();
+
                 edittext_fornewannouncement.setText("");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(create_announcement_activity.this, "Failure Occured", Toast.LENGTH_SHORT).show();
-               // loadingBar.dismiss();
+
                 edittext_fornewannouncement.setText("");
             }
         });

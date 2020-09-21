@@ -34,23 +34,15 @@ public class RecyclerAdapterForAnnouncement extends RecyclerView.Adapter<Recycle
     }
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-
-
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
         View view=layoutInflater.inflate(R.layout.row_itemforannouncements,parent,false);
         ViewHolder viewHolder=new ViewHolder(view);
-
-
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final announcement_data announcementData =announcement_dataList.get(position);
-
-        //holder.messageforannouncement_textviewid.setText(R.string.sundarban);
         holder.messageforannouncement_textviewid.setText(announcementData.getAnnouncementText());
         String time =announcementData.getDate_time();
         Long tm =Long.valueOf(time);

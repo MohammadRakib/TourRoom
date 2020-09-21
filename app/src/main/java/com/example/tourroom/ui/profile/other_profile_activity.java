@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.tourroom.Data.User_Data;
 import com.example.tourroom.Data.postdata;
 import com.example.tourroom.R;
+import com.example.tourroom.ui.feed.commentActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -25,7 +27,7 @@ import java.util.List;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static java.util.Objects.requireNonNull;
 
-public class other_profile_activity extends AppCompatActivity {
+public class other_profile_activity extends AppCompatActivity implements otherProfileInterface{
     RecyclerView otherprofile_recycler_view;
     Otherprofile_Recycler_Adapter otherprofile_recycler_adapter;
     int position;
@@ -55,6 +57,8 @@ public class other_profile_activity extends AppCompatActivity {
             memberId = extras.getString("memberId");
             otherProfileLoad(this);
         }
+        otherProfileInterface = this;
+
     }
 
 
@@ -86,7 +90,7 @@ public class other_profile_activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ifFollowing = snapshot.hasChild(UserId);
 
-                otherprofile_recycler_adapter=new Otherprofile_Recycler_Adapter(context,UserName,UserImage,UserId,ifFollowing,userPostList);
+                otherprofile_recycler_adapter=new Otherprofile_Recycler_Adapter(context,UserName,UserImage,UserId,ifFollowing,userPostList,otherProfileInterface);
                 otherprofile_recycler_view.setLayoutManager(new LinearLayoutManager(context));
 
                 otherprofile_recycler_view.setAdapter(otherprofile_recycler_adapter);
@@ -126,4 +130,11 @@ public class other_profile_activity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onclickComment(String postId, String userId) {
+        Intent intent = new Intent(other_profile_activity.this, commentActivity.class);
+        intent.putExtra("postId",postId);
+        intent.putExtra("userId",userId);
+        startActivity(intent);
+    }
 }

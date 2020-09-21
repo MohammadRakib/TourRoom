@@ -9,10 +9,10 @@
         android:id="@+id/member"
         android:icon="@drawable/ic_member"
         android:title="@string/members" />
-    <item
+   <!-- <item
         android:id="@+id/poll"
         android:icon="@drawable/ic_ballot"
-        android:title="@string/poll" />
+        android:title="@string/poll" />-->
     <item
         android:id="@+id/event"
         android:icon="@drawable/ic_event"

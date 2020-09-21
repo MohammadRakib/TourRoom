@@ -23,13 +23,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static java.util.Objects.requireNonNull;
+import static com.example.tourroom.After_login_Activity.UserName;
 
 public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Adapter.FeedViewHolder> {
 
@@ -104,6 +107,11 @@ public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Ad
                             @Override
                             public void onSuccess(Void aVoid) {
                                 profileLowerViewHolder.like_count_textv.setText(String.valueOf(temp));
+                                String notificationString = UserName+" has liked your post";
+                                final String notificationKey = getINSTANCE().getRootRef().child("notification").child(postdata.getUserId()).push().getKey();
+                                final Map<String, Object> update = new HashMap<>();
+                                update.put("notification/"+postdata.getUserId()+"/"+notificationKey,notificationString);
+                                getINSTANCE().getRootRef().updateChildren(update);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -119,6 +127,7 @@ public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Ad
         profileLowerViewHolder.comment_imagev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                feedInterface.clickComment(postdata.getPostId(),postdata.getUserId());
 
             }
         });

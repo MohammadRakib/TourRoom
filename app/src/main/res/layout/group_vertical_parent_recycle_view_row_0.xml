@@ -5,7 +5,7 @@
     android:id="@+id/group_parent_vertical_parent_recycle_view_row_0_layout_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="15dp">
+    android:layout_marginBottom="5dp">
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -15,13 +15,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
         android:drawableStart="@drawable/ic_create_group_button"
         android:drawableLeft="@drawable/ic_create_group_button"
         android:drawablePadding="10dp"
-        android:clickable="true"
         android:focusable="true"
-        android:background="?android:attr/selectableItemBackground"
         android:text="@string/create_a_new_group"
         android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"

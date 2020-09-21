@@ -187,11 +187,11 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
 
                 return true;
 
-            case R.id.poll:
+           /* case R.id.poll:
                 navController.navigate(R.id.poll_fragment);
                 state.setText(R.string.poll);
 
-                return true;
+                return true;*/
 
             case R.id.event:
                 navController.navigate(R.id.event_fragment);

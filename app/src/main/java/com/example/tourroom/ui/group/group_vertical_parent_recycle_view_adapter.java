@@ -26,11 +26,13 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,7 +41,8 @@ import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE
 
 public class group_vertical_parent_recycle_view_adapter extends RecyclerView.Adapter implements HRecyclerViewClickInterface {
 
-public VRecyclerViewClickInterface vRecyclerViewClickInterface;
+    private final String currentUserID;
+    public VRecyclerViewClickInterface vRecyclerViewClickInterface;
     private Context context;
     private List<yourGroupData> groupDataList;
     private final Calendar c = Calendar.getInstance(Locale.getDefault());
@@ -54,6 +57,7 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
         this.vRecyclerViewClickInterface = vRecyclerViewClickInterface;
         this.groupDataList = groupDataList;
         RecommendedGroupDataList = new ArrayList<>();
+        currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
     }
 
     @Override
@@ -241,27 +245,16 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
 
     private void loadGroup() {
 
-        getINSTANCE().getRootRef().child("GROUP").addChildEventListener(new ChildEventListener() {
+        getINSTANCE().getRootRef().child("GROUP").limitToLast(10).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                group_data group_data = snapshot.getValue(group_data.class);
-                RecommendedGroupDataList.add(group_data);
-                recyclerAdapterForHorizontalScroll.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()){
+                    group_data group_data = data.getValue(group_data.class);
+                    if(!data.child("members").hasChild(currentUserID)){
+                        RecommendedGroupDataList.add(group_data);
+                        recyclerAdapterForHorizontalScroll.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override
@@ -269,7 +262,6 @@ public VRecyclerViewClickInterface vRecyclerViewClickInterface;
 
             }
         });
-
     }
 
 }

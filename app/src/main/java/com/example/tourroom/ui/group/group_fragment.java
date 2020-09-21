@@ -108,7 +108,6 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.hasChild("lastmsgUserName")){
-                        Toast.makeText(requireActivity(), "t", Toast.LENGTH_SHORT).show();
                         getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastmsgUserName(Objects.requireNonNull(dataSnapshot.child("lastmsgUserName").getValue()).toString());
                         getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastMessage(Objects.requireNonNull(dataSnapshot.child("lastMessage").getValue()).toString());
                         getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastmsgTime(Objects.requireNonNull(dataSnapshot.child("lastmsgTime").getValue()).toString());
@@ -204,7 +203,6 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
 
             }
         });
-
     }
 
    /* private void join_group(final group_data group_data) {

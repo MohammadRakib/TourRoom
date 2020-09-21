@@ -33,6 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static java.util.Objects.requireNonNull;
+import static com.example.tourroom.After_login_Activity.UserName;
 
 
 public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
@@ -44,15 +45,17 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
     List<postdata> userPostList;
     int followerCount = 0;
     int followingCount = 0;
+    otherProfileInterface otherProfileInterface;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public Otherprofile_Recycler_Adapter(Context context, String userName, String userImage, String UserId, boolean ifFollowing, List<postdata> userPostList) {
+    public Otherprofile_Recycler_Adapter(Context context, String userName, String userImage, String UserId, boolean ifFollowing, List<postdata> userPostList, otherProfileInterface otherProfileInterface) {
         this.context = context;
         this.userName = userName;
         this.userImage = userImage;
         this.UserId = UserId;
         this.ifFollowing = ifFollowing;
         this.userPostList = userPostList;
+        this.otherProfileInterface = otherProfileInterface;
         currentUser = requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
     }
 
@@ -133,6 +136,13 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     profileLowerViewHolder.like_count_textv.setText(String.valueOf(temp));
+
+                                    String notificationString = UserName+" has liked your post";
+                                    final String notificationKey = getINSTANCE().getRootRef().child("notification").child(postdata.getUserId()).push().getKey();
+                                    final Map<String, Object> update = new HashMap<>();
+                                    update.put("notification/"+postdata.getUserId()+"/"+notificationKey,notificationString);
+                                    getINSTANCE().getRootRef().updateChildren(update);
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -148,7 +158,7 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
             profileLowerViewHolder.comment_imagev.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    otherProfileInterface.onclickComment(postdata.getPostId(),postdata.getUserId());
                 }
             });
         }

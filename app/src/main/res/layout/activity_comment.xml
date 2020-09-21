@@ -6,4 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".ui.feed.commentActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentRecycleView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/commentEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/commentEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="5dp"
+        android:autofillHints="write"
+        android:background="@drawable/chat_shape"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/write_here"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/send_comment"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/send_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/send_image"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/commentEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/commentEditText"
+        app:srcCompat="@drawable/ic_send"
+        tools:targetApi="lollipop" />
 </androidx.constraintlayout.widget.ConstraintLayout>

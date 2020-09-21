@@ -37,24 +37,28 @@ public class HomeFragment extends Fragment {
 
     public BottomNavigationView bottomNavigationView;
     public Toolbar main_toolbar;
-    private SearchView searchView = null;
-    private SearchView.OnQueryTextListener queryTextListener;
     TextView textview;
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
+        return root;
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
 
         //toolbar
-        main_toolbar = root.findViewById(R.id.main_toolbar);
+        main_toolbar = view.findViewById(R.id.main_toolbar);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(main_toolbar);
         //bottom navigation
-        bottomNavigationView = root.findViewById(R.id.bottom_home_nav);
-        final NavController navController = Navigation.findNavController(root.findViewById(R.id.bottom_nav_host_fragment));
+        bottomNavigationView = view.findViewById(R.id.bottom_home_nav);
+        final NavController navController = Navigation.findNavController(view.findViewById(R.id.bottom_nav_host_fragment));
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
         textview=main_toolbar.findViewById(R.id.SearchBoxInMainToolbar);
         textview.setOnClickListener(new View.OnClickListener() {
@@ -64,28 +68,6 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        Menu bottom_menu = bottomNavigationView.getMenu();
-        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(bottom_menu.getItem(3).getItemId());
-        badgeDrawable.setVisible(true);
-
-        //view model related
-        homeViewModel.get_pending_notification().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-
-            }
-        });
-
-
-
-        return root;
-    }
-
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
 
     }

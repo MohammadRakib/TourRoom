@@ -1,10 +1,15 @@
 package com.example.tourroom.ui.search;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,6 +24,8 @@ import com.example.tourroom.Data.place_data;
 import com.example.tourroom.R;
 import com.example.tourroom.ui.place.PlaceInfoActivity;
 import com.example.tourroom.ui.profile.other_profile_activity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +35,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 
 public class search_activity extends AppCompatActivity implements RecyclerviewAdapterForSearch.search_data_get_interface,
         RecyclerviewAdapterForSearchGroup.search_data_get_group__interface,
@@ -43,8 +53,10 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
     List<place_data> placeDataList;
     List<group_data> groupDataList;
     List<User_Data> userDataList;
+    private String currentUserID;
 
     //private ProgressDialog loadingBar;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +65,7 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
         searchEditText=findViewById(R.id.edittextforsearch);
         searchbtn=findViewById(R.id.searchButton);
         recyclerView=findViewById(R.id.recyclerviewForSearch);
-
+        currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
 
 
         //loadingBar = new ProgressDialog(this);
@@ -213,8 +225,23 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
     }
 
     @Override
-    public void on_Item_click_group(int position, group_data groupData) {
+    public void on_Item_click_group(int position, final group_data groupData) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(search_activity.this);
+        alert.setTitle("join the group");
+        alert.setMessage("Do you want join this group?");
+        alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                sendJoinRequest(groupData);
+            }
+        });
+        alert.setNegativeButton("no", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+        alert.create().show();
 
     }
 
@@ -233,4 +260,38 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
         groupDataList.clear();
         userDataList.clear();
     }
+
+    private void sendJoinRequest(final group_data group_data) {
+
+
+        getINSTANCE().getRootRef().child("GROUP").child(group_data.getGroupId()).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.hasChild(currentUserID)){
+
+                    getINSTANCE().getRootRef().child("groupMemberRequest").child(group_data.getGroupId()).child(currentUserID).setValue("true")
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(search_activity.this, "Join Request Sent", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(search_activity.this, "Could not sent Join Request, Try Again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else {
+                    Toast.makeText(search_activity.this, "Your are already joined in this group", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 }

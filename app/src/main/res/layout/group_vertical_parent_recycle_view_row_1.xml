@@ -5,7 +5,7 @@
     android:id="@+id/group_vertical_parent_recycle_view_row_1_layout_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="5dp"
     android:layout_marginBottom="24dp">
 
     <TextView
@@ -28,8 +28,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recommendedgrouptextview"
-     />
+        app:layout_constraintTop_toBottomOf="@+id/recommendedgrouptextview" />
 
 
     <TextView
@@ -42,7 +41,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/group_child_horizontal_recycle_view_id" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

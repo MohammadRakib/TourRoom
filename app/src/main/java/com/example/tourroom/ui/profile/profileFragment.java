@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tourroom.Data.User_Data;
 import com.example.tourroom.Data.postdata;
 import com.example.tourroom.R;
+import com.example.tourroom.ui.feed.commentActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -156,6 +157,14 @@ public class profileFragment extends Fragment implements profileInterface {
                 .getIntent(requireContext());
         startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
 
+    }
+
+    @Override
+    public void onclickComment(String postId, String userId) {
+        Intent intent = new Intent(requireActivity(), commentActivity.class);
+        intent.putExtra("postId",postId);
+        intent.putExtra("userId",userId);
+        startActivity(intent);
     }
 
     @Override

@@ -37,9 +37,6 @@ public class feed_fragment extends Fragment implements feedInterface{
     Feed_Recycler_Adapter feed_recycler_adapter;
     private String currentUserID;
     List<postdata> userPostList;
-    boolean noFollower = true;
-    boolean noPost = true;
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -58,8 +55,6 @@ public class feed_fragment extends Fragment implements feedInterface{
 
         currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
         userPostList = new ArrayList<>();
-        noFollower = true;
-        noPost = true;
 
             feed_recycler_view=view.findViewById(R.id.feed_recyclerview);
             feed_recycler_adapter=new Feed_Recycler_Adapter(userPostList,requireActivity(),this);
@@ -73,16 +68,6 @@ public class feed_fragment extends Fragment implements feedInterface{
 
             loadPost();
 
-
-       /* Button button=view.findViewById(R.id.other_profile_from_feed);
-        button.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), other_profile_activity.class);
-                startActivity(intent);
-            }
-        });*/
     }
 
     public void loadPost(){
@@ -92,50 +77,14 @@ public class feed_fragment extends Fragment implements feedInterface{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()){
                     String FollowingUserId = data.getKey();
-                    noFollower = false;
                     assert FollowingUserId != null;
                     getINSTANCE().getRootRef().child("post").child(FollowingUserId).limitToLast(3).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot data : snapshot.getChildren()){
-                                noPost = false;
                                 postdata postdata = data.getValue(postdata.class);
                                 userPostList.add(postdata);
                                 feed_recycler_adapter.notifyDataSetChanged();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }
-
-                //user is not following anyone
-                if(noFollower || noPost){
-                   
-                    getINSTANCE().getRootRef().child("Users").limitToFirst(3).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot data : snapshot.getChildren()){
-                                String UserId = data.getKey();
-                                assert UserId != null;
-                                getINSTANCE().getRootRef().child("post").child(UserId).limitToLast(10).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        for (DataSnapshot data : snapshot.getChildren()){
-                                            postdata postdata = data.getValue(postdata.class);
-                                            userPostList.add(postdata);
-                                            feed_recycler_adapter.notifyDataSetChanged();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
                             }
                         }
 
@@ -153,5 +102,13 @@ public class feed_fragment extends Fragment implements feedInterface{
             }
         });
 
+    }
+
+    @Override
+    public void clickComment(String postId, String userId) {
+        Intent intent = new Intent(requireActivity(),commentActivity.class);
+        intent.putExtra("postId",postId);
+        intent.putExtra("userId",userId);
+        startActivity(intent);
     }
 }

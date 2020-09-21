@@ -1,5 +1,6 @@
 package com.example.tourroom.ui.noti_fication;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourroom.R;
 
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class general_notification_adapter extends RecyclerView.Adapter<general_notification_adapter.general_notification_viewholder> {
+
+    List<String> notificationList;
+    Context context;
+
+    public general_notification_adapter(List<String> notificationList, Context context) {
+        this.notificationList = notificationList;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -25,22 +36,20 @@ public class general_notification_adapter extends RecyclerView.Adapter<general_n
 
     @Override
     public void onBindViewHolder(@NonNull general_notification_viewholder holder, int position) {
-
+             holder.general_notification_text_view.setText(notificationList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return notificationList.size();
     }
 
-    class general_notification_viewholder extends RecyclerView.ViewHolder{
+    static class general_notification_viewholder extends RecyclerView.ViewHolder{
 
-        CircleImageView general_notification_img;
         TextView general_notification_text_view;
 
         public general_notification_viewholder(@NonNull View itemView) {
             super(itemView);
-            general_notification_img=itemView.findViewById(R.id.invitation_notification_img_id);
             general_notification_text_view=itemView.findViewById(R.id.invitation_notification_textv_id);
         }
     }

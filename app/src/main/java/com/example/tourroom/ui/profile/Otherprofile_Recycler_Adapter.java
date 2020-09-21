@@ -85,37 +85,7 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
 
             profileUpperPartViewHolder.post_count_textv.setText(String.valueOf(userPostList.size()));
 
-            getINSTANCE().getRootRef().child("UserFollower").child(UserId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot data : snapshot.getChildren()){
-                        String dummy = data.getKey();
-                        followerCount++;
-                    }
-                    profileUpperPartViewHolder.followers_count_textv.setText(String.valueOf(followerCount));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-            getINSTANCE().getRootRef().child("UserFollowing").child(UserId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot data : snapshot.getChildren()){
-                        String dummy = data.getKey();
-                        followingCount++;
-                    }
-                    profileUpperPartViewHolder.following_count_textv.setText(String.valueOf(followingCount));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+            userFollowingAndFollowerCount(profileUpperPartViewHolder);
 
             if(currentUser.equals(UserId)){
                 profileUpperPartViewHolder.followButton.setVisibility(View.INVISIBLE);
@@ -191,6 +161,42 @@ public class Otherprofile_Recycler_Adapter extends RecyclerView.Adapter {
 
 
         }
+    }
+
+    private void userFollowingAndFollowerCount(final otherprofileUpperPartViewHolder profileUpperPartViewHolder) {
+
+        getINSTANCE().getRootRef().child("UserFollower").child(UserId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()){
+                    String dummy = data.getKey();
+                    followerCount++;
+                }
+                profileUpperPartViewHolder.followers_count_textv.setText(String.valueOf(followerCount));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        getINSTANCE().getRootRef().child("UserFollowing").child(UserId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()){
+                    String dummy = data.getKey();
+                    followingCount++;
+                }
+                profileUpperPartViewHolder.following_count_textv.setText(String.valueOf(followingCount));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private void followTheUser(final Button followButton) {

@@ -143,7 +143,7 @@ public class addNewPostFragment extends Fragment {
                     if (task.isSuccessful()) {
                         final Uri downloadUri = task.getResult();
                         assert downloadUri != null;
-                        postdata postdata = new postdata(postKey, downloadUri.toString(), "0", "0");
+                        postdata postdata = new postdata(postKey, downloadUri.toString(), "0", "0",currentUserID);
                         assert postKey != null;
                         getINSTANCE().getRootRef().child("post").child(currentUserID).child(postKey).setValue(postdata).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

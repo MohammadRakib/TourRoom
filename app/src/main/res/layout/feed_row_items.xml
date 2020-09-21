@@ -6,59 +6,45 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_imageview"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/dummyavatar"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="1dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile_image" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/username_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="Jumara"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/user_imageview"
         app:layout_constraintStart_toEndOf="@+id/user_imageview"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/post_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:text="My trip to Europe"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#0E0E0E"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_imageview" />
+        app:layout_constraintTop_toTopOf="@+id/user_imageview" />
 
     <ImageView
         android:id="@+id/post_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_textview"
+        app:layout_constraintTop_toBottomOf="@+id/user_imageview"
         app:srcCompat="@drawable/place_image" />
 
     <TextView
@@ -79,13 +65,13 @@
         android:id="@+id/comment_count_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:text="4 comment"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:text="4 "
         android:textColor="#0E0E0E"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/post_imageview" />
 
     <ImageView
@@ -94,33 +80,44 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/like_count_textview"
         app:srcCompat="@drawable/like_image" />
 
     <ImageView
         android:id="@+id/comment_imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/share_imageview"
         app:layout_constraintStart_toEndOf="@+id/like_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/like_count_textview"
         app:srcCompat="@drawable/comment_image" />
 
     <ImageView
         android:id="@+id/share_imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/like_count_textview"
         app:srcCompat="@drawable/share_image" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Comments"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_count_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/comment_count_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

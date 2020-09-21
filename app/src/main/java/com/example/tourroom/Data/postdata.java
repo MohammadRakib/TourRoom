@@ -1,16 +1,25 @@
 package com.example.tourroom.Data;
 
 public class postdata {
-    String postId,postImage,likeNumber,CommentNumber;
+    String postId,postImage,likeNumber,commentNumber, userId;
 
     public postdata() {
     }
 
-    public postdata(String postId, String postImage, String likeNumber, String commentNumber) {
+    public postdata(String postId, String postImage, String likeNumber, String commentNumber, String userId) {
         this.postId = postId;
         this.postImage = postImage;
         this.likeNumber = likeNumber;
-        CommentNumber = commentNumber;
+        this.commentNumber = commentNumber;
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPostId() {
@@ -38,10 +47,10 @@ public class postdata {
     }
 
     public String getCommentNumber() {
-        return CommentNumber;
+        return commentNumber;
     }
 
     public void setCommentNumber(String commentNumber) {
-        CommentNumber = commentNumber;
+        this.commentNumber = commentNumber;
     }
 }

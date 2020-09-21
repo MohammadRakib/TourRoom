@@ -20,18 +20,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.tourroom.Data.postdata;
 import com.example.tourroom.R;
 import com.example.tourroom.ui.profile.other_profile_activity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 
 public class feed_fragment extends Fragment {
     RecyclerView feed_recycler_view;
     Feed_Recycler_Adapter feed_recycler_adapter;
+    private String currentUserID;
+    List<postdata> userPostList;
+    boolean noFollower = true;
+    boolean noPost = true;
 
-    public static feed_fragment newInstance() {
-        return new feed_fragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -47,8 +56,14 @@ public class feed_fragment extends Fragment {
         if(!Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).isShowing()) {
             Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
            }
+
+        currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
+        userPostList = new ArrayList<>();
+        noFollower = true;
+        noPost = true;
+
             feed_recycler_view=view.findViewById(R.id.feed_recyclerview);
-            feed_recycler_adapter=new Feed_Recycler_Adapter();
+            feed_recycler_adapter=new Feed_Recycler_Adapter(userPostList,requireActivity());
 
             feed_recycler_view.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
@@ -56,6 +71,8 @@ public class feed_fragment extends Fragment {
 
             DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(requireActivity(),DividerItemDecoration.VERTICAL);
             feed_recycler_view.addItemDecoration(dividerItemDecoration);
+
+            loadPost();
 
 
        /* Button button=view.findViewById(R.id.other_profile_from_feed);
@@ -68,4 +85,74 @@ public class feed_fragment extends Fragment {
             }
         });*/
     }
+
+    public void loadPost(){
+
+        getINSTANCE().getRootRef().child("UserFollowing").child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()){
+                    String FollowingUserId = data.getKey();
+                    noFollower = false;
+                    assert FollowingUserId != null;
+                    getINSTANCE().getRootRef().child("post").child(FollowingUserId).limitToLast(3).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot data : snapshot.getChildren()){
+                                noPost = false;
+                                postdata postdata = data.getValue(postdata.class);
+                                userPostList.add(postdata);
+                                feed_recycler_adapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                //user is not following anyone
+                if(noFollower || noPost){
+                    getINSTANCE().getRootRef().child("Users").limitToLast(3).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot data : snapshot.getChildren()){
+                                String UserId = data.getKey();
+                                assert UserId != null;
+                                getINSTANCE().getRootRef().child("post").child(UserId).limitToLast(10).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for (DataSnapshot data : snapshot.getChildren()){
+                                            postdata postdata = data.getValue(postdata.class);
+                                            userPostList.add(postdata);
+                                            feed_recycler_adapter.notifyDataSetChanged();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 }

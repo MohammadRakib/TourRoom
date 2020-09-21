@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.example.tourroom.Data.postdata;
 import com.example.tourroom.R;
-import com.example.tourroom.ui.profile.Profile_Recycler_Adapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,16 +29,22 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
+import static java.util.Objects.requireNonNull;
 
 public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Adapter.FeedViewHolder> {
 
     List<postdata> userPostList;
     Context context;
     private String userName,userImage;
+    String currentUserID;
+    feedInterface feedInterface;
 
-    public Feed_Recycler_Adapter(List<postdata> userPostList, Context context) {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public Feed_Recycler_Adapter(List<postdata> userPostList, Context context, feedInterface feedInterface) {
         this.userPostList = userPostList;
         this.context = context;
+        this.feedInterface = feedInterface;
+        currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
     }
 
     @NonNull
@@ -118,15 +123,10 @@ public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Ad
             }
         });
 
-        profileLowerViewHolder.share_imagev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
     }
+
+
+
 
     @Override
     public int getItemCount() {
@@ -134,10 +134,9 @@ public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Ad
     }
 
     static class FeedViewHolder extends RecyclerView.ViewHolder {
-        ImageView post_imagev,like_imagev,comment_imagev,share_imagev;
+        ImageView post_imagev,like_imagev,comment_imagev;
         CircleImageView user_imagev;
         TextView username_textv,like_count_textv,comment_count_textv;
-
 
         public FeedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -150,7 +149,6 @@ public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Ad
             like_imagev=itemView.findViewById(R.id.like_imageview);
 
             comment_imagev=itemView.findViewById(R.id.comment_imageview);
-            share_imagev=itemView.findViewById(R.id.share_imageview);
         }
     }
 }

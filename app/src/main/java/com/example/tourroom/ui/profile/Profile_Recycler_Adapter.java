@@ -154,12 +154,6 @@ public class Profile_Recycler_Adapter extends RecyclerView.Adapter {
                   }
               });
 
-              profileLowerViewHolder.share_imagev.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-
-                  }
-              });
 
           }
     }
@@ -191,7 +185,7 @@ public class Profile_Recycler_Adapter extends RecyclerView.Adapter {
     }
 
     static class profileLowerViewHolder extends RecyclerView.ViewHolder {
-        ImageView post_imagev,like_imagev,comment_imagev,share_imagev;
+        ImageView post_imagev,like_imagev,comment_imagev;
         CircleImageView user_imagev;
         TextView username_textv,like_count_textv,comment_count_textv;
 
@@ -207,7 +201,7 @@ public class Profile_Recycler_Adapter extends RecyclerView.Adapter {
             like_imagev=itemView.findViewById(R.id.like_imageview);
 
             comment_imagev=itemView.findViewById(R.id.comment_imageview);
-            share_imagev=itemView.findViewById(R.id.share_imageview);
+
         }
     }
 

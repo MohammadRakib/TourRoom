@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:text="Jumara"
+        android:text="name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@+id/user_imageview"
@@ -54,7 +54,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"
-        android:text="70 Likes"
+        android:text="0"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#101010"
         android:textSize="18sp"
@@ -68,7 +68,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
-        android:text="4 "
+        android:text="0"
         android:textColor="#0E0E0E"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
@@ -91,23 +91,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/share_imageview"
-        app:layout_constraintStart_toEndOf="@+id/like_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/like_count_textview"
-        app:srcCompat="@drawable/comment_image" />
-
-    <ImageView
-        android:id="@+id/share_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/like_count_textview"
-        app:srcCompat="@drawable/share_image" />
+        app:layout_constraintTop_toBottomOf="@+id/comment_count_textview"
+        app:srcCompat="@drawable/comment_image" />
 
     <TextView
         android:id="@+id/textView2"
@@ -119,5 +108,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/comment_count_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/comment_count_textview" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:text="Likes"
+        app:layout_constraintBottom_toBottomOf="@+id/like_count_textview"
+        app:layout_constraintStart_toEndOf="@+id/like_count_textview"
+        app:layout_constraintTop_toTopOf="@+id/like_count_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

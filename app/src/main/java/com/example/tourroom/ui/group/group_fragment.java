@@ -108,11 +108,11 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.hasChild("lastmsgUserName")){
-
+                        Toast.makeText(requireActivity(), "t", Toast.LENGTH_SHORT).show();
                         getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastmsgUserName(Objects.requireNonNull(dataSnapshot.child("lastmsgUserName").getValue()).toString());
                         getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastMessage(Objects.requireNonNull(dataSnapshot.child("lastMessage").getValue()).toString());
                         getYourGroupListInstance().getYourGroupList().get(yourGroupIntoPosition).setLastmsgTime(Objects.requireNonNull(dataSnapshot.child("lastmsgTime").getValue()).toString());
-
+                        group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();
                     }
 
                     yourGroupIntoPosition = -1;

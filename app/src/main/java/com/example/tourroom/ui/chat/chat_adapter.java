@@ -122,8 +122,6 @@ public class chat_adapter extends RecyclerView.Adapter {
                 chatViewHolder_user.user_message_time.setText(date_time);
             }
 
-
-
         }else {
 
             if(chat_message_data.isImage()){

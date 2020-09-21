@@ -25,23 +25,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
-import com.example.tourroom.Data.group_data;
 import com.example.tourroom.Data.yourGroupData;
 import com.example.tourroom.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.example.tourroom.After_login_Activity.yourGroupIntoId;
-import static com.example.tourroom.After_login_Activity.yourGroupIntoPosition;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
 
@@ -52,11 +42,7 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
     NavController navController;
     TextView state,group_name;
     CircleImageView group_image;
-    private int position = -1;
-    private String currentUserID;
-    private String groupId;
-    String selectadmin;
-    boolean memberListNumberNotZero = false;
+    private static int position;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -73,7 +59,6 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         group_image = findViewById(R.id.group_image);
         group_name = findViewById(R.id.group_title);
 
-        currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
 
         // problem with activity when go to landscape mode fix
         activity_open_fix();
@@ -82,19 +67,12 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
         if (extras != null) {
             //for shared activity animation
             position = extras.getInt("position");
-            groupId = getYourGroupListInstance().getYourGroupList().get(position).getGroupId();
 
-        }
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(position != -1){
             loadGroupData(position);
         }
     }
+
+
 
     // problem with activity when go to landscape mode is fixed here
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -144,14 +122,13 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
                 startActivity(intent);
                 return true;
 
-            case R.id.group_info:
+            case R.id.edit_group_info:
                 Intent intent2 = new Intent(this,edit_group_info_activity.class);
-                intent2.putExtra("position",position);
                 startActivity(intent2);
                 return true;
 
             case R.id.leave:
-                leaveGroup();
+                Toast.makeText(this, "leave", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
@@ -219,128 +196,28 @@ public class group_host_activity extends AppCompatActivity implements PopupMenu.
     private void loadGroupData(int position) {
 
         yourGroupData group_data = getYourGroupListInstance().getYourGroupList().get(position);
-        String groupName = group_data.getGroupName();
-        String groupImageUri = group_data.getGroupImage();
 
-        group_name.setText(groupName);
+        if(group_data != null && group_data.getGroupImage() == null){
 
-        Glide.with(group_host_activity.this)
-                .load(groupImageUri)
-                .format(DecodeFormat.PREFER_ARGB_8888)
-                .dontAnimate()
-                .placeholder(R.drawable.dummyimage)
-                .into(group_image);
+            String groupName = group_data.getGroupName();
+            group_name.setText(groupName);
 
+        }else if (group_data != null && group_data.getGroupImage() != null){
 
-    }
+            String groupName = group_data.getGroupName();
+            String groupImageUri = group_data.getGroupImage();
 
+            group_name.setText(groupName);
 
+            Glide.with(group_host_activity.this)
+                    .load(groupImageUri)
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .dontAnimate()
+                    .placeholder(R.drawable.dummyimage)
+                    .into(group_image);
 
-    private void leaveGroup() {
+        }
 
-        getINSTANCE().getRootRef().child("GROUP").child(groupId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                group_data group_data = snapshot.getValue(group_data.class);
-
-                assert group_data != null;
-                if(currentUserID.equals(group_data.getGroupAdmin())){
-                    selectAdmin();
-
-                }else {
-                    final Map<String, Object> update = new HashMap<>(); //this hashmap is used to write different data in different path in the database at once or atomically
-                    update.put("GROUP/"+groupId+"/members/"+currentUserID,null);
-                    update.put("Users/"+currentUserID+"/joinedGroups/"+groupId,null);
-                    getINSTANCE().getRootRef().updateChildren(update).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(group_host_activity.this, "Leaved the group", Toast.LENGTH_SHORT).show();
-                            getYourGroupListInstance().getYourGroupList().remove(position);
-                            yourGroupIntoPosition = -1;
-                            yourGroupIntoId = null;
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(group_host_activity.this, "could not leaved the group, try again", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
-    private void selectAdmin() {
-
-        getINSTANCE().getRootRef().child("GROUP").child(groupId).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                memberListNumberNotZero = false;
-                for (DataSnapshot data : snapshot.getChildren()){
-                    if(!Objects.equals(data.getKey(), currentUserID)){
-                        selectadmin = data.getKey();
-                        final Map<String, Object> update = new HashMap<>(); //this hashmap is used to write different data in different path in the database at once or atomically
-                        update.put("GROUP/"+groupId+"/groupAdmin",selectadmin);
-                        update.put("GROUP/"+groupId+"/members/"+currentUserID,null);
-                        update.put("Users/"+currentUserID+"/joinedGroups/"+groupId,null);
-                        memberListNumberNotZero = true;
-
-                        getINSTANCE().getRootRef().updateChildren(update).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(group_host_activity.this, "Leaved the group", Toast.LENGTH_SHORT).show();
-                                getYourGroupListInstance().getYourGroupList().remove(position);
-                                yourGroupIntoPosition = -1;
-                                yourGroupIntoId = null;
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(group_host_activity.this, "could not leaved the group, try again", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        break;
-                    }
-                }
-                if(!memberListNumberNotZero){
-                    final Map<String, Object> update = new HashMap<>(); //this hashmap is used to write different data in different path in the database at once or atomically
-                    update.put("GROUP/"+groupId,null);
-                    update.put("Users/"+currentUserID+"/joinedGroups/"+groupId,null);
-                    update.put("groupMessage/"+groupId,null);
-                    getINSTANCE().getRootRef().updateChildren(update).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(group_host_activity.this, "Leaved the group", Toast.LENGTH_SHORT).show();
-                            getYourGroupListInstance().getYourGroupList().remove(position);
-                            yourGroupIntoPosition = -1;
-                            yourGroupIntoId = null;
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(group_host_activity.this, "could not leaved the group, try again", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
 

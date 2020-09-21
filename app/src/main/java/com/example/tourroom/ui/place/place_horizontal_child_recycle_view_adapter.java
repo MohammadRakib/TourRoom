@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,7 +68,9 @@ public class place_horizontal_child_recycle_view_adapter extends RecyclerView.Ad
 
     @Override
     public int getItemCount() {
-        return horizontalPlaceList.size();
+       return horizontalPlaceList.size();
+
+
     }
 
     static class place_child_horizontal_recycle_view_viewholder extends RecyclerView.ViewHolder  {

@@ -78,8 +78,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 finish();
             }
         });
-
+        Toast.makeText(this, "Please long press on marker to change location", Toast.LENGTH_LONG).show();
     }
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;

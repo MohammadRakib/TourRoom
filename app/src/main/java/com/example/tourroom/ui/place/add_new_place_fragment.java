@@ -44,6 +44,8 @@ import java.util.Objects;
 
 import static com.example.tourroom.After_login_Activity.dummyImage;
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
+import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
+import static com.example.tourroom.singleton.yourPlaceSingleton.getYourPlaceListInstance;
 
 public class add_new_place_fragment extends Fragment {
 
@@ -58,6 +60,8 @@ public class add_new_place_fragment extends Fragment {
     private NavController navController;
     private String currentUser, localPlaceId, PlaceImage;
     private ProgressDialog loadingBar;
+
+
 
     public static add_new_place_fragment newInstance() {
         return new add_new_place_fragment();
@@ -127,6 +131,7 @@ public class add_new_place_fragment extends Fragment {
         loadingBar.setMessage("Please wait, your place is adding to database...");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
+        place_data placeData;
 
         place_name = Objects.requireNonNull(nameEditText_for_add_place_fragment.getText()).toString().trim();
         place_address = Objects.requireNonNull(addressEditText_for_add_place_fragment.getText()).toString().trim();

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.example.tourroom.Data.User_Data;
+import com.example.tourroom.Data.place_data;
 import com.example.tourroom.Data.yourGroupData;
 import com.example.tourroom.ui.group.group_vertical_parent_recycle_view_adapter;
 import com.google.firebase.database.ChildEventListener;
@@ -25,6 +26,7 @@ import java.util.Objects;
 
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
+import static com.example.tourroom.singleton.yourPlaceSingleton.getYourPlaceListInstance;
 import static com.example.tourroom.ui.group.group_fragment.group_vertical_parent_recycle_view_adapterVariable;
 
 public class After_login_Activity extends AppCompatActivity {
@@ -66,11 +68,14 @@ public class After_login_Activity extends AppCompatActivity {
         loadUserProfile();
         loadGroup();
 
+
+
 //        //track new message dynamically
 //        newMessageTracker();
-
-
     }
+
+
+
 
 
 

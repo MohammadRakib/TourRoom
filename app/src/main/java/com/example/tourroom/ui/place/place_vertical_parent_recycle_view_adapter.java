@@ -38,6 +38,7 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
     boolean flag=true;
     static  String randomPlaceTracker;
     String currentUser;
+
     private List<place_data> placeDataList;
     private List<place_data> RecommendedPlaceDataList;
 
@@ -109,7 +110,7 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
 
 
         }else if (position == 1){//view 1
-            if(flag==true)
+            if(flag)
             {
                 place_horizontal_child_recycle_view_adapter = new place_horizontal_child_recycle_view_adapter(context,this,RecommendedPlaceDataList);
                 row_1_view_holder row_1_view_holder = (place_vertical_parent_recycle_view_adapter.row_1_view_holder) holder;
@@ -153,14 +154,21 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
     }
 
     private void loadRecommenedPlaceList() {
+
         Query query;
         if(randomPlaceTracker==null)
         {
             query= getINSTANCE().getRootRef().child("Places").limitToFirst(5);
+
+
         }
         else {
+
             query=getINSTANCE().getRootRef().child("Places").orderByChild("placeId").startAt(randomPlaceTracker).limitToFirst(5);
+
         }
+
+
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -176,6 +184,9 @@ public class place_vertical_parent_recycle_view_adapter extends RecyclerView.Ada
                                 RecommendedPlaceDataList.add(placeDatavar);
                                 randomPlaceTracker=placeDatavar.getPlaceId();
                                 place_horizontal_child_recycle_view_adapter.notifyDataSetChanged();
+
+
+
                             }
                         }
 

@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
+import static com.example.tourroom.singleton.yourGroupSingleton.getYourGroupListInstance;
+import static com.example.tourroom.singleton.yourPlaceSingleton.getYourPlaceListInstance;
 
 public class place_parent_fragment extends Fragment implements com.example.tourroom.ui.place.place_vertical_parent_recycle_view_adapter.place_parent_recycle_view_click_listener_interface {
 
@@ -61,12 +63,12 @@ public class place_parent_fragment extends Fragment implements com.example.tourr
         parent_vertical_recycle_view.setAdapter(place_vertical_parent_recycle_view_adapter);
         navController = Navigation.findNavController(requireActivity(),R.id.after_login_host_fragment);
         loadallPlaceListFromDatabase();
+        place_vertical_parent_recycle_view_adapter.notifyDataSetChanged();
+
 
     }
 
     private void loadallPlaceListFromDatabase() {
-
-        //getYourPlaceListInstance().getYourPlaceList().clear();
         getINSTANCE().getRootRef().child("Places").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -77,14 +79,11 @@ public class place_parent_fragment extends Fragment implements com.example.tourr
                 }
 
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
     }
 
 

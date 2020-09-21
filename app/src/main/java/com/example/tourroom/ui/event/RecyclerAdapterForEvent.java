@@ -1,5 +1,7 @@
 package com.example.tourroom.ui.event;
 
+import android.content.Context;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +11,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.example.tourroom.Data.announcement_data;
+import com.example.tourroom.Data.event_data;
 import com.example.tourroom.R;
 
-public class RecyclerAdapterForEvent extends RecyclerView.Adapter<RecyclerAdapterForEvent.ViewHolder> {
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
+
+public class RecyclerAdapterForEvent extends RecyclerView.Adapter<RecyclerAdapterForEvent.ViewHolder> {
+    List<event_data> event_dataList;
+    Context context;
+    private final Calendar c = Calendar.getInstance(Locale.getDefault());
+    public RecyclerAdapterForEvent( Context context,List<event_data> event_dataList) {
+        this.context=context;
+        this.event_dataList=event_dataList;
+    }
 
     @NonNull
     @Override
@@ -31,18 +48,34 @@ public class RecyclerAdapterForEvent extends RecyclerView.Adapter<RecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.messageforannouncementtextview.setText(String.valueOf(position));
+        final event_data eventData =event_dataList.get(position);
+        holder.messageforannouncementtextview.setText(eventData.getEventName());
+        if(eventData.getEventPhoto()!= null){
+            Glide.with(context)
+                    .load(eventData.getEventPhoto())
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .dontAnimate()
+                    .placeholder(R.drawable.dummyimage)
+                    .into(holder.imageViewidforevent);
+        }
+        holder.eventdaytextView_forevent.setText(eventData.getEventDate());
+        holder.journeystarttextView_forevent.setText(eventData.getEventStartTime());
+        String time =eventData.getDateTime();
+        Long tm =Long.valueOf(time);
+        c.setTimeInMillis(tm*1000);
+        String date_time =  DateFormat.format("MMM d yyyy, h:mm a",c).toString();
+        holder.datetimeText.setText(date_time);
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return event_dataList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
     {
         ImageView imageViewidforevent;
-        TextView messageforannouncementtextview,eventdatetextView_forevent,eventdaytextView_forevent,journeystarttextView_forevent;
+        TextView messageforannouncementtextview,eventdaytextView_forevent,journeystarttextView_forevent,datetimeText;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -50,10 +83,9 @@ public class RecyclerAdapterForEvent extends RecyclerView.Adapter<RecyclerAdapte
 
             imageViewidforevent=itemView.findViewById(R.id.imageViewid_forevent);
             messageforannouncementtextview=itemView.findViewById(R.id.messageforannouncementtextviewid);
-            eventdatetextView_forevent=itemView.findViewById(R.id.eventdatetextViewid_forevent);
             eventdaytextView_forevent=itemView.findViewById(R.id.eventdaytextViewid_forevent);
             journeystarttextView_forevent=itemView.findViewById(R.id.journeystarttextViewid_forevent);
-
+            datetimeText=itemView.findViewById(R.id.dateTimeTextView);
         }
 
 

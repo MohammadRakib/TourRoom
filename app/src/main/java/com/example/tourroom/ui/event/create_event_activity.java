@@ -16,6 +16,8 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -50,6 +52,7 @@ import java.util.Objects;
 
 import static com.example.tourroom.singleton.firebase_init_singleton.getINSTANCE;
 
+
 public class create_event_activity extends AppCompatActivity {
 
     TextInputLayout eventname_editText_forevent,eventdate_editText_forevent,journeystart_editText_forevent;
@@ -62,6 +65,8 @@ public class create_event_activity extends AppCompatActivity {
     String groupId,userId,ImageDownloadUrlForEvent,eventId;
     private StorageReference ImageReference;
     private ProgressDialog loadingBar;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -192,6 +197,7 @@ public class create_event_activity extends AppCompatActivity {
                 return filePath.getDownloadUrl();
             }
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
 
@@ -210,6 +216,7 @@ public class create_event_activity extends AppCompatActivity {
                     journey_edit.setText("");
                     event_image.setImageResource(R.drawable.dummyimage);
                     loadingBar.dismiss();
+                     finish();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -249,6 +256,7 @@ public class create_event_activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
     }
 
     public void upload_image(View view) { //upload image on_clicker

@@ -99,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         {
             EditText editText=findViewById(R.id.location_search);
             String address=editText.getText().toString();
-
+            //Toast.makeText(this, address, Toast.LENGTH_SHORT).show();
             List<Address> addressList=null;
             MarkerOptions userMarkerOptions=new MarkerOptions();
 

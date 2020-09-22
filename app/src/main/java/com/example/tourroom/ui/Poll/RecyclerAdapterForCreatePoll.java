@@ -1,21 +1,31 @@
 package com.example.tourroom.ui.Poll;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tourroom.Data.Read_poll_data;
 import com.example.tourroom.R;
 
+import java.util.List;
 
 public class RecyclerAdapterForCreatePoll extends RecyclerView.Adapter<RecyclerAdapterForCreatePoll.ViewHolder> {
+
+
+    List<Read_poll_data> pollDataList;
+    Context context;
+
+    public RecyclerAdapterForCreatePoll(List<Read_poll_data> pollDataList, Context context) {
+        this.pollDataList = pollDataList;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -32,31 +42,29 @@ public class RecyclerAdapterForCreatePoll extends RecyclerView.Adapter<RecyclerA
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+       /* final Read_poll_data pollData =pollDataList.get(position);
+        holder.opbtn1.setText(pollData.getOptionName1());
+        holder.opbtn2.setText(pollData.getOptionName2());
+        holder.optex1.setText(pollData.getOption1Vote());
+        holder.optex2.setText(pollData.getOption2Vote());*/
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 10;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-         RadioGroup radioGroup_forpoll;
-         ProgressBar progressBar_option1_forpoll,progressBar_option2_forpoll;
-         RadioButton option1radiobutton_forpoll,option2radiobutton_forpoll;
-         TextView countvalueofoption1_forpoll,countvalueofoption2_forpoll;
-
+          Button opbtn1,opbtn2;
+          TextView optex1,optex2;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+           opbtn1=itemView.findViewById(R.id.option1Button);
+           opbtn2=itemView.findViewById(R.id.option2Button);
+           optex1=itemView.findViewById(R.id.option1TextView);
+           optex2=itemView.findViewById(R.id.option2TextView);
 
-            radioGroup_forpoll=itemView.findViewById(R.id.radiogroupid_forpoll);
-            progressBar_option1_forpoll=itemView.findViewById(R.id.option1_progressBar);
-            progressBar_option2_forpoll=itemView.findViewById(R.id.option2_progressbar);
-            option1radiobutton_forpoll=itemView.findViewById(R.id.option1_radiobutton);
-            option2radiobutton_forpoll=itemView.findViewById(R.id.option2_radiobutton);
-            countvalueofoption1_forpoll=itemView.findViewById(R.id.countvalueforoption1_textView);
-            countvalueofoption2_forpoll=itemView.findViewById(R.id.countvalueofoption2_textview);
         }
 
 

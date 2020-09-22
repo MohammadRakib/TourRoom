@@ -26,23 +26,7 @@
             android:text="@string/create_poll"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addpolloption_imageview"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="30dp"
-            android:textColor="@color/colorPrimary"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:drawableStart="@drawable/ic_add_circle_outline_black_24dp"
-            android:drawableLeft="@drawable/ic_add_circle_outline_black_24dp"
-            android:drawablePadding="10dp"
-            android:focusable="true"
-            android:text="@string/add_poll_option"
-            tools:ignore="NewApi" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/option1_edittext_layout"
@@ -96,7 +80,8 @@
             android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/create" />
+            android:text="@string/create"
+            android:enabled="false"/>
 
     </LinearLayout>
 

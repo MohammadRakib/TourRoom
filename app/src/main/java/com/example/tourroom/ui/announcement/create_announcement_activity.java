@@ -83,6 +83,7 @@ public class create_announcement_activity extends AppCompatActivity {
                 Toast.makeText(create_announcement_activity.this, "Announcement created", Toast.LENGTH_SHORT).show();
 
                 edittext_fornewannouncement.setText("");
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -127,5 +128,6 @@ public class create_announcement_activity extends AppCompatActivity {
 
         }
     };
+
 
 }

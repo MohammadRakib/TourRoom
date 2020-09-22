@@ -106,4 +106,10 @@ public class place_parent_fragment extends Fragment implements com.example.tourr
         navController = Navigation.findNavController(requireActivity(),R.id.after_login_host_fragment);
         navController.navigate(R.id.add_new_place_fragment);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadallPlaceListFromDatabase();
+    }
 }

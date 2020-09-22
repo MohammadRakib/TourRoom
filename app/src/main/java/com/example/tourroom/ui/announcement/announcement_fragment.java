@@ -123,6 +123,7 @@ public class announcement_fragment extends Fragment {
 
                     announcementDataList.add(announcementData);
                     recyclerAdapterForAnnouncement.notifyDataSetChanged();
+
                 }
             }
 
@@ -132,5 +133,11 @@ public class announcement_fragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadAnnouncements();
     }
 }

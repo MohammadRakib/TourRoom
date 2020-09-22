@@ -92,6 +92,7 @@ public class EditPlaceInfoActivity extends AppCompatActivity {
                         ref.updateChildren(map);
                         Toast.makeText(getApplicationContext(), "Place description Updated Successfully", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
+                        finish();
                     }
                 }
 
@@ -126,6 +127,7 @@ public class EditPlaceInfoActivity extends AppCompatActivity {
                                 ref.updateChildren(map);
                                 Toast.makeText(EditPlaceInfoActivity.this, "place Photo and description updated successfully", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
+                                finish();
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -166,6 +168,7 @@ public class EditPlaceInfoActivity extends AppCompatActivity {
                                 ref.updateChildren(map);
                                 Toast.makeText(EditPlaceInfoActivity.this, "place Photo and description updated successfully", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
+                                finish();
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {

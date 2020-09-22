@@ -119,7 +119,6 @@ public class Event_fragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()) {
                     final event_data eventData= data.getValue(event_data.class);
-
                     eventDataList.add(eventData);
                     recyclerAdapterforevent.notifyDataSetChanged();
                 }
@@ -130,5 +129,11 @@ public class Event_fragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadEventDetails();
     }
 }

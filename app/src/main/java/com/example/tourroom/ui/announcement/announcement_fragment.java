@@ -138,6 +138,6 @@ public class announcement_fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        loadAnnouncements();
+        //loadAnnouncements();
     }
 }

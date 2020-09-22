@@ -134,6 +134,6 @@ public class Event_fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        loadEventDetails();
+        //loadEventDetails();
     }
 }

@@ -20,8 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.tourroom.Data.User_Data;
 import com.example.tourroom.Data.postdata;
 import com.example.tourroom.R;
+import com.example.tourroom.ui.profile.other_profile_activity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -37,6 +39,8 @@ public class feed_fragment extends Fragment implements feedInterface{
     Feed_Recycler_Adapter feed_recycler_adapter;
     private String currentUserID;
     List<postdata> userPostList;
+    boolean checkIfHasFollower = false;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -72,10 +76,13 @@ public class feed_fragment extends Fragment implements feedInterface{
 
     public void loadPost(){
 
-        getINSTANCE().getRootRef().child("UserFollowing").child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+       checkIfHasFollower = false;
+       getINSTANCE().getRootRef().child("UserFollowing").child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 for (DataSnapshot data : snapshot.getChildren()){
+                    checkIfHasFollower = true;
                     String FollowingUserId = data.getKey();
                     assert FollowingUserId != null;
                     getINSTANCE().getRootRef().child("post").child(FollowingUserId).limitToLast(3).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -94,6 +101,26 @@ public class feed_fragment extends Fragment implements feedInterface{
                         }
                     });
                 }
+
+                if(!checkIfHasFollower){
+                    getINSTANCE().getRootRef().child("post").limitToLast(6).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot data : snapshot.getChildren()){
+                                for(DataSnapshot data2 : data.getChildren()){
+                                    postdata postdata = data2.getValue(postdata.class);
+                                    userPostList.add(postdata);
+                                    feed_recycler_adapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -101,6 +128,8 @@ public class feed_fragment extends Fragment implements feedInterface{
 
             }
         });
+
+
 
     }
 
@@ -111,4 +140,14 @@ public class feed_fragment extends Fragment implements feedInterface{
         intent.putExtra("userId",userId);
         startActivity(intent);
     }
+
+    @Override
+    public void on_Item_click_user(int position, String currentUserId) {
+        Intent intent = new Intent(requireActivity(), other_profile_activity.class);
+        intent.putExtra("position",position);
+        intent.putExtra("memberId",currentUserId);
+        startActivity(intent);
+    }
+
+
 }

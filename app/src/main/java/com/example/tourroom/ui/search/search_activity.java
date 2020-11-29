@@ -11,6 +11,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +28,7 @@ import com.example.tourroom.ui.place.PlaceInfoActivity;
 import com.example.tourroom.ui.profile.other_profile_activity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,9 +46,8 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
         RecyclerviewAdapterForSearchGroup.search_data_get_group__interface,
         RecyclerviewAdapterForSearchUser.search_data_get_user__interface{
     String []searchOptions;
-    EditText searchEditText;
+    TextInputEditText searchEditText;
     Spinner spinner;
-    Button searchbtn;
     RecyclerView recyclerView;
     RecyclerviewAdapterForSearch recyclerviewAdapterForSearch;
     RecyclerviewAdapterForSearchGroup recyclerviewAdapterForSearchGroup;
@@ -63,7 +65,6 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
         setContentView(R.layout.search_activity);
         spinner=findViewById(R.id.spinnerforsearch);
         searchEditText=findViewById(R.id.edittextforsearch);
-        searchbtn=findViewById(R.id.searchButton);
         recyclerView=findViewById(R.id.recyclerviewForSearch);
         currentUserID = Objects.requireNonNull(getINSTANCE().getMAuth().getCurrentUser()).getUid();
 
@@ -92,26 +93,32 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
         recyclerviewAdapterForSearchUser=new RecyclerviewAdapterForSearchUser(userDataList,this,this);
         //recyclerView.setAdapter(recyclerviewAdapterForSearchUser);
 
-
-
-
-
         searchOptions=getResources().getStringArray(R.array.searchOptions);
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,R.layout.sample_view,R.id.textviewforsampleview,searchOptions);
         spinner.setAdapter(adapter);
 
-        searchbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 placeDataList.clear();
                 groupDataList.clear();
                 userDataList.clear();
-                    loadData();
-                    searchEditText.setText("");
+                loadData();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
+
     }
 
     public void loadData() {
@@ -128,7 +135,7 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
             //Toast.makeText(this, editTextValue, Toast.LENGTH_SHORT).show();
             DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("Places");
 
-            Query query=mDatabaseRef.orderByChild("placeName").equalTo(editTextValue);
+            Query query=mDatabaseRef.orderByChild("placeName").startAt(editTextValue).endAt(editTextValue+"\uf8ff");
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -155,7 +162,7 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
             //Toast.makeText(this, editTextValue, Toast.LENGTH_SHORT).show();
             DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("GROUP");
 
-            Query query=mDatabaseRef.orderByChild("groupName").equalTo(editTextValue);
+            Query query=mDatabaseRef.orderByChild("groupName").startAt(editTextValue).endAt(editTextValue+"\uf8ff");
 
             query.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -185,7 +192,7 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
             //Toast.makeText(this, editTextValue, Toast.LENGTH_SHORT).show();
             DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
-            Query query=mDatabaseRef.orderByChild("name").equalTo(editTextValue);
+            Query query=mDatabaseRef.orderByChild("name").startAt(editTextValue).endAt(editTextValue+"\uf8ff");
 
             query.addValueEventListener(new ValueEventListener() {
                 @Override

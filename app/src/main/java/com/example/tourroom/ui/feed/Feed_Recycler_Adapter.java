@@ -59,7 +59,7 @@ public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Ad
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FeedViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FeedViewHolder holder, final int position) {
         final postdata postdata = userPostList.get(position);
         final Feed_Recycler_Adapter.FeedViewHolder profileLowerViewHolder = holder;
 
@@ -129,6 +129,20 @@ public class Feed_Recycler_Adapter extends RecyclerView.Adapter<Feed_Recycler_Ad
             public void onClick(View v) {
                 feedInterface.clickComment(postdata.getPostId(),postdata.getUserId());
 
+            }
+        });
+
+        profileLowerViewHolder.user_imagev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               feedInterface.on_Item_click_user(position,userPostList.get(position).getUserId());
+            }
+        });
+
+        profileLowerViewHolder.username_textv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                feedInterface.on_Item_click_user(position,userPostList.get(position).getUserId());
             }
         });
 

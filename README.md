@@ -190,7 +190,17 @@ Users can see their and other users' profiles and also follow them. Users can se
 <img align="left" src="tour room ss/add new post/addpost1.png" width="230" height="400">
 <img src="tour room ss/add new post/addpost2.png" width="230" height="400">
 
+#### Change password system
 
+<img src="tour room ss/change password.png" width="230" height="400">
+
+#### About us
+
+<img src="tour room ss/about us.png" width="230" height="400">
+
+#### Log out
+
+Users can log out.
 
 
 

@@ -11,28 +11,31 @@ new people. Through this application, a tour lover can explore our beautiful Ban
 
 ## Features of This App
 
-* Create account/Login account
-* Forget password recovery
-* Tour places information
-* Add new tour place
-* Group
-  - Create new group
-  - Group information
-  - Group chat
-  - Group events
-  - Group announcements
-  - Group members list
-  - Invite other people
-  - Group join request system
-  - Leave group
-* Feed
-* Notification system
-* Search system
-* Main menu
-  - Profile
-  - Create new post
-  - Change password system
-  - About us
-  - Log out 
+* [Create account and Login account](#create-account-and-login-account)
+* [Forget password recovery](#forget-password-recovery)
+* [Tour places information](#tour-places-information)
+* [Add new tour place](#add-new-tour-place)
+* [Group](#group)
+  - [Create new group](#create-new-group)
+  - [Group information](#group-information)
+  - [Group chat](#group-chat)
+  - [Group events](#group-events)
+  - [Group announcements](#group-announcements)
+  - [Group members list](#group-members-list)
+  - [Invite other people](#invite-other-people)
+  - [Group join request system](#group-join-request-system)
+  - [Leave group](#leave-group)
+* [Feed](#feed)
+* [Notification system](#notification-system)
+* [Search system](#search-system)
+* [Main menu](#main-menu)
+  - [Profile](#profile)
+  - [Create new post](#create-new-post)
+  - [Change password system](#change-password-system)
+  - [About us](#about-us)
+  - [Log out](#log-out) 
 
+## Features details with screenshots
 
+### Create account and Login account
+### Forget password recovery

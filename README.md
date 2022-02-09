@@ -18,13 +18,14 @@ new people. Through this application, a tour lover can explore our beautiful Ban
 * [Group](#group)
   - [Create new group](#create-new-group)
   - [Group information](#group-information)
-  - [Group chat](#group-chat)
-  - [Group events](#group-events)
-  - [Group announcements](#group-announcements)
-  - [Group members list](#group-members-list)
-  - [Invite other people](#invite-other-people)
-  - [Group join request system](#group-join-request-system)
-  - [Leave group](#leave-group)
+  - [Group features](#group-features)
+    - [Group chat](#group-chat)
+    - [Group events](#group-events)
+    - [Group announcements](#group-announcements)
+    - [Group members list](#group-members-list)
+    - [Invite other people](#invite-other-people)
+    - [Group join request system](#group-join-request-system)
+    - [Leave group](#leave-group)
 * [Feed](#feed)
 * [Notification system](#notification-system)
 * [Search system](#search-system)
@@ -38,10 +39,12 @@ new people. Through this application, a tour lover can explore our beautiful Ban
 ## Features details with screenshots
 
 ### Create account and Login account
+
 <img align="left" src="tour room ss/sign in and reg/sign up.png" width="230" height="400">
 <img src="tour room ss/sign in and reg/sign in.png" width="230" height="400">
 
 ### Forget password recovery
+
 <img src="tour room ss/sign in and reg/forget password.png" width="230" height="400">
 
 ### Tour places information
@@ -83,8 +86,50 @@ User can add new tour places which also support selecting location address from 
 User can see the group information, if they are joined to the group. The user who has created the group, can change the group image. 
 
 <img align="left" src="tour room ss/group/group list.png" width="230" height="400">
-<img align="left" src="tour room ss/group/group info1.png.png" width="230" height="400">
+<img align="left" src="tour room ss/group/group info1.png" width="230" height="400">
 <img src="tour room ss/group/group info2.png" width="230" height="400">
+
+#### Group features
+
+The group feature itself has several features.
+
+<img align="left" src="tour room ss/group/group option 1.png" width="230" height="400">
+<img src="tour room ss/group/group option 2.png" width="230" height="400">
+
+#### Group chat
+
+<img align="left" src="tour room ss/group/chat1.png" width="230" height="400">
+<img align="left" src="tour room ss/group/chat2.png" width="230" height="400">
+<img align="left" src="tour room ss/group/chat3.png" width="230" height="400">
+<img align="left" src="tour room ss/group/chat4.png" width="230" height="400">
+<img align="left" src="tour room ss/group/chat5.png" width="230" height="400">
+<img src="tour room ss/group/chat6.png" width="230" height="400">
+
+#### Group events
+
+User can create events by pressing floating plus button, which vanish away with animation when scrolling.
+
+<img align="left" src="tour room ss/group/event 1.png" width="230" height="400">
+<img align="left" src="tour room ss/group/event 2.png" width="230" height="400">
+<img align="left" src="tour room ss/group/event 3.png" width="230" height="400">
+<img align="left" src="tour room ss/group/event 4.png" width="230" height="400">
+<img align="left" src="tour room ss/group/event 5.png" width="230" height="400">
+<img align="left" src="tour room ss/group/event 6.png" width="230" height="400">
+<img src="tour room ss/group/event 7.png" width="230" height="400">
+
+#### Group announcements
+
+<img align="left" src="tour room ss/group/announcement 1.png" width="230" height="400">
+<img align="left" src="tour room ss/group/announcement 2.png" width="230" height="400">
+<img align="left" src="tour room ss/group/announcement 3.png" width="230" height="400">
+<img src="tour room ss/group/announcement 4.png" width="230" height="400">
+
+
+#### Group members list
+
+User can see group member list, check their profile and follow them.
+
+<img align="left" src="tour room ss/group/member.png" width="230" height="400">
 
 
 

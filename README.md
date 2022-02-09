@@ -5,7 +5,7 @@ new people. Through this application, a tour lover can explore our beautiful Ban
 
 ## Components Used
 
-* Firebase Database and Firebase Storage
+* Firebase Authentication, Firebase Database and Firebase Storage
 * Google Maps Api
 * Android Studio
 
@@ -52,7 +52,7 @@ User can see the place location in the map.
 <img align="left" src="tour room ss/place/place1.png" width="230" height="400">
 <img align="left" src="tour room ss/place/place2.png" width="230" height="400">
 <img align="left" src="tour room ss/place/place3.png" width="230" height="400">
-<img src="tour room ss/place/place4.png" width="230" height="400">
+<img align="left" src="tour room ss/place/place4.png" width="230" height="400">
 <img align="left" src="tour room ss/place/place5.png" width="230" height="400">
 <img align="left" src="tour room ss/place/place6.png" width="230" height="400">
 <img align="left" src="tour room ss/place/add new place5.png" width="230" height="400">
@@ -65,10 +65,26 @@ User can add new tour places which also support selecting location address from 
 <img align="left" src="tour room ss/place/add new place1.png" width="230" height="400">
 <img align="left" src="tour room ss/place/map1.png" width="230" height="400">
 <img align="left" src="tour room ss/place/map2.png" width="230" height="400">
-<img src="tour room ss/place/map3.png" width="230" height="400">
+<img align="left" src="tour room ss/place/map3.png" width="230" height="400">
 <img align="left" src="tour room ss/place/add new place2.png" width="230" height="400">
 <img align="left" src="tour room ss/place/add new place3.png" width="230" height="400">
 <img align="left" src="tour room ss/place/add new place4.png" width="230" height="400">
 <img src="tour room ss/place/add new place5.png" width="230" height="400">
+
+### Group
+#### Create new group
+
+<img align="left" src="tour room ss/group/create group1.png" width="230" height="400">
+<img align="left" src="tour room ss/group/create group2.png" width="230" height="400">
+<img src="tour room ss/group/create group3.png" width="230" height="400">
+
+#### Group information
+
+User can see the group information, if they are joined to the group. The user who has created the group, can change the group image. 
+
+<img align="left" src="tour room ss/group/group list.png" width="230" height="400">
+<img align="left" src="tour room ss/group/group info1.png.png" width="230" height="400">
+<img src="tour room ss/group/group info2.png" width="230" height="400">
+
 
 

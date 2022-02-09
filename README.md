@@ -49,8 +49,8 @@ new people. Through this application, a tour lover can explore our beautiful Ban
 
 ### Tour places information
 
-User can see tour places information, it supports nested scrolling. Bottom navigation bar and search bar also vanish away with animation when scrolling.
-User can see the place location in the map.
+Users can see tour places information, it supports nested scrolling. Bottom navigation bar and search bar also vanish away with animation when scrolling.
+Users can see the place location in the map.
 
 <img align="left" src="tour room ss/place/place1.png" width="230" height="400">
 <img align="left" src="tour room ss/place/place2.png" width="230" height="400">
@@ -63,7 +63,7 @@ User can see the place location in the map.
 
 ### Add new tour place
 
-User can add new tour places which also support selecting location address from map. User can also edit place description and upload place image.
+Users can add new tour places which also support selecting location address from map. Users can also edit place description and upload place image.
 
 <img align="left" src="tour room ss/place/add new place1.png" width="230" height="400">
 <img align="left" src="tour room ss/place/map1.png" width="230" height="400">
@@ -83,7 +83,7 @@ User can add new tour places which also support selecting location address from 
 
 #### Group information
 
-User can see the group information, if they are joined to the group. The user who has created the group, can change the group image. 
+Users can see the group information, if they are joined to the group. The user who has created the group, can change the group image. 
 
 <img align="left" src="tour room ss/group/group list.png" width="230" height="400">
 <img align="left" src="tour room ss/group/group info1.png" width="230" height="400">
@@ -107,7 +107,7 @@ The group feature itself has several features.
 
 #### Group events
 
-User can create events by pressing floating plus button, which vanish away with animation when scrolling.
+Users can create events by pressing floating plus button, which vanish away with animation when scrolling.
 
 <img align="left" src="tour room ss/group/event 1.png" width="230" height="400">
 <img align="left" src="tour room ss/group/event 2.png" width="230" height="400">
@@ -127,9 +127,71 @@ User can create events by pressing floating plus button, which vanish away with 
 
 #### Group members list
 
-User can see group member list, check their profile and follow them.
+Users can see group member list, check their profile and follow them.
 
-<img align="left" src="tour room ss/group/member.png" width="230" height="400">
+<img src="tour room ss/group/member.png" width="230" height="400">
+
+#### Invite other people
+
+Users can invite people they follow or followed by if those people are not a member of the group.
+
+<img align="left" src="tour room ss/group/invite 1.png" width="230" height="400">
+<img src="tour room ss/group/invite 2.png" width="230" height="400">
+
+#### Group join request system
+
+Users have to send a request for joining a group and group members can accept or reject the request.
+
+<img align="left" src="tour room ss/group/join group.png" width="230" height="400">
+<img src="tour room ss/group/member request.png" width="230" height="400">
+
+#### Leave group
+
+Users can leave a group if they want.
+
+#### Feed
+
+Users can see the posts of the people they followed. They can like the post and comment on it.
+
+<img align="left" src="tour room ss/feed/feed 1.png" width="230" height="400">
+<img src="tour room ss/feed/feed 2.png" width="230" height="400">
+
+#### Notification system
+
+This app supports two types of notifications. One is general notification, which is for likes and comments notifications of the users' posts. The other one is group
+invitation notifications.
+
+<img align="left" src="tour room ss/notification/noti1.png" width="230" height="400">
+<img src="tour room ss/notification/noti2.png" width="230" height="400">
+
+#### Search system
+
+Users can search other users, places and groups.
+
+<img align="left" src="tour room ss/search/search1.png" width="230" height="400">
+<img align="left" src="tour room ss/search/search2.png" width="230" height="400">
+<img align="left" src="tour room ss/search/search3.png" width="230" height="400">
+<img align="left" src="tour room ss/search/search4.png" width="230" height="400">
+<img src="tour room ss/search/search5.png" width="230" height="400">
+
+#### Main menu
+
+<img src="tour room ss/main menu.png" width="230" height="400">
+
+#### Profile
+
+Users can see their and other users' profiles and also follow them. Users can see their posts too. They can also change their profile picture.
+
+<img align="left" src="tour room ss/profile/prof1.png" width="230" height="400">
+<img src="tour room ss/profile/prof2.png" width="230" height="400">
+
+#### Create new post
+
+<img align="left" src="tour room ss/add new post/addpost1.png" width="230" height="400">
+<img src="tour room ss/add new post/addpost2.png" width="230" height="400">
+
+
+
 
 
 

@@ -38,4 +38,21 @@ new people. Through this application, a tour lover can explore our beautiful Ban
 ## Features details with screenshots
 
 ### Create account and Login account
+<img align="left" src="tour room ss/sign in and reg/sign up.png" width="230" height="400">
+<img src="tour room ss/sign in and reg/sign in.png" width="230" height="400">
+
 ### Forget password recovery
+<img src="tour room ss/sign in and reg/forget password.png" width="230" height="400">
+
+### Tour places information
+#### User can see tour places information, it supports nested scrolling. Bottom navigation bar and search bar also vanish away with animation when scrolling.
+<img align="left" src="tour room ss/place/place1.png" width="230" height="400">
+<img align="left" src="tour room ss/place/place2.png" width="230" height="400">
+<img align="left" src="tour room ss/place/place3.png" width="230" height="400">
+<img src="tour room ss/place/place4.png" width="230" height="400">
+<img align="left" src="tour room ss/place/place5.png" width="230" height="400">
+<img src="tour room ss/place/place6.png" width="230" height="400">
+
+
+
+

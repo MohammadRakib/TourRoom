@@ -122,17 +122,11 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
     }
 
     public void loadData() {
-      /* loadingBar.setTitle("Search");
-         loadingBar.setMessage("Please wait,searching your query");
-         loadingBar.setCanceledOnTouchOutside(false);
-         loadingBar.show();*/
         String editTextValue=searchEditText.getText().toString();
         String value=spinner.getSelectedItem().toString();
-        //Toast.makeText(this, value, Toast.LENGTH_SHORT).show();
         if(value.equals("Place"))
         {
             recyclerView.setAdapter(recyclerviewAdapterForSearch);
-            //Toast.makeText(this, editTextValue, Toast.LENGTH_SHORT).show();
             DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("Places");
 
             Query query=mDatabaseRef.orderByChild("placeName").startAt(editTextValue).endAt(editTextValue+"\uf8ff");
@@ -159,7 +153,6 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
        else if(value.equals("Group"))
         {
             recyclerView.setAdapter(recyclerviewAdapterForSearchGroup);
-            //Toast.makeText(this, editTextValue, Toast.LENGTH_SHORT).show();
             DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("GROUP");
 
             Query query=mDatabaseRef.orderByChild("groupName").startAt(editTextValue).endAt(editTextValue+"\uf8ff");
@@ -173,7 +166,6 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
                         final group_data groupDatas = data.getValue(group_data.class);
                         groupDataList.add(groupDatas);
                         recyclerviewAdapterForSearchGroup.notifyDataSetChanged();
-                        //loadingBar.dismiss();
                     }
 
                 }
@@ -181,7 +173,6 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     Toast.makeText(search_activity.this, "Error occured", Toast.LENGTH_SHORT).show();
-                    //loadingBar.dismiss();
                 }
             });
         }
@@ -189,7 +180,6 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
         else  if(value.equals("User"))
         {
             recyclerView.setAdapter(recyclerviewAdapterForSearchUser);
-            //Toast.makeText(this, editTextValue, Toast.LENGTH_SHORT).show();
             DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
             Query query=mDatabaseRef.orderByChild("name").startAt(editTextValue).endAt(editTextValue+"\uf8ff");
@@ -203,7 +193,6 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
                         final User_Data userDatas = data.getValue(User_Data.class);
                         userDataList.add(userDatas);
                         recyclerviewAdapterForSearchUser.notifyDataSetChanged();
-                        //loadingBar.dismiss();
                     }
 
                 }
@@ -211,13 +200,11 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     Toast.makeText(search_activity.this, "Error occured", Toast.LENGTH_SHORT).show();
-                    //loadingBar.dismiss();
                 }
             });
         }
          else
          {
-             //loadingBar.dismiss();
              Toast.makeText(this, "Find nothing", Toast.LENGTH_SHORT).show();
 
          }
@@ -225,7 +212,6 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
 
     @Override
     public void on_Item_click(int position, place_data placeData) {
-        //finish();
         Intent intent=new Intent(this, PlaceInfoActivity.class);
         intent.putExtra("id",placeData.getPlaceId());
         startActivity(intent);
@@ -234,8 +220,8 @@ public class search_activity extends AppCompatActivity implements RecyclerviewAd
     @Override
     public void on_Item_click_group(int position, final group_data groupData) {
         AlertDialog.Builder alert = new AlertDialog.Builder(search_activity.this);
-        alert.setTitle("join the group");
-        alert.setMessage("Do you want join this group?");
+        alert.setTitle("Group join request");
+        alert.setMessage("Do you want to send a join request to this group?");
         alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -153,12 +153,11 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
        // navController.navigate(R.id.group_info_fragment);
 
         AlertDialog.Builder alert = new AlertDialog.Builder(requireActivity());
-        alert.setTitle("join the group");
-        alert.setMessage("Do you want join this group?");
+        alert.setTitle("Group join request");
+        alert.setMessage("Do you want to send a join request to this group?");
         alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //join_group(group_data);
                 sendJoinRequest(group_data);
             }
         });
@@ -204,49 +203,6 @@ public class group_fragment extends Fragment  implements  VRecyclerViewClickInte
             }
         });
     }
-
-   /* private void join_group(final group_data group_data) {
-
-        final String groupId = group_data.getGroupId();
-        Map<String, Object> update = new HashMap<>();
-
-        update.put("GROUP/"+groupId+"/members/"+currentUserID,true);
-        update.put("Users/"+currentUserID+"/joinedGroups/"+groupId+"/msgCountUser",group_data.getMsgCount());
-
-        getINSTANCE().getRootRef().updateChildren(update).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-
-                getINSTANCE().getRootRef().child("GROUP").child(groupId).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        group_data group_data = snapshot.getValue(group_data.class);
-
-                        assert group_data != null;
-                        yourGroupData yourGroupData = new yourGroupData(groupId,group_data.getGroupName(),group_data.getGroupImage());
-                        getYourGroupListInstance().getYourGroupList().add(0,yourGroupData);
-                        group_vertical_parent_recycle_view_adapterVariable.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-                Toast.makeText(requireActivity(), "joined the group", Toast.LENGTH_SHORT).show();
-            }
-
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(requireActivity(), "Error"+e.toString(), Toast.LENGTH_LONG).show();
-            }
-
-        });
-
-    }*/
 
     @Override
     public void onStop() {

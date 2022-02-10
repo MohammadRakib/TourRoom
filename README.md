@@ -183,7 +183,8 @@ Users can search other users, places and groups.
 Users can see their and other users' profiles and also follow them. Users can see their posts too. They can also change their profile picture.
 
 <img align="left" src="tour room ss/profile/prof1.png" width="230" height="400">
-<img src="tour room ss/profile/prof2.png" width="230" height="400">
+<img align="left" src="tour room ss/profile/prof2.png" width="230" height="400">
+<img src="tour room ss/profile/prof3.png" width="230" height="400">
 
 #### Create new post
 

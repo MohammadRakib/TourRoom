@@ -1,4 +1,4 @@
-# TourRoom
+# Tour Room
 
 This is a native android application. This application is built for the people who love to visit different places as well as try to explore new places along with meeting 
 new people. Through this application, a tour lover can explore our beautiful Bangladesh through visiting. One can also meet different types of people through this application. A tour lover can create a group and also chat with the other members for visiting a tourist place.
